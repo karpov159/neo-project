@@ -1,0 +1,54 @@
+.login {
+    margin-top: 96px;
+    .input {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    &__check {
+        margin-top: 27px;
+        display: flex;
+        align-items: center;
+    }
+    &__box {
+        opacity: 0;
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        &:checked + label::after {
+            content: '✓';
+            font-weight: 700;
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 2px;
+            bottom: 0;
+        }
+    }
+    &__label {
+        position: relative;
+        margin: 0 11px;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #5C5C5C;
+        cursor: pointer;
+    }
+    &__text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #2D3436;
+    }
+    &__link {
+        margin-top: 16px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #2D3436;
+        text-align: center;
+        a {
+            color: #2F80ED;
+            text-decoration: none;
+        }
+    }
+}

@@ -40,16 +40,16 @@
         &__right {
             padding: 48px 0 148px 0;
         }
-        &__login {
-            margin-top: 70px;
-        }
-        &__text {
-            font-size: 12px;
-            line-height: 15px;
-        }
         &__logo {
             width: 96px;
             height: 93px;
+        }
+    }
+    .login {
+        margin-top: 70px;
+        &__text {
+            font-size: 12px;
+            line-height: 15px;
         }
         &__link {
             font-size: 12px;
@@ -58,21 +58,23 @@
         &__check {
             margin-top: 20px;
         }
-    }
-    .input {
-        margin-top: 24px;
-        width: 343px;
-        input {
-            font-size: 16px;
-            line-height: 19px;
+        .input {
+            margin-top: 24px;
+            width: 343px;
+            input {
+                font-size: 16px;
+                line-height: 19px;
+            }
+            &__icon {
+                width: 25px;
+                height: 25px;
+                bottom: 6px;
+                right: 11px;
+            }
         }
-        &__icon {
-            width: 25px;
-            height: 25px;
-            bottom: 6px;
-            right: 11px;
-        }
     }
+
+
     .button {
         &_main {
             font-size: 16px;

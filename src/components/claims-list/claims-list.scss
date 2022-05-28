@@ -1,0 +1,23 @@
+.claims-list {
+    margin-top: 48px;
+    display: grid;
+    grid-template-rows: 56px;
+    grid-auto-rows: 48px;
+    &__filters {
+        padding-left: 24px;
+        background: #F1F1F1;
+        display: grid;
+        grid-template-columns: 469px 300px 300px 272px 296px;
+        border-bottom: 1px solid #C2C2C2;
+    }
+    &__filter {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        img {
+            width: 7px;
+            height: 10px;   
+            margin-left: 16px;
+        }
+    }
+}

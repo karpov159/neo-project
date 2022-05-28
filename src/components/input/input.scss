@@ -9,6 +9,7 @@
         line-height: 15px;        
         color: #ADADAD;
         text-transform: uppercase;
+        letter-spacing: 2.5px;
     }
     input {
         margin-top: 8px;
@@ -31,5 +32,21 @@
         right: 4px;
         width: 40px;
         height: 40px;
+    }
+    &_search {
+        margin-top: 0;
+        width: 585px;
+        height: 48px;
+        input {
+            margin-top: 0;
+            padding: 8px 44px 8px 26px;
+            &::placeholder {
+                color: #ADADAD;
+            }
+        }
+        img {
+            top: 50%;
+            transform: translateY(-50%);
+        }
     }
 }

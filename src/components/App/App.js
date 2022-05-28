@@ -1,11 +1,14 @@
-import Entrance from '../entrance/Entrance';
+import Entrance from '../entrance/entrance';
+import Homepage from '../homepage/homepage';
 
 import './app.scss';
 
 const App = () => {
+
   return (
     <div className="App">
-      <Entrance/>
+      {/* <Entrance/> */}
+      <Homepage/>
     </div>
   );
 }

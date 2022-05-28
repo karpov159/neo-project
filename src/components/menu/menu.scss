@@ -1,0 +1,49 @@
+.menu {
+    padding: 32px 12px 0 12px;
+    width: 100%;
+    height: 100%;
+    grid-column: 1/2;
+    grid-row: 1/3;
+    background: linear-gradient(180deg, #D5EEE2 0%, #7DB59A 43.23%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__logo {
+        width: 72px;
+        height: 71px;
+    }
+    &__links {
+        margin-top: 47px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__link {
+        margin-bottom: 24px;
+        width: 40px;
+        height: 40px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        &_active {
+            &::after {
+                content: '';
+                position: absolute;
+                cursor: default;
+                width: 0px;
+                border: 2.5px solid #FFFFFF;
+                height: 100%;
+                top: 0;
+                left: -27px;
+                background-color: #fff;
+            }
+        }
+    }
+    
+    
+}
