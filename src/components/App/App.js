@@ -1,11 +1,11 @@
-
+import Entrance from '../entrance/Entrance';
 
 import './app.scss';
 
 const App = () => {
   return (
     <div className="App">
-      <h1>hello</h1>
+      <Entrance/>
     </div>
   );
 }

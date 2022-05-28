@@ -1,0 +1,25 @@
+.button {
+    border: none;
+    background: #7DB59A;
+    border-radius: 16px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+    height: 48px;
+    cursor: pointer;
+    transition: 0.3s all;
+    &_main {
+        height: 52px;
+        width: 100%;
+        margin-top: 35px;
+    }
+    &:hover {
+        background: #5B9479;
+    }
+    &:active {
+        background: #4F896C;
+    }
+}
