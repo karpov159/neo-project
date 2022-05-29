@@ -49,4 +49,31 @@
             transform: translateY(-50%);
         }
     }
+    &_mt40 {
+        margin-top: 40px;
+        &::first-child {
+            margin-top: 48px;
+        }
+    }
+    &__content {
+        z-index: 10;
+        position: absolute;
+        top: 110%;
+        left: 0;
+        padding: 10px;
+        background: #fff;
+        box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+        font-weight: 500;
+        color: #333;
+        width: 100%;
+    }
+    &__item {
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+            background: rgba(194, 194, 194, 0.24);
+        }
+    }
+
 }

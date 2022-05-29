@@ -9,7 +9,9 @@ import Avatar from '../../assets/icons/avatar.png';
 import './header.scss';
 
 
-const Header = () => {
+const Header = (props) => {
+    const {toggleLogin} = props;
+
     return (
         <header className="header">
             <Input placeholder="Search" addClass={"input_search"} icon={SearchImg}/>
@@ -23,7 +25,7 @@ const Header = () => {
                     <div className="header__name">
                         Ivan Ivanov    
                     </div>          
-                    <button className="header__btn">
+                    <button onClick={toggleLogin} className="header__btn">
                         <img src={IconHome} alt="notification" />
                     </button>
                 </div>

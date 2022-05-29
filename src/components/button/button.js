@@ -1,10 +1,10 @@
 import './button.scss';
 
 const Button = (props) => {
-    const {label, addClass} = props,
+    const {label, addClass, onToggle} = props,
           classes = addClass ? 'button ' + addClass : 'button';
     return (
-        <button className={classes}>
+        <button onClick={onToggle} className={classes}>
             {label}
         </button>
     )

@@ -9,8 +9,10 @@
     text-align: center;
     color: #FFFFFF;
     height: 48px;
+    width: 82px;
     cursor: pointer;
     transition: 0.3s all;
+    letter-spacing: 0.25px;
     &_main {
         height: 52px;
         width: 100%;
@@ -21,5 +23,22 @@
     }
     &:active {
         background: #4F896C;
+    }
+    &_cancel {
+        border: 1px solid #ADADAD;
+        background: none;
+        color: #858585;
+        &:hover {
+            border: 1px solid #7DB59A;
+            color: #7DB59A;
+            background: none;
+
+        }
+        &:active {
+            border: 1px solid #4F896C;
+            color: #4F896C;
+            background: none;
+
+        }
     }
 }

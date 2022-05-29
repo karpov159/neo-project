@@ -27,7 +27,7 @@ const ClaimsList = () => {
         data: '12/04/2021',
         type: 'Networking',
         status: 'done',
-        key: '3'
+        key: '4'
         },
     ]
     
