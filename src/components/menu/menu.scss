@@ -43,6 +43,19 @@
                 background-color: #fff;
             }
         }
+        &:hover {
+            &::after {
+                content: '';
+                position: absolute;
+                cursor: default;
+                width: 0px;
+                border: 2.5px solid #FFFFFF;
+                height: 100%;
+                top: 0;
+                left: -27px;
+                background-color: #fff;
+            }
+        }
     }
     
     

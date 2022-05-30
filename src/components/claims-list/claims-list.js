@@ -1,40 +1,48 @@
+import { useState } from 'react';
 import Claim from '../claim/claim';
 import IconFilter from '../../assets/icons/filter.png';
 
 import './claims-list.scss';
 
-const ClaimsList = () => {
-    const claims = [
-        {title: 'Figma smart web system for to build',
-        data: '12/04/2021',
-        type: 'Hardware',
-        status: 'new',
+const ClaimsList = (props) => {
+    const [sort, setSort] = useState(false),
+          [toggleOrder, setToggleOrder] = useState(true),
+          [claims, setClaims] = useState(''),
+          {data} = props;
+
+    const filters = [
+        {label: 'Title',
+        icon: IconFilter,
+        filter: 'title',
         key: '1'
         },
-        {title: 'Figma smart web system for to build',
-        data: '12/04/2021',
-        type: 'Software',
-        status: 'declined',
+        {label: 'Created',
+        icon: IconFilter,
+        filter: 'data',
         key: '2'
         },
-        {title: 'Figma smart web system for to build',
-        data: '12/04/2021',
-        type: 'Troubleshooting',
-        status: 'in progress',
+        {label: 'Type',
+        icon: IconFilter,
+        filter: 'type',
         key: '3'
         },
-        {title: 'Figma smart web system for to build',
-        data: '12/04/2021',
-        type: 'Networking',
-        status: 'done',
+        {label: 'Status',
+        icon: IconFilter,
+        filter: 'status',
         key: '4'
+        },
+        {label: 'Actions',
+        icon: null,
+        filter: false,
+        key: '5'
         },
     ]
     
 
-    const items = () => {
+    const createItems = (claims) => {
+        const sorted = sort ? sortItems(claims) : claims;
         return (
-            claims.map(({title, data, type, status, key}) => {
+            sorted.map(({title, data, type, status, key}) => {
                 return <Claim title={title} 
                 data={data} 
                 type={type} 
@@ -45,30 +53,51 @@ const ClaimsList = () => {
         )
     }
 
+    const createFilters = (filters) => {
+
+        return filters.map(({label, icon, key, filter}) => {
+            return (
+                <div key={key} className="claims-list__item">
+                    <div onClick={() => {onSetSort(filter);}} 
+                    className='claims-list__filter'>
+                        <div>{label}</div>
+                        {icon ? <img src={icon} alt="filter" /> : null }  
+                    </div>
+                </div>
+            )
+        })
+    }
+
+    const onSetSort = (sort) => {
+        setSort(sort);
+    }
+
+    const sortItems = (items) => {
+        setToggleOrder(toggleOrder => !toggleOrder);
+
+        console.log(toggleOrder)
+        const value = toggleOrder ? 1 : -1;
+
+        const sorted = [...items].sort((a, b) => {
+            if (a[sort] === b[sort]) {
+                return 0;
+            }
+            return a[sort] > b[sort] ? value : value * -1;
+        });
+
+        setClaims(sorted);
+        setSort(false)
+
+        return sorted;
+    }
+
+
     return (
         <div className="claims-list">
             <div className="claims-list__filters">
-                <div className="claims-list__filter">
-                    <div>Title</div>
-                    <img src={IconFilter} alt="filter" />    
-                </div>
-                <div className="claims-list__filter">
-                    <div>Created</div>
-                    <img src={IconFilter} alt="filter" />    
-                </div>
-                <div className="claims-list__filter">
-                    <div>Type</div>
-                    <img src={IconFilter} alt="filter" />    
-                </div>
-                <div className="claims-list__filter">
-                    <div>Status</div>
-                    <img src={IconFilter} alt="filter" />    
-                </div>
-                <div className="claims-list__filter">
-                    <div>Actions</div>
-                </div>            
+                {createFilters(filters)}
             </div>
-            {items()}    
+            {createItems(claims || data)}    
         </div>
     )
 }

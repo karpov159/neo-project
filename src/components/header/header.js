@@ -10,11 +10,15 @@ import './header.scss';
 
 
 const Header = (props) => {
-    const {toggleLogin} = props;
+    const {toggleLogin, isSearchInput, setSearchWord} = props;
+
+    const changeValue = (e) => {
+        setSearchWord(e.target.value)
+    }
 
     return (
         <header className="header">
-            <Input placeholder="Search" addClass={"input_search"} icon={SearchImg}/>
+            {!isSearchInput ? <Input onChange={changeValue} placeholder="Search" addClass={"input_search"} icon={SearchImg}/> : null}
             <div className="header__options">
                     <button className="header__btn">
                         <img src={Notification} alt="notification" />

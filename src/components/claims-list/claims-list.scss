@@ -10,14 +10,19 @@
         grid-template-columns: 469px 300px 300px 272px 296px;
         border-bottom: 1px solid #C2C2C2;
     }
-    &__filter {
+    &__item {
         display: flex;
         align-items: center;
-        cursor: pointer;
         img {
             width: 7px;
             height: 10px;   
             margin-left: 16px;
         }
+    }
+    &__filter {
+        min-width: 50px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
     }
 }

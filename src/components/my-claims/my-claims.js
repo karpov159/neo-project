@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import ClaimsList from '../claims-list/claims-list';
 import Title from '../title/title';
 import IconPlus from '../../assets/icons/icon-plus.svg';
@@ -5,7 +6,18 @@ import IconPlus from '../../assets/icons/icon-plus.svg';
 import './my-claims.scss';
 
 const MyClaims = (props) => {
-    const {onToggle} = props;
+    const {onToggle, searchWord, dataFromTheServer} = props;
+
+    const filterClaims = (searchWord, data) => {
+        if (searchWord < 1) {
+            console.log(data)
+            return data;
+        }
+
+        return data.filter(item => item.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1);
+    }
+
+    const visibleData = searchWord ? filterClaims(searchWord, dataFromTheServer) : dataFromTheServer;
 
     return (
         <div className="my-claims">
@@ -16,7 +28,7 @@ const MyClaims = (props) => {
                     Create claim
                 </button>
             </div>
-            <ClaimsList/>
+            <ClaimsList data={visibleData}/>
         </div>
     )
 }

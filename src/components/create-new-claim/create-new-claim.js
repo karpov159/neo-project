@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Title from '../title/title';
 import Input from '../input/input';
 import Button from '../button/button';
-import DropDown from '../drop-down/drop-down';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png'
 import './create-new-claim.scss';
@@ -64,7 +63,6 @@ const CreateNewClaim = (props) => {
                 addClass={'input_mt40'} 
                 label={'DESCRIPTION'} 
                 placeholder={'Type claim description'} />
-                <DropDown/>
                 <div className="new-claim__btns">
                     <Button onToggle={onToggle} addClass={'button_cancel'} label={'Cancel'}/>
                     <Button label={'Create'}/>
