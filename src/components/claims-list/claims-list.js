@@ -1,16 +1,12 @@
-import { useState } from 'react';
 import Claim from '../claim/claim';
 import IconFilter from '../../assets/icons/filter.png';
 
 import './claims-list.scss';
 
 const ClaimsList = (props) => {
-    const [sort, setSort] = useState(false),
-          [toggleOrder, setToggleOrder] = useState(true),
-          [claims, setClaims] = useState(''),
-          {data} = props;
+    const {data, onSetSort} = props;
 
-    const filters = [
+    const filtersList = [
         {label: 'Title',
         icon: IconFilter,
         filter: 'title',
@@ -39,67 +35,49 @@ const ClaimsList = (props) => {
     ]
     
 
-    const createItems = (claims) => {
-        const sorted = sort ? sortItems(claims) : claims;
-        return (
-            sorted.map(({title, data, type, status, key}) => {
-                return <Claim title={title} 
-                data={data} 
-                type={type} 
-                status={status}
-                key={key}
-                />
-            })
-        )
-    }
-
-    const createFilters = (filters) => {
-
-        return filters.map(({label, icon, key, filter}) => {
-            return (
-                <div key={key} className="claims-list__item">
-                    <div onClick={() => {onSetSort(filter);}} 
-                    className='claims-list__filter'>
-                        <div>{label}</div>
-                        {icon ? <img src={icon} alt="filter" /> : null }  
-                    </div>
-                </div>
-            )
-        })
-    }
-
-    const onSetSort = (sort) => {
-        setSort(sort);
-    }
-
-    const sortItems = (items) => {
-        setToggleOrder(toggleOrder => !toggleOrder);
-
-        console.log(toggleOrder)
-        const value = toggleOrder ? 1 : -1;
-
-        const sorted = [...items].sort((a, b) => {
-            if (a[sort] === b[sort]) {
-                return 0;
-            }
-            return a[sort] > b[sort] ? value : value * -1;
-        });
-
-        setClaims(sorted);
-        setSort(false)
-
-        return sorted;
-    }
 
 
     return (
         <div className="claims-list">
             <div className="claims-list__filters">
-                {createFilters(filters)}
+                <Filtres onSetSort={onSetSort} filtersList={filtersList}/>
             </div>
-            {createItems(claims || data)}    
+            <Items data={data}/>    
         </div>
     )
+}
+
+// создание айтемов
+const Items = (props) => {
+    const {data} = props
+    return (
+        data.map(({title, data, type, status, key}) => {
+            return <Claim title={title} 
+            data={data} 
+            type={type} 
+            status={status}
+            key={key}
+            />
+        })
+    )
+}
+
+
+// создание фильтров
+const Filtres = (props) => {
+    const {filtersList, onSetSort} = props
+    return filtersList.map(({label, icon, key, filter}) => {
+        return (
+            <div key={key} className="claims-list__item">
+                <div onClick={() => {onSetSort(filter);}} 
+                className='claims-list__filter'>
+                    <div>{label}</div>
+                    {icon ? <img src={icon} alt="filter" /> : null }  
+                </div>
+            </div>
+        )
+        
+    })
 }
 
 export default ClaimsList;

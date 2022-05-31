@@ -1,13 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import ClaimsList from '../claims-list/claims-list';
+import Pagination from '../pagination/pagination';
 import Title from '../title/title';
 import IconPlus from '../../assets/icons/icon-plus.svg';
 
 import './my-claims.scss';
 
+const countTotalPages = (data) => {        
+    return Math.ceil(data.length / 10);
+}
+
 const MyClaims = (props) => {
     const {onToggle, searchWord, dataFromTheServer} = props;
+    const [offset, setOffset] = useState(0);
+    const [activePage, setActivePage] = useState();
+    const [sortedClaims, setSortedClaims] = useState(dataFromTheServer);
+    const [sort, setSort] = useState(false);
+    const [toggleOrder, setToggleOrder] = useState(true);
 
+    // фильтрует, если поисковая строка не пустая
     const filterClaims = (searchWord, data) => {
         if (searchWord < 1) {
             console.log(data)
@@ -17,7 +28,64 @@ const MyClaims = (props) => {
         return data.filter(item => item.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1);
     }
 
-    const visibleData = searchWord ? filterClaims(searchWord, dataFromTheServer) : dataFromTheServer;
+    // перелистывает страницу нажатием на кнопки
+    const changePageByArrows = (num) => {
+        setOffset(offset => {
+            const value = offset + num;
+            if (value < 0) {
+                return 0;
+            }
+            if (value / totalPages === 10) {
+                return value - 10;
+            }
+            return value;
+        });
+    }
+
+    // перелистывает нажатием на цифры
+    const changePageByNumbers = (num) => {
+        setOffset(num * 10 - 10)
+    }
+
+
+    // Обновляем активную страницу
+    useEffect(() => {
+        setActivePage(offset / 10 + 1);
+    }, [offset])
+
+    // 
+    const sortClaims = (data) => {
+        setSortedClaims(data);
+    }
+
+    const onSetSort = (sort) => {
+        setSort(sort);
+    }
+
+    useEffect(() => {
+        if (sort) {
+            setToggleOrder(toggleOrder => !toggleOrder);
+
+            const value = toggleOrder ? 1 : -1;
+    
+            const sorted = [...sortedClaims].sort((a, b) => {
+                if (a[sort] === b[sort]) {
+                    return 0;
+                }
+                return a[sort] > b[sort] ? value : value * -1;
+            });
+    
+            setSort(false)
+            setSortedClaims(sorted)
+        }
+    }, [sort, sortedClaims, toggleOrder])
+
+    const filtredData = searchWord ? filterClaims(searchWord, sortedClaims) : sortedClaims;
+    const visibleData = filtredData.slice(offset, offset + 10)
+
+    const totalPages = useMemo(() => {
+        return countTotalPages(filtredData);
+    }, [filtredData])
 
     return (
         <div className="my-claims">
@@ -28,7 +96,15 @@ const MyClaims = (props) => {
                     Create claim
                 </button>
             </div>
-            <ClaimsList data={visibleData}/>
+            <ClaimsList 
+            onSetSort={onSetSort}
+            sortClaims={sortClaims} 
+            data={visibleData}/>
+            <Pagination
+            changePageByNumbers={changePageByNumbers} 
+            activePage={activePage} 
+            changePageByArrows={changePageByArrows} 
+            totalPages={totalPages}/>
         </div>
     )
 }
