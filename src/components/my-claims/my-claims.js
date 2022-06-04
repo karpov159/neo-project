@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ClaimsList from '../claims-list/claims-list';
 import Pagination from '../pagination/pagination';
 import Title from '../title/title';
@@ -11,12 +12,13 @@ const countTotalPages = (data) => {
 }
 
 const MyClaims = (props) => {
-    const {onToggle, searchWord, dataFromTheServer} = props;
+    const {searchWord, dataFromTheServer, showClaim} = props;
     const [offset, setOffset] = useState(0);
     const [activePage, setActivePage] = useState();
     const [sortedClaims, setSortedClaims] = useState(dataFromTheServer);
     const [sort, setSort] = useState(false);
     const [toggleOrder, setToggleOrder] = useState(true);
+    const navigate = useNavigate();
 
     // фильтрует, если поисковая строка не пустая
     const filterClaims = (searchWord, data) => {
@@ -91,12 +93,17 @@ const MyClaims = (props) => {
         <div className="my-claims">
             <div className="my-claims__headline">
                 <Title title={'Your claims'}/>
-                <button onClick={onToggle} className="my-claims__btn">
+                <button 
+                onClick={() => {
+                    navigate('create-new-claim');
+                }} 
+                className="my-claims__btn">
                     <img src={IconPlus} alt="plus"/>
                     Create claim
                 </button>
             </div>
             <ClaimsList 
+            showClaim={showClaim}
             onSetSort={onSetSort}
             sortClaims={sortClaims} 
             data={visibleData}/>

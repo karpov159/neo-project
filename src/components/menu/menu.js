@@ -10,29 +10,30 @@ import IconNavigation from '../../assets/icons/icon-navigation.svg';
 import './menu.scss';
 
 const Menu = () => {
+
     return (
         <aside className='menu'>
             <img className='menu__logo' src={MiniLogo} alt="logo"/>
             <div className="menu__links">
-            <button href="#" className="menu__link menu__link_active">
+            <button className="menu__link menu__link_active">
                 <img src={IconHome} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconGlobe} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconArchive} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconPieChart} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconDollar} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconDatabase} alt="icon" />    
             </button>
-            <button href="#" className="menu__link">
+            <button className="menu__link">
                 <img src={IconNavigation} alt="icon" />    
             </button>    
             </div>

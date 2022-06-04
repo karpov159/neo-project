@@ -1,0 +1,14 @@
+.browse-claim {
+    padding: 56px 0 0 64px;
+    .input {
+        &:first-child {
+            margin-top: 48px;
+        }
+    }
+    &__btns {
+        width: 300px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 48px;
+    }
+}

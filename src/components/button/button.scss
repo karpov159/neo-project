@@ -32,13 +32,21 @@
             border: 1px solid #7DB59A;
             color: #7DB59A;
             background: none;
-
         }
         &:active {
             border: 1px solid #4F896C;
             color: #4F896C;
             background: none;
-
         }
     }
+    &_decline {
+        background: #E84393;
+        &:hover {
+            background: #B03671;
+        }
+        &:active {
+            background: #832552;
+        }
+    }
+
 }

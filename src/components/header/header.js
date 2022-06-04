@@ -1,5 +1,5 @@
 import Input from '../input/input';
-
+import { useNavigate } from 'react-router-dom';
 import SearchImg from '../../assets/icons/search.svg';
 import Notification from '../../assets/icons/icon-notification.svg';
 import IconHome from '../../assets/icons/icon-log-out.svg';
@@ -11,6 +11,7 @@ import './header.scss';
 
 const Header = (props) => {
     const {toggleLogin, isSearchInput, setSearchWord} = props;
+    const navigate = useNavigate();
 
     const changeValue = (e) => {
         setSearchWord(e.target.value)
@@ -18,7 +19,7 @@ const Header = (props) => {
 
     return (
         <header className="header">
-            {!isSearchInput ? <Input onChange={changeValue} placeholder="Search" addClass={"input_search"} icon={SearchImg}/> : null}
+            {isSearchInput ? <Input onChange={changeValue} placeholder="Search" addClass={"input_search"} icon={SearchImg}/> : null}
             <div className="header__options">
                     <button className="header__btn">
                         <img src={Notification} alt="notification" />
@@ -29,7 +30,11 @@ const Header = (props) => {
                     <div className="header__name">
                         Ivan Ivanov    
                     </div>          
-                    <button onClick={toggleLogin} className="header__btn">
+                    <button onClick={() => {
+                        toggleLogin();
+                        navigate('/')
+                    }} 
+                    className="header__btn">
                         <img src={IconHome} alt="notification" />
                     </button>
                 </div>

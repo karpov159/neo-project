@@ -1,4 +1,4 @@
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import './input.scss';
 
@@ -6,9 +6,8 @@ import './input.scss';
 const Input = (props) => {
 
     const [active, setActive] = useState(false);
-    const DropDownInput = createRef();
+    const DropDownInput = useRef(null);
     
-
     useEffect(() => {
         const handleCLick = (e) => {
             if (DropDownInput.current && !DropDownInput.current.contains(e.target)) {
@@ -30,7 +29,7 @@ const Input = (props) => {
         onChange('');
     }
 
-    const {label, placeholder, icon, addClass, options, onChange, value, dropDown} = props,
+    const {label, placeholder, icon, addClass, options, onChange, value, dropDown, readOnly} = props,
 
           span = label ? <span className='input__span'>{label}</span> : null,
 
@@ -66,9 +65,11 @@ const Input = (props) => {
         <div ref={DropDownInput} 
             className={classes}>
             {span}
-            <input  onClick={dropDown ? toggleActive : null}
+            <input 
+            onClick={dropDown ? toggleActive : null}
             onChange={dropDown ? disabledInput : onChange} 
-            value={value} 
+            value={value}
+            readOnly={readOnly}
             style={options ? {'cursor': 'pointer'} : null}
             required type="text" 
             placeholder={placeholder} />

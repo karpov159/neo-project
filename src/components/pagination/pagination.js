@@ -50,7 +50,6 @@ const TotalPages = (props) => {
     }
     
     if (totalPages > 8) {
-        console.log(active)
         return (
             <>
                 {pages.slice(0,1)}

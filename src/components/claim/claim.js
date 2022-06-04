@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
+
 import './claim.scss';
 
 const Claim = (props) => {
-    const {title, data, type, status} = props;
+    const {title, data, type, status, showClaim, id} = props,
+          navigate = useNavigate();
 
     const ballColor = (type) => {
         switch (type) {
@@ -38,8 +41,12 @@ const Claim = (props) => {
                 <div className="claim__text">{type}</div>
             </div>
             <div style={{'background': `${statusColor(status)}`}} className="claim__status">{status}</div>
-            <button className="claim__button">Browse</button>
-
+            <button 
+            onClick={() => {
+                showClaim(id);
+                navigate(`browse-claim-${id}`);
+            }} 
+            className="claim__button">Browse</button>
         </div>
     )
 }

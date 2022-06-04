@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Title from '../title/title';
 import Input from '../input/input';
@@ -9,11 +10,19 @@ import './create-new-claim.scss';
 
 const CreateNewClaim = (props) => {
 
-    const {onToggle} = props;
+    const {setSearchInput} = props;
 
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [descr, setDescr] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setSearchInput(false);
+        return () => {
+            setSearchInput(true);
+        }
+    })
 
 
     const changeValue = (e, func) => {
@@ -34,7 +43,7 @@ const CreateNewClaim = (props) => {
         setTitle('')
         setType('')
         setDescr('')
-        onToggle();
+        navigate(-1);
     }
 
     const options = ['Hardware', 'Software', 'Troubleshooting', 'Networking'];
@@ -56,15 +65,15 @@ const CreateNewClaim = (props) => {
                 options={options}
                 addClass={'input_mt40'} 
                 label={'TYPE'} 
-                placeholder={'Select type'} />
+                placeholder={'Select type'}/>
                 <Input 
                 onChange={(e) => changeValue(e, setDescr)} 
                 value={descr} 
                 addClass={'input_mt40'} 
                 label={'DESCRIPTION'} 
-                placeholder={'Type claim description'} />
+                placeholder={'Type claim description'}/>
                 <div className="new-claim__btns">
-                    <Button onToggle={onToggle} addClass={'button_cancel'} label={'Cancel'}/>
+                    <Button onClick addClass={'button_cancel'} label={'Cancel'}/>
                     <Button label={'Create'}/>
                 </div>
             </form>

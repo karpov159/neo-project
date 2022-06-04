@@ -2,18 +2,21 @@ import { useState } from 'react';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 import MyClaims from '../my-claims/my-claims';
+import { Route, Routes } from 'react-router-dom';
 import CreateNewClaim from '../create-new-claim/create-new-claim';
+import BrowsedClaim from '../browsed-claim/browsed-claim';
 
 import './homepage.scss';
 
 const Homepage = (props) => {
     const {toggleLogin} = props;
 
-    const [newClaim, setNewClaim] = useState(false);
+    const [isSearchInput, setSearchInput] = useState(true);
     const [searchWord, setSearchWord] = useState('');
-
-    const toggleNewClaim = () => {
-        setNewClaim(newClaim => !newClaim);
+    const [browseClaim, setBrowseClaim] = useState(null);
+    
+    const showClaim = (id) => {
+        setBrowseClaim(id);
     }
 
     const dataFromTheServer = [
@@ -530,15 +533,27 @@ const Homepage = (props) => {
 
     ]
 
-
     return (
-        <section className='homepage'>
-            <Menu/>
-            <Header setSearchWord={setSearchWord} isSearchInput={newClaim} toggleLogin={toggleLogin}/>
-            {newClaim ? 
-            <CreateNewClaim onToggle={toggleNewClaim}/> : 
-            <MyClaims dataFromTheServer={dataFromTheServer} searchWord={searchWord} onToggle={toggleNewClaim}/>}
-        </section>
+            <section className='homepage'>
+                <Menu/>
+                <Header setSearchWord={setSearchWord} isSearchInput={isSearchInput} toggleLogin={toggleLogin}/>
+                <Routes>
+                    <Route path='' 
+                    element={
+                    <MyClaims 
+                    dataFromTheServer={dataFromTheServer} 
+                    searchWord={searchWord} 
+                    />}/>
+
+                    <Route path="create-new-claim" element={<CreateNewClaim setSearchInput={setSearchInput}/> }/>        
+
+                    <Route path={`browse-claim-${browseClaim}`} element={
+                    <BrowsedClaim 
+                    setSearchInput={setSearchInput}
+                    id={browseClaim} 
+                    data={dataFromTheServer}/>}/>
+                </Routes>
+            </section>
     )
 }
 

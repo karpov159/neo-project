@@ -1,10 +1,19 @@
+import { useNavigate } from 'react-router-dom';
 import './button.scss';
 
 const Button = (props) => {
-    const {label, addClass, onToggle} = props,
-          classes = addClass ? 'button ' + addClass : 'button';
+    const {label, addClass, onClick} = props,
+          classes = addClass ? 'button ' + addClass : 'button',
+          navigate = useNavigate();
+
     return (
-        <button onClick={onToggle} className={classes}>
+        <button onClick={() => {
+           if (onClick) {
+
+            navigate(-1);
+           }
+        }} 
+        className={classes}>
             {label}
         </button>
     )

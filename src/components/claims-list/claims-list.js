@@ -4,7 +4,7 @@ import IconFilter from '../../assets/icons/filter.png';
 import './claims-list.scss';
 
 const ClaimsList = (props) => {
-    const {data, onSetSort} = props;
+    const {data, onSetSort, showClaim} = props;
 
     const filtersList = [
         {label: 'Title',
@@ -42,21 +42,24 @@ const ClaimsList = (props) => {
             <div className="claims-list__filters">
                 <Filtres onSetSort={onSetSort} filtersList={filtersList}/>
             </div>
-            <Items data={data}/>    
+            <Items showClaim={showClaim} data={data}/>    
         </div>
     )
 }
 
 // создание айтемов
 const Items = (props) => {
-    const {data} = props
+    const {data, showClaim} = props
     return (
         data.map(({title, data, type, status, key}) => {
-            return <Claim title={title} 
+            return <Claim 
+            showClaim={showClaim}
+            title={title} 
             data={data} 
             type={type} 
             status={status}
             key={key}
+            id={key}
             />
         })
     )

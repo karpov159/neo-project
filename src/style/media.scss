@@ -10,6 +10,41 @@
             padding: 70px 0;
         }
     }
+    .my-claims {
+        padding: 20px;
+        width: calc(100vw - 96px);
+    }
+    .claims-list {
+        width: 100%;
+        margin-top: 20px;
+        &__filters {
+            grid-template-columns: 1.5fr repeat(4, 1fr);
+            column-gap: 20px;
+        }
+    }
+    .pagination {
+        bottom: 20px;
+    }
+    .title {
+        font-size: 30px;
+    }
+    .claim {
+        grid-template-columns: 1.5fr repeat(4, 1fr);
+        column-gap: 20px;
+        &__text {
+            font-size: 13px;
+        }
+        &__ball {
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
+        }
+        &__status {
+            font-size: 10px;
+            width: 105px;
+            height: 25px;
+        }
+    }
 }
 
 @media (max-width: 992px) {
@@ -27,10 +62,33 @@
             }
         }
     }
+    .input {
+        &_search {
+            display: none;
+        }
+    }
+    .claims-list {
+        &__filter {
+            font-size: 16px;
+        }
+    }
+    .claim {
+        &__ball {
+            display: none;
+        }
+        &__text {
+            font-size: 12px;
+        }
+    }
+    .title {
+        font-size: 28px;
+    }
 }
 
 @media (max-width: 768px) {
-
+    .menu {
+        display: none;
+    }
 }
 
 
