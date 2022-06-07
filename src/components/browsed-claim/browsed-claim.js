@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Title from '../title/title';
 import Input from '../input/input';
 import Button from '../button/button';
+import { useParams } from 'react-router-dom';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png'
 
@@ -9,21 +10,23 @@ import IconDown from '../../assets/icons/icon-chevron-down.png'
 import './browsed-claim.scss';
 
 const BrowsedClaim = (props) => {
-    const {id, data, showClaim, setSearchInput} = props,
-          [title, setTitle] = useState(),
-          [type, setType] = useState(),
-          [descr, setDescr] = useState();
+    const {claims, showClaim, setSearchInput} = props,
+          [title, setTitle] = useState(''),
+          [type, setType] = useState(''),
+          [descr, setDescr] = useState('');
+
+    const {claimId} = useParams();
 
 
     useEffect(() => {
-        data.forEach(item => {
-            if (item.key === id) {
+        claims.forEach(item => {
+            if (item.key === claimId) {
                 setTitle(item.title);
                 setType(item.type);
                 setDescr('some descr')
             }
         })
-    }, [id])
+    }, [claimId])
 
     useEffect(() => {
         setSearchInput(false);

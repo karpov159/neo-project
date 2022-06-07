@@ -25,6 +25,10 @@
         &::placeholder {
             color: #2D3436;
         }
+        &:focus {
+            outline: 4px solid rgba(253, 203, 110, 0.4);
+            background: rgba(236, 210, 175, 0.609);
+        }
     }
     &__icon {
         position: absolute;
@@ -37,11 +41,16 @@
         margin-top: 0;
         width: 585px;
         height: 48px;
+
         input {
             margin-top: 0;
             padding: 8px 44px 8px 26px;
             &::placeholder {
                 color: #ADADAD;
+            }
+            &:focus {
+                outline: none;
+                background: rgba(194, 194, 194, 0.24);
             }
         }
         img {

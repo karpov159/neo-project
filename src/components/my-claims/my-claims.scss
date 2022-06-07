@@ -23,10 +23,18 @@
         justify-content: flex-start;
         align-items: center;
         cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+            background: #5B9479;
+        }
+        &:active {
+            background: #4F896C;
+        }
         img {
             width: 40px;
             height: 40px;
         }
+
     }
     .claim {
         &:last-child {

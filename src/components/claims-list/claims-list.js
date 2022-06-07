@@ -1,10 +1,13 @@
 import Claim from '../claim/claim';
+import Spinner from '../spinner/Spiner';
+import ErrorMessage from '../errorMessage/errorMessage';
+
 import IconFilter from '../../assets/icons/filter.png';
 
 import './claims-list.scss';
 
 const ClaimsList = (props) => {
-    const {data, onSetSort, showClaim} = props;
+    const {data, onSetSort, showClaim, loading, error} = props;
 
     const filtersList = [
         {label: 'Title',
@@ -33,7 +36,10 @@ const ClaimsList = (props) => {
         key: '5'
         },
     ]
-    
+
+    const spinner = loading ? <Spinner/> : null,
+          errorMessage = error ? <ErrorMessage/> : null,
+          content = !error && !loading ? <Items showClaim={showClaim} data={data}/> : null;
 
 
 
@@ -42,7 +48,9 @@ const ClaimsList = (props) => {
             <div className="claims-list__filters">
                 <Filtres onSetSort={onSetSort} filtersList={filtersList}/>
             </div>
-            <Items showClaim={showClaim} data={data}/>    
+            {spinner}
+            {errorMessage}
+            {content}
         </div>
     )
 }

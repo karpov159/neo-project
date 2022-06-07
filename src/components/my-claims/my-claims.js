@@ -3,19 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import ClaimsList from '../claims-list/claims-list';
 import Pagination from '../pagination/pagination';
 import Title from '../title/title';
+
 import IconPlus from '../../assets/icons/icon-plus.svg';
 
 import './my-claims.scss';
 
-const countTotalPages = (data) => {        
-    return Math.ceil(data.length / 10);
+const countTotalPages = (data) => {
+    if (data) {
+        return Math.ceil(data.length / 10);
+    }        
 }
 
 const MyClaims = (props) => {
-    const {searchWord, dataFromTheServer, showClaim} = props;
+    const {searchWord, claims, showClaim, loading, error} = props;
     const [offset, setOffset] = useState(0);
     const [activePage, setActivePage] = useState();
-    const [sortedClaims, setSortedClaims] = useState(dataFromTheServer);
+    const [sortedClaims, setSortedClaims] = useState([]);
     const [sort, setSort] = useState(false);
     const [toggleOrder, setToggleOrder] = useState(true);
     const navigate = useNavigate();
@@ -49,12 +52,6 @@ const MyClaims = (props) => {
         setOffset(num * 10 - 10)
     }
 
-
-    // Обновляем активную страницу
-    useEffect(() => {
-        setActivePage(offset / 10 + 1);
-    }, [offset])
-
     // 
     const sortClaims = (data) => {
         setSortedClaims(data);
@@ -83,11 +80,25 @@ const MyClaims = (props) => {
     }, [sort, sortedClaims, toggleOrder])
 
     const filtredData = searchWord ? filterClaims(searchWord, sortedClaims) : sortedClaims;
-    const visibleData = filtredData.slice(offset, offset + 10)
+    const visibleData = filtredData.slice(offset, offset + 10);
 
     const totalPages = useMemo(() => {
         return countTotalPages(filtredData);
     }, [filtredData])
+
+    useEffect(() => {
+        setActivePage(offset / 10 + 1);
+
+        if (activePage > totalPages) {
+            setActivePage(1);
+            setOffset(0);
+        }
+        
+    }, [offset, totalPages, activePage])
+
+    useEffect(() => {
+        setSortedClaims(claims);
+    }, [claims])
 
     return (
         <div className="my-claims">
@@ -106,7 +117,10 @@ const MyClaims = (props) => {
             showClaim={showClaim}
             onSetSort={onSetSort}
             sortClaims={sortClaims} 
-            data={visibleData}/>
+            data={visibleData}
+            loading={loading}
+            error={error}
+            />
             <Pagination
             changePageByNumbers={changePageByNumbers} 
             activePage={activePage} 

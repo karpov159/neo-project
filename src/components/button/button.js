@@ -9,7 +9,6 @@ const Button = (props) => {
     return (
         <button onClick={() => {
            if (onClick) {
-
             navigate(-1);
            }
         }} 

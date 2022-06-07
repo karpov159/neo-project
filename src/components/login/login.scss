@@ -1,5 +1,8 @@
 .form {
     margin-top: 96px;
+    &_mt20 {
+        margin-top: 20px;
+    }
     .input {
         &:first-child {
             margin-top: 0;
@@ -50,6 +53,12 @@
             color: #2F80ED;
             text-decoration: none;
         }
+    }
+    &__btns {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+
     }
 }
 

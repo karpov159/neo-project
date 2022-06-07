@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Left from '../../assets/icons/pagination/Left.png';
 import Right from '../../assets/icons/pagination/Right.png';
 
@@ -6,6 +8,8 @@ import './pagination.scss';
 
 const Pagination = (props) => {
     const {totalPages, changePageByArrows, activePage, changePageByNumbers} = props;
+
+
 
     return (
         <div className="pagination">
@@ -51,6 +55,7 @@ const TotalPages = (props) => {
     
     if (totalPages > 8) {
         return (
+            // доработать
             <>
                 {pages.slice(0,1)}
 
