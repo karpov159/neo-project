@@ -1,3 +1,5 @@
+import PageLink from './pageLink/PageLink';
+
 import MiniLogo from '../../assets/img/logo_mini.svg';
 import IconHome from '../../assets/icons/icon-home.svg';
 import IconGlobe from '../../assets/icons/icon-globe.svg';
@@ -10,34 +12,25 @@ import IconNavigation from '../../assets/icons/icon-navigation.svg';
 import './menu.scss';
 
 const Menu = () => {
-
+    const mobile = false;
+    const activeClass = mobile ? 'menu menu_active' : 'menu';
     return (
-        <aside className='menu'>
-            <img className='menu__logo' src={MiniLogo} alt="logo"/>
-            <div className="menu__links">
-            <button className="menu__link menu__link_active">
-                <img src={IconHome} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconGlobe} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconArchive} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconPieChart} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconDollar} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconDatabase} alt="icon" />    
-            </button>
-            <button className="menu__link">
-                <img src={IconNavigation} alt="icon" />    
-            </button>    
-            </div>
-        </aside>    
+        <>
+            <aside className={activeClass}>
+                {!activeClass ? <img className='menu__logo' src={MiniLogo} alt="logo"/> : null}
+                <div className="menu__links">
+                    <PageLink icon={IconHome} active mobileName="Home"/>
+                    <PageLink icon={IconGlobe} mobileName="Services"/>
+                    <PageLink icon={IconArchive} mobileName="Storage"/>
+                    <PageLink icon={IconPieChart} mobileName="Charts"/>
+                    <PageLink icon={IconDollar} mobileName="Currency"/>
+                    <PageLink icon={IconDatabase} mobileName="Base"/>
+                    <PageLink icon={IconNavigation} mobileName="Locations"/>
+                </div>
+            </aside>
+        {mobile ? <div className='overlay'/> : null}
+        </>
+    
     )
 }
 

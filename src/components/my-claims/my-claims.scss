@@ -14,21 +14,27 @@
         background: #7DB59A;
         border-radius: 16px;
         border: none;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 32px;
-        color: #FFFFFF;
-        letter-spacing: 0.2px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         cursor: pointer;
         transition: 0.3s all;
+        position: relative;
         &:hover {
             background: #5B9479;
         }
         &:active {
             background: #4F896C;
+        }
+        &::after {
+            position: absolute;
+            content: 'Create claim';
+            font-weight: 700;
+            font-size: 17px;
+            line-height: 32px;
+            color: #FFFFFF;
+            letter-spacing: 0.2px;
+            left: 44px;
         }
         img {
             width: 40px;

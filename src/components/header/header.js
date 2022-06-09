@@ -1,5 +1,6 @@
 import Input from '../input/input';
 import { useNavigate } from 'react-router-dom';
+import Hamburger from '../hamburger/hamburger';
 import SearchImg from '../../assets/icons/search.svg';
 import Notification from '../../assets/icons/icon-notification.svg';
 import IconHome from '../../assets/icons/icon-log-out.svg';
@@ -19,6 +20,7 @@ const Header = (props) => {
 
     return (
         <header className="header">
+            <Hamburger/>
             {isSearchInput ? <Input onChange={changeValue} placeholder="Search" addClass={"input_search"} icon={SearchImg}/> : null}
             <div className="header__options">
                     <button className="header__btn">
@@ -41,5 +43,6 @@ const Header = (props) => {
         </header>
     )
 }
+
 
 export default Header;

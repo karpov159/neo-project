@@ -1,3 +1,5 @@
+import useProjectService from "../../services/ProjectService";
+
 import Input from "../input/input"
 import Button from "../button/button";
 import { useNavigate } from "react-router-dom";
@@ -5,14 +7,24 @@ import Title from "../title/title";
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 
+
 const Registration = (props) => {
 
     const navigate = useNavigate();
+    const {onRegistration} = useProjectService();
 
     const onSubmit = (e) => {
         e.preventDefault();
+        onRegistration({
+            "fullName": "Maxim Karpov",
+            "email": "karpov123",
+            "password": "123456"
+        }).then(console.log)
         navigate('/')
     }
+
+
+    
 
     return (
         <>

@@ -1,3 +1,4 @@
+import useProjectService from '../../services/ProjectService';
 import Input from '../input/input';
 import Button from '../button/button';
 import { useNavigate, NavLink } from 'react-router-dom';
@@ -13,9 +14,15 @@ import './login.scss';
 const Login = (props) => {
     const { toggleLogin} = props;
     const navigate = useNavigate();
+    const {onAuthorization} = useProjectService();
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault();
         toggleLogin();
+        onAuthorization({
+            "email": "karpov123",
+            "password": "123456"
+        }).then(console.log)
         navigate('homepage');      
     }
 
@@ -24,7 +31,7 @@ const Login = (props) => {
             <div className="entrance__logo">
                 <img src={BigLogo} alt="logo" />    
             </div>
-            <form onSubmit={onSubmit} className="form">
+            <form onSubmit={(e) => onSubmit(e)} className="form">
                 <Input label={'E-MAIL'} placeholder={'Type your e-mail'} icon={Mail} />
                 <Input label={'password'} placeholder={'Type your password'} icon={Lock} />
                 <div className="form__check">

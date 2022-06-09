@@ -9,11 +9,11 @@ const useHttp = () => {
             setLoading(true);
     
             try {
-                const respone = await fetch(url,{method, body, headers});
+                const respone = await fetch(url,{method, body, headers });
     
-                if (!respone.ok) {
-                    throw new Error('Could not fetch this');
-                }
+                // if (!respone.ok) {
+                //     throw new Error('Could not fetch this');
+                // }
     
                 const data = await respone.json();
     
