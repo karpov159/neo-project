@@ -29,7 +29,7 @@ const Login = (props) => {
             "password": password
         }).then(result => {
             if (result) {
-                console.log(result)
+                console.log(result.role.slug)
                 toggleLogin();
                 navigate('homepage'); 
             }

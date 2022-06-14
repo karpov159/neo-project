@@ -1,6 +1,6 @@
 .claim {
     display: grid;
-    grid-template-columns: 469px 300px 300px 272px 296px;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
     border-bottom: 1px solid #C2C2C2;
     padding-left: 24px;
     justify-content: flex-start;
@@ -67,6 +67,11 @@
                 background-color: #1460ad;
             }
         }
+    }
+
+
+    &__filter {
+        display: none;
     }
 
 }

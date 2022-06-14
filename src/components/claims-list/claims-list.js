@@ -63,7 +63,7 @@ const Items = (props) => {
             title={title} 
             createdAt={createdAt.slice(0, 10)} 
             type={type ? type.name : null} 
-            status={status.name}
+            status={status ? status.name : null}
             key={_id}
             id={_id}
             />

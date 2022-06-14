@@ -6,19 +6,19 @@ const useProjectService = () => {
           _registration = 'http://localhost:3001/auth/registration',
           _authorization = 'http://localhost:3001/auth/login',
           _createNewClaim = 'http://localhost:3001/claim',
-          _createUser = 'http://localhost:3001/user',
-          _user = localStorage.getItem("Token");
+          _user = 'http://localhost:3001/user',
+          _userToken = localStorage.getItem("Token");
 
 
     const getAllClaims = async (sort = 'title', order = 'desc') => {
-        const res = await request(`${_apiKey}?offset=0&column=${sort}&sort=${order}`, 'GET', null, {'Authorization': `Bearer ${_user}`,
+        const res = await request(`${_apiKey}?offset=0&column=${sort}&sort=${order}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'});
         return res.claims;
     }
     
     const getClaim = async (id) => {
-        const res = await request(`${_apiKey}/${id}`, 'GET', null, {'Authorization': `Bearer ${_user}`,
+        const res = await request(`${_apiKey}/${id}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'});
         return res;
@@ -36,13 +36,21 @@ const useProjectService = () => {
         localStorage.setItem('User', 
             JSON.stringify(
             {'fullName': res.fullName}));
-        console.log(JSON.parse(localStorage.getItem('User')))
 
         return res;
     }
 
     const createUser = async (body) => {
-        const res = await request(_createUser, 'POST', JSON.stringify(body), {'Content-Type': 'application/json;charset=utf-8'})
+        const res = await request(_user, 'POST', JSON.stringify(body), {'Authorization': `Bearer ${_userToken}`,
+
+        'Content-Type': 'application/json'})
+        return res;
+    }
+
+    const getUsers = async () => {
+        const res = await request(_user, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
+
+        'Content-Type': 'application/json'});
         return res;
     }
 
@@ -54,14 +62,16 @@ const useProjectService = () => {
 
             JSON.stringify(body), 
             
-            {'Authorization': `Bearer ${_user}`,
+            {'Authorization': `Bearer ${_userToken}`,
 
             'Content-Type': 'application/json'})
 
         return res;
     }
 
-    return {loading, request, error, clearError, getAllClaims, registration, authorization, createNewClaim, getClaim, createUser};
+    return {loading, request, error, clearError, getAllClaims, 
+        registration, authorization, createNewClaim, getClaim, 
+        createUser, getUsers};
 }
 
 export default useProjectService;
