@@ -18,12 +18,14 @@
         }
     }
     &__right {
-        padding: 140px 0;
+        padding-bottom: 140px;
+        padding-top: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
     &__logo {
+        margin-top: 40px;
         width: 165px;
         height: 161px;
         img {

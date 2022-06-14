@@ -20,9 +20,8 @@ const Homepage = (props) => {
 
     useEffect(() => {
 
-        getAllClaims().then(setClaims)
+        getAllClaims().then(results => setClaims(results))
     }, [])
-
 
     return (
             <section className='homepage'>

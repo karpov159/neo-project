@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useProjectService from '../../services/ProjectService';
 import Input from '../input/input';
 import Button from '../button/button';
@@ -12,18 +13,32 @@ import './login.scss';
 
 
 const Login = (props) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [keepLogIn, setKeepLogIn] = useState(false);
+
     const { toggleLogin} = props;
     const navigate = useNavigate();
-    const {onAuthorization} = useProjectService();
+    const {authorization, error, clearError} = useProjectService();
 
     const onSubmit = (e) => {
+        clearError();
         e.preventDefault();
-        toggleLogin();
-        onAuthorization({
-            "email": "karpov123",
-            "password": "123456"
-        }).then(console.log)
-        navigate('homepage');      
+        authorization({
+            "email": email,
+            "password": password
+        }).then(result => {
+            if (result) {
+                console.log(result)
+                toggleLogin();
+                navigate('homepage'); 
+            }
+        })
+
+    }
+    
+    const onChangeInput = (e, func) => {
+        func(e.target.value);
     }
 
     return (
@@ -32,12 +47,30 @@ const Login = (props) => {
                 <img src={BigLogo} alt="logo" />    
             </div>
             <form onSubmit={(e) => onSubmit(e)} className="form">
-                <Input label={'E-MAIL'} placeholder={'Type your e-mail'} icon={Mail} />
-                <Input label={'password'} placeholder={'Type your password'} icon={Lock} />
+                <Input 
+                error={error}
+                onChange={(e) => onChangeInput(e, setEmail)} 
+                type="email"
+                label={'E-MAIL'} 
+                placeholder={'Type your e-mail'} 
+                icon={Mail} />
+                <Input 
+                error={error}
+                onChange={(e) => onChangeInput(e, setPassword)} 
+                type="password"
+                label={'password'} 
+                placeholder={'Type your password'} 
+                icon={Lock} />
+                {error ? <div className='error error_block'>Wrong password</div> : null}
+
                 <div className="form__check">
-                    <input id="checkbox" className='form__box' type="checkbox"/>
-                    <label className="form__label" htmlFor="checkbox"/>
-                    <div className="form__text">Keep me logged in</div>
+                    <input 
+
+                    value={keepLogIn} 
+                    id="checkbox" 
+                    className='form__box' 
+                    type="checkbox"/>
+                    <label className="form__label" htmlFor="checkbox">Keep me logged in </label>
                 </div>
                 <Button label={'Login'} addClass={'button_main'}/>
                 <div className="form__link">

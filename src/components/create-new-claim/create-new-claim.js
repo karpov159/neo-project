@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProjectService from '../../services/ProjectService';
+import getClaimType from '../../libs/getClaimType';
 
 import Title from '../title/title';
 import Input from '../input/input';
 import Button from '../button/button';
+import DropDownInput from '../input/DropDownInput';
 
-import IconDown from '../../assets/icons/icon-chevron-down.png'
+import IconDown from '../../assets/icons/icon-chevron-down.png';
 import './create-new-claim.scss';
 
 const CreateNewClaim = (props) => {
@@ -17,13 +20,14 @@ const CreateNewClaim = (props) => {
     const [descr, setDescr] = useState('');
     const navigate = useNavigate();
 
+    const {error, clearError, createNewClaim} = useProjectService();
+
     useEffect(() => {
         setSearchInput(false);
         return () => {
             setSearchInput(true);
         }
     })
-
 
     const changeValue = (e, func) => {
         func(e.target.value)
@@ -34,16 +38,14 @@ const CreateNewClaim = (props) => {
     }
 
     const onSubmit = (e) => {
+        clearError();
         e.preventDefault();
-        console.log({
-            'title' : title,
-            'type': type,
-            'descr': descr
+        createNewClaim({
+            "title": title, 
+            "description": descr, 
+            "type": getClaimType(type)
         })
-        setTitle('')
-        setType('')
-        setDescr('')
-        navigate(-1);
+        // .then(results => results ? navigate(-1) : null);
     }
 
     const options = ['Hardware', 'Software', 'Troubleshooting', 'Networking'];
@@ -54,24 +56,27 @@ const CreateNewClaim = (props) => {
                 <Input 
                 onChange={(e) => changeValue(e, setTitle)} 
                 value={title} 
-                addClass={'input_mt40'} 
+                addClass={'input-block_mt40'} 
                 label={'TITLE'} 
                 placeholder={'Type claim title'}/>
-                <Input 
-                dropDown={true}
+                
+                <DropDownInput 
                 icon={IconDown}
                 onChange={changeDropDown}
-                value={type} 
+                value={type}
                 options={options}
-                addClass={'input_mt40'} 
+                addClass={'input-block_mt40'} 
                 label={'TYPE'} 
-                placeholder={'Select type'}/>
+                placeholder={'Select type'}                
+                />
+
                 <Input 
                 onChange={(e) => changeValue(e, setDescr)} 
                 value={descr} 
-                addClass={'input_mt40'} 
+                addClass={'input-block_mt40'} 
                 label={'DESCRIPTION'} 
                 placeholder={'Type claim description'}/>
+                {error ? <div className='error'>Cant create new claim</div> : null}
                 <div className="new-claim__btns">
                     <Button onClick addClass={'button_cancel'} label={'Cancel'}/>
                     <Button label={'Create'}/>

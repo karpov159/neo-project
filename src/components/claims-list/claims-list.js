@@ -7,7 +7,7 @@ import IconFilter from '../../assets/icons/filter.png';
 import './claims-list.scss';
 
 const ClaimsList = (props) => {
-    const {data, onSetSort, showClaim, loading, error} = props;
+    const {data, onSetSort, showClaim, loading, error, setToggleOrder} = props;
 
     const filtersList = [
         {label: 'Title',
@@ -41,12 +41,10 @@ const ClaimsList = (props) => {
           errorMessage = error ? <ErrorMessage/> : null,
           content = !error && !loading ? <Items showClaim={showClaim} data={data}/> : null;
 
-
-
     return (
         <div className="claims-list">
             <div className="claims-list__filters">
-                <Filtres onSetSort={onSetSort} filtersList={filtersList}/>
+                <Filtres onSetSort={onSetSort} filtersList={filtersList} setToggleOrder={setToggleOrder}/>
             </div>
             {spinner}
             {errorMessage}
@@ -59,15 +57,15 @@ const ClaimsList = (props) => {
 const Items = (props) => {
     const {data, showClaim} = props
     return (
-        data.map(({title, data, type, status, key}) => {
+        data.map(({title, createdAt, type, status, _id}) => {
             return <Claim 
             showClaim={showClaim}
             title={title} 
-            data={data} 
-            type={type} 
-            status={status}
-            key={key}
-            id={key}
+            createdAt={createdAt.slice(0, 10)} 
+            type={type ? type.name : null} 
+            status={status.name}
+            key={_id}
+            id={_id}
             />
         })
     )
@@ -76,11 +74,14 @@ const Items = (props) => {
 
 // создание фильтров
 const Filtres = (props) => {
-    const {filtersList, onSetSort} = props
+    const {filtersList, onSetSort, setToggleOrder} = props
     return filtersList.map(({label, icon, key, filter}) => {
         return (
             <div key={key} className="claims-list__item">
-                <div onClick={() => {onSetSort(filter);}} 
+                <div onClick={() => {
+                    onSetSort(filter);
+                    setToggleOrder(toggleOrder => !toggleOrder);
+                }} 
                 className='claims-list__filter'>
                     <div>{label}</div>
                     {icon ? <img src={icon} alt="filter" /> : null }  

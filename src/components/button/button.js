@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './button.scss';
 
 const Button = (props) => {
-    const {label, addClass, onClick} = props,
+    const {label, addClass, onClick, type} = props,
           classes = addClass ? 'button ' + addClass : 'button',
           navigate = useNavigate();
 
@@ -11,7 +11,8 @@ const Button = (props) => {
            if (onClick) {
             navigate(-1);
            }
-        }} 
+        }}
+        type={type} 
         className={classes}>
             {label}
         </button>

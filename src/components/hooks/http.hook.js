@@ -9,16 +9,19 @@ const useHttp = () => {
             setLoading(true);
     
             try {
-                const respone = await fetch(url,{method, body, headers });
+                const response = await fetch(url,{method, body, headers });
+                if (!response.ok) {
+                    response.json().then(setError)
+                    throw new Error('Error')
+
+                } else {
+                    const data = await response.json();
+        
+                    setLoading(false);
+                    return data;
+                }
     
-                // if (!respone.ok) {
-                //     throw new Error('Could not fetch this');
-                // }
-    
-                const data = await respone.json();
-    
-                setLoading(false);
-                return data;
+                
             } catch(e) {
                 setLoading(false);
                 setError(e.message);

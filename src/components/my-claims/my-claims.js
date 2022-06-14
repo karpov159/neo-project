@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useProjectService from '../../services/ProjectService';
 import ClaimsList from '../claims-list/claims-list';
 import Pagination from '../pagination/pagination';
 import Title from '../title/title';
@@ -14,6 +15,15 @@ const countTotalPages = (data) => {
     }        
 }
 
+// фильтрует, если поисковая строка не пустая
+const filterClaims = (searchWord, data) => {
+    if (searchWord < 1) {
+        return data;
+    }
+
+    return data.filter(item => item.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1);
+}
+
 const MyClaims = (props) => {
     const {searchWord, claims, showClaim, loading, error} = props;
     const [offset, setOffset] = useState(0);
@@ -23,15 +33,8 @@ const MyClaims = (props) => {
     const [toggleOrder, setToggleOrder] = useState(true);
     const navigate = useNavigate();
 
-    // фильтрует, если поисковая строка не пустая
-    const filterClaims = (searchWord, data) => {
-        if (searchWord < 1) {
-            console.log(data)
-            return data;
-        }
+    const {getAllClaims} = useProjectService();
 
-        return data.filter(item => item.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1);
-    }
 
     // перелистывает страницу нажатием на кнопки
     const changePageByArrows = (num) => {
@@ -63,21 +66,22 @@ const MyClaims = (props) => {
 
     useEffect(() => {
         if (sort) {
-            setToggleOrder(toggleOrder => !toggleOrder);
+            const order = toggleOrder ? 'desc' : 'asc';
 
-            const value = toggleOrder ? 1 : -1;
-    
-            const sorted = [...sortedClaims].sort((a, b) => {
-                if (a[sort] === b[sort]) {
-                    return 0;
-                }
-                return a[sort] > b[sort] ? value : value * -1;
-            });
-    
-            setSort(false)
-            setSortedClaims(sorted)
+            if (sort === 'data') {
+                const value = toggleOrder ? 1 : -1;
+                const sorted = [...sortedClaims].sort((a, b) => {
+                    if (a.createdAt === b.createdAt) {
+                        return 0;
+                    }
+                    return a.createdAt > b.createdAt ? value : value * -1;
+                });
+                setSortedClaims(sorted);
+            } else {
+                getAllClaims(sort, order).then(setSortedClaims)
+            }
         }
-    }, [sort, sortedClaims, toggleOrder])
+    }, [sort, toggleOrder])
 
     const filtredData = searchWord ? filterClaims(searchWord, sortedClaims) : sortedClaims;
     const visibleData = filtredData.slice(offset, offset + 10);
@@ -110,8 +114,8 @@ const MyClaims = (props) => {
                 }} 
                 className="my-claims__btn">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 13V27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M13 20H27" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 13V27" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M13 20H27" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </button>
             </div>
@@ -122,6 +126,7 @@ const MyClaims = (props) => {
             data={visibleData}
             loading={loading}
             error={error}
+            setToggleOrder={setToggleOrder}
             />
             <Pagination
             changePageByNumbers={changePageByNumbers} 

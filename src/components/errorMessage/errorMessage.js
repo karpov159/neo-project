@@ -6,10 +6,10 @@ import './errorMessage.scss';
 const ErrorMessage = () => {
     const navigate = useNavigate();
     return (
-        <div className='error'>
+        <div className='error-message'>
             <Title title="Something went wrong with the server"/>
-            <div className="error__block">
-                <p className="error__text">Click here to comeback to the homepage</p>
+            <div className="error-message__block">
+                <p className="error-message__text">Click here to comeback to the homepage</p>
                 <button onClick={() => navigate('/')} className='button button_cancel button_error'>Click</button>
             </div>
 

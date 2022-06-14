@@ -1,14 +1,61 @@
 .browse-claim {
     padding: 56px 0 0 64px;
-    .input {
-        &:first-child {
-            margin-top: 48px;
-        }
+    // .input {
+    //     &:first-child {
+    //         margin-top: 48px;
+    //     }
+    // }
+
+    &__item {
+        margin-top: 63px;
+        width: 589px;
+        height: 48px;
+        padding: 13px 0 13px 16px;
+        background: rgba(194, 194, 194, 0.24);
+        border-radius: 16px;
+        position: relative;
+
+    }
+    &__text {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: #ADADAD;
+        display: flex;
+        align-items: center;
+    }
+    &__ball {
+        margin-right: 10px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 100%;
+    }
+    &__type {
+        display: flex;
+        align-items: center;
+    }
+    &__label {
+        position: absolute;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #ADADAD;
+        left: 0;
+        top: -21px;
     }
     &__btns {
         width: 300px;
         display: flex;
         justify-content: space-between;
         margin-top: 48px;
+    }
+    &__img {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
 }

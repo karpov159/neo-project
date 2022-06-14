@@ -1,5 +1,6 @@
+import { Formik } from 'formik';
+import { useState } from 'react';
 import useProjectService from "../../services/ProjectService";
-
 import Input from "../input/input"
 import Button from "../button/button";
 import { useNavigate } from "react-router-dom";
@@ -8,42 +9,135 @@ import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 
 
-const Registration = (props) => {
-
+const Registration = () => {
+    // const [error, setError] = useState(null)
     const navigate = useNavigate();
-    const {onRegistration} = useProjectService();
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        onRegistration({
-            "fullName": "Maxim Karpov",
-            "email": "karpov123",
-            "password": "123456"
-        }).then(console.log)
-        navigate('/')
-    }
-
-
-    
+    const {registration, error, clearError} = useProjectService();    
 
     return (
         <>
             <Title title="Create your personal account"/>
-            <form className="form form_mt20" onSubmit={(e) => onSubmit(e)}>
-                <Input label={'Name'} placeholder={'Type your name'} icon={Mail} />
-                <Input label={'surname'} placeholder={'Type your surname'} icon={Mail} />
-                <Input label={'E-MAIL'} placeholder={'Type your e-mail'} icon={Mail} />
-                <Input label={'password'} placeholder={'Type your password'} icon={Lock} />
-                <Input label={'password'} placeholder={'Type your password again'} icon={Lock} />
-                <div className="form__btns">
-                    <Button onClick label={'Cancel'} addClass={'button_cancel button_w45'}/>
-                    <Button label={'Continue'} addClass={'button_w45'} />
-                </div>
-            </form>
+            <Formik
+                initialValues = {{
+                    name: '',
+                    surname: '',
+                    email: '',
+                    password: '',
+                    secondPassword: '',
+                    terms: false
+                }}
+
+                validate = {values => {
+                    clearError();
+
+                    const errors = {};
+
+                    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                        errors.email = 'Invalid email address';
+                    }
+
+                    if (values.password !== values.secondPassword) {
+                        errors.password = 'Passwords did not match'
+                    }
+
+                    if (!values.terms) {
+                        errors.terms = 'You have to agree with the terms'
+                    }
+
+                    return errors;
+                    
+                }}
+
+                onSubmit = {values => {
+                    clearError();
+                    registration({
+                        "fullName": values.name + ' ' + values.surname,
+                        "email": values.email,
+                        "password": values.password
+                    }).then(result => {
+                        if (result) {
+                            console.log(result);
+                            navigate(-1);
+                        }
+                    })                    
+                }}
+            >
+                {({
+                    values, 
+                    errors, 
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit
+                }) => (
+                    <form className="form form_mt20" onSubmit={handleSubmit}>
+                        <Input
+                        type="text"
+                        name="name"
+                        value={values.name} 
+                        onChange={handleChange} 
+                        label={'Name'} 
+                        placeholder={'Type your name'} 
+                        icon={Mail} />
+                        <Input
+                        type="text"
+                        name="surname"
+                        value={values.surname} 
+                        onChange={handleChange} 
+                        label={'surname'} 
+                        placeholder={'Type your surname'} 
+                        icon={Mail} />
+                        <Input
+                        type="email"
+                        name="email"
+                        value={values.email} 
+                        onChange={handleChange} 
+                        onBlur={handleBlur}
+                        label={'E-MAIL'} 
+                        placeholder={'Type your e-mail'} 
+                        icon={Mail} />
+                        {errors.email && touched.email ? <div className='error'>{errors.email}</div> : null}
+                        <Input
+                        type="password"
+                        name="password"
+                        value={values.password} 
+                        onChange={handleChange} 
+                        label={'password'} 
+                        placeholder={'Type your password'} 
+                        icon={Lock} />
+                        <Input
+                        type="password"
+                        name="secondPassword"
+                        value={values.secondPassword} 
+                        onChange={handleChange} 
+                        onBlur={handleBlur}
+                        label={'password'} 
+                        placeholder={'Type your password again'} 
+                        icon={Lock} />
+                        {errors.password && touched.secondPassword ? <div className='error'>{errors.password}</div> : null}
+                        <div className="form__check form__check_mt40">
+                            <input 
+                            name="terms"
+                            value={values.terms}
+                            onChange={handleChange} 
+                            onBlur={handleBlur}
+                            id="checkbox" 
+                            className='form__box' 
+                            type="checkbox"/>
+                            <label className="form__label" htmlFor="checkbox">I have read and accept the Privacy Statement </label>
+                        </div>
+                        {errors.terms && touched.terms && !error ? <div className='error'>{errors.terms}</div> : null}
+                        {error ? <div className='error'>{error.message}</div> : null}
+                        <div className="form__btns">
+                            <Button type="button" onClick label={'Cancel'} addClass={'button_cancel button_w45'}/>
+                            <Button type="submit" label={'Continue'} addClass={'button_w45'} />
+                        </div>
+                    </form>
+
+                )}
+
+            </Formik>
         </>
-
-
-       
 
     )
 }
