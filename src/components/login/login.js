@@ -1,26 +1,26 @@
 import { useState } from 'react';
-import useProjectService from '../../services/ProjectService';
-import Input from '../input/input';
-import Button from '../button/button';
 import { useNavigate, NavLink } from 'react-router-dom';
+import useProjectService from '../../services/ProjectService';
+import Input from '../generic/input/input';
+import Button from '../generic/button/button';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 import BigLogo from '../../assets/img/logo_big.svg';
 
-
 import './login.scss';
 
+const onChangeInput = (e, func) => {
+    func(e.target.value);
+}
 
-const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [keepLogIn, setKeepLogIn] = useState(false);
-
-    const { toggleLogin} = props;
-    const navigate = useNavigate();
-    const {authorization, error, clearError} = useProjectService();
-
+const Login = ({toggleLogin}) => {
+    const [email, setEmail] = useState(''),
+          [password, setPassword] = useState(''),
+          [keepLogIn, setKeepLogIn] = useState(false),
+          navigate = useNavigate(),
+          {authorization, error, clearError} = useProjectService();
+    // вынести в отдельную функцию(?)
     const onSubmit = (e) => {
         clearError();
         e.preventDefault();
@@ -34,11 +34,6 @@ const Login = (props) => {
                 navigate('homepage'); 
             }
         })
-
-    }
-    
-    const onChangeInput = (e, func) => {
-        func(e.target.value);
     }
 
     return (
@@ -65,18 +60,18 @@ const Login = (props) => {
 
                 <div className="form__check">
                     <input 
-
                     value={keepLogIn} 
                     id="checkbox" 
                     className='form__box' 
                     type="checkbox"/>
                     <label className="form__label" htmlFor="checkbox">Keep me logged in </label>
                 </div>
+
                 <Button label={'Login'} addClass={'button_main'}/>
                 <div className="form__link">
-                Not a member? &nbsp;
+                    Not a member? &nbsp;
                 <NavLink end to="/registration">
-                Request registration.
+                    Request registration.
                 </NavLink>
                 </div>
             </form>

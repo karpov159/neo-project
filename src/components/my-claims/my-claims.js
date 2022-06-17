@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useProjectService from '../../services/ProjectService';
 import ClaimsList from '../claims-list/claims-list';
 import Pagination from '../pagination/pagination';
-import Title from '../title/title';
-
-import IconPlus from '../../assets/icons/icon-plus.svg';
+import Title from '../generic/title/title';
 
 import './my-claims.scss';
 
@@ -24,17 +22,15 @@ const filterClaims = (searchWord, data) => {
     return data.filter(item => item.title.toLowerCase().indexOf(searchWord.toLowerCase()) > -1);
 }
 
-const MyClaims = (props) => {
-    const {searchWord, claims, showClaim, loading, error} = props;
-    const [offset, setOffset] = useState(0);
-    const [activePage, setActivePage] = useState();
-    const [sortedClaims, setSortedClaims] = useState([]);
-    const [sort, setSort] = useState(false);
-    const [toggleOrder, setToggleOrder] = useState(true);
-    const navigate = useNavigate();
+const MyClaims = ({searchWord, claims, showClaim, loading, error}) => {
+    const [offset, setOffset] = useState(0),
+          [activePage, setActivePage] = useState(),
+          [sortedClaims, setSortedClaims] = useState([]),
+          [sort, setSort] = useState(false),
+          [toggleOrder, setToggleOrder] = useState(true),
+          navigate = useNavigate();
 
     const {getAllClaims} = useProjectService();
-
 
     // перелистывает страницу нажатием на кнопки
     const changePageByArrows = (num) => {
@@ -55,15 +51,10 @@ const MyClaims = (props) => {
         setOffset(num * 10 - 10)
     }
 
-    // 
-    const sortClaims = (data) => {
-        setSortedClaims(data);
-    }
-
     const onSetSort = (sort) => {
         setSort(sort);
     }
-
+    
     useEffect(() => {
         if (sort) {
             const order = toggleOrder ? 'desc' : 'asc';
@@ -107,8 +98,8 @@ const MyClaims = (props) => {
     return (
         <div className="my-claims">
             <div className="my-claims__headline">
-                <Title title={'Your claims'}/>
-                <button 
+                <Title title='Your claims'/>
+                <button
                 onClick={() => {
                     navigate('create-new-claim');
                 }} 
@@ -122,7 +113,6 @@ const MyClaims = (props) => {
             <ClaimsList 
             showClaim={showClaim}
             onSetSort={onSetSort}
-            sortClaims={sortClaims} 
             data={visibleData}
             loading={loading}
             error={error}

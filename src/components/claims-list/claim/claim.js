@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import getStatusColor from '../../libs/getStatusColor';
-import getBallColor from '../../libs/getBallColor';
+import getStatusColor from '../../../helpers/getStatusColor';
+import getBallColor from '../../../helpers/getBallColor';
 
 import './claim.scss';
 
-const Claim = (props) => {
-    const {title, createdAt, type, status, id} = props,
-          navigate = useNavigate();
+const Claim = ({title, createdAt, type, status, id}) => {
+    const navigate = useNavigate();
 
     return (
         <div className="claim">

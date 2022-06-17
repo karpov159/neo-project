@@ -1,41 +1,12 @@
-import Claim from '../claim/claim';
-import Spinner from '../spinner/Spiner';
+import filtersList from '../../helpers/filtersList';
+import Claim from './claim/claim';
+import Spinner from '../generic/spinner/Spiner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
-import IconFilter from '../../assets/icons/filter.png';
 
 import './claims-list.scss';
 
-const ClaimsList = (props) => {
-    const {data, onSetSort, showClaim, loading, error, setToggleOrder} = props;
-
-    const filtersList = [
-        {label: 'Title',
-        icon: IconFilter,
-        filter: 'title',
-        key: '1'
-        },
-        {label: 'Created',
-        icon: IconFilter,
-        filter: 'data',
-        key: '2'
-        },
-        {label: 'Type',
-        icon: IconFilter,
-        filter: 'type',
-        key: '3'
-        },
-        {label: 'Status',
-        icon: IconFilter,
-        filter: 'status',
-        key: '4'
-        },
-        {label: 'Actions',
-        icon: null,
-        filter: false,
-        key: '5'
-        },
-    ]
+const ClaimsList = ({data, onSetSort, showClaim, loading, error, setToggleOrder}) => {
 
     const spinner = loading ? <Spinner/> : null,
           errorMessage = error ? <ErrorMessage/> : null,
@@ -54,8 +25,7 @@ const ClaimsList = (props) => {
 }
 
 // создание айтемов
-const Items = (props) => {
-    const {data, showClaim} = props
+const Items = ({data, showClaim}) => {
     return (
         data.map(({title, createdAt, type, status, _id}) => {
             return <Claim 
@@ -71,10 +41,8 @@ const Items = (props) => {
     )
 }
 
-
 // создание фильтров
-const Filtres = (props) => {
-    const {filtersList, onSetSort, setToggleOrder} = props
+const Filtres = ({filtersList, onSetSort, setToggleOrder}) => {
     return filtersList.map(({label, icon, key, filter}) => {
         return (
             <div key={key} className="claims-list__item">

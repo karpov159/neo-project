@@ -1,6 +1,7 @@
+import getBallColor from '../../../helpers/getBallColor';
 import { useRef, useState, useEffect } from "react";
 
-const DropDownInput = (props) => {
+const DropDownInput = ({label, placeholder, icon, addClass, claimTypes, onChange, value}) => {
 
     // устанавливает открыт список или нет
     const [active, setActive] = useState(false);
@@ -23,28 +24,24 @@ const DropDownInput = (props) => {
     const toggleActive = () => {
         setActive(active => !active);
     }
-
+    // не позволяет пользователю печатать в инпуте
     const disabledInput = () => {
-        onChange('');
+        onChange(value);
     }
 
-    const {label, placeholder, icon, addClass, options, onChange, value, readOnly} = props,
-          classes = addClass ? 'input-block ' + addClass : 'input-block';
+    const classes = addClass ? 'input-block ' + addClass : 'input-block';
 
     return (
         <div 
         ref={DropDownInput} 
         className={classes}
         >
-
             <span className='input-block__span'>{label}</span>  
-
             <input 
             className='input-block__input'
             onClick={toggleActive}
             onChange={disabledInput} 
             value={value}
-            readOnly={readOnly}
             required 
             type="text"
             placeholder={placeholder} 
@@ -56,7 +53,7 @@ const DropDownInput = (props) => {
             /> 
             {active && 
             <View 
-            options={options} 
+            claimTypes={claimTypes} 
             onChange={onChange} 
             toggleActive={toggleActive}
             />}
@@ -64,41 +61,24 @@ const DropDownInput = (props) => {
     )
 }
 
-const View = (props) => {
-    const {options, onChange, toggleActive } = props;
-
-    const ballColor = (type) => {
-        switch (type) {
-            case 'Software':
-                return '#FF7675';
-            case 'Troubleshooting':
-                return '#6C5CE7';
-            case 'Networking':
-                return '#FDCB6E';
-            default:
-                return '#7DB59A';
-            }   
-        } 
-
-    return (
-        
+const View = ({claimTypes, onChange, toggleActive }) => {
+    return (  
         <div  className="input-block__content">
-        {options.map((option) => (
+        {claimTypes.map((claim) => (
             <div 
             onClick={
-                (e) => {
-                onChange(option);
+                () => {
+                onChange(claim);
                 toggleActive(false);
                 }}
-            key={option}
+            key={claim}
             className="input-block__option">
-                <span style={{'background': `${ballColor(option)}`}} className="input-block__ball"></span>
+                <span style={{'background': `${getBallColor(claim)}`}} className="input-block__ball"></span>
                 <div className="input-block__item">
-                {option}
+                {claim}
                 </div>    
             </div>
         ))}
-
         </div>
     )
 }

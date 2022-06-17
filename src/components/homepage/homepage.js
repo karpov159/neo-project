@@ -1,27 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Menu from '../menu/menu';
 import Header from '../header/header';
 import MyClaims from '../my-claims/my-claims';
 import useProjectService from '../../services/ProjectService';
-import { Route, Routes } from 'react-router-dom';
 import CreateNewClaim from '../create-new-claim/create-new-claim';
 import BrowsedClaim from '../browsed-claim/browsed-claim';
 
 import './homepage.scss';
 
-const Homepage = (props) => {
-    const {toggleLogin} = props;
+const Homepage = ({toggleLogin}) => {
 
-    const [isSearchInput, setSearchInput] = useState(true);
-    const [searchWord, setSearchWord] = useState('');
-    const [claims, setClaims] = useState([]);
+    const [isSearchInput, setSearchInput] = useState(true),
+          [searchWord, setSearchWord] = useState(''),
+          [claims, setClaims] = useState([]),
+          {error, loading, getAllClaims} = useProjectService();
 
-    const {error, loading, getAllClaims} = useProjectService();
-
+    // получаем данные обращений
     useEffect(() => {
-
         getAllClaims().then(results => setClaims(results))
-    }, [])
+    }, [isSearchInput])
 
     return (
             <section className='homepage'>
@@ -37,9 +36,7 @@ const Homepage = (props) => {
                     loading={loading}
                     error={error}
                     />}/>
-
                     <Route path="create-new-claim" element={<CreateNewClaim setSearchInput={setSearchInput}/> }/>        
-
                     <Route path={":claimId"} element={
                     <BrowsedClaim 
                     setSearchInput={setSearchInput}

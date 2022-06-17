@@ -1,25 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import Title from '../title/title';
-import Input from '../input/input';
+import Title from '../generic/title/title';
 import useProjectService from '../../services/ProjectService';
-import Button from '../button/button';
+import Button from '../generic/button/button';
 import { useParams } from 'react-router-dom';
-import getBallColor from '../../libs/getBallColor';
+import getBallColor from '../../helpers/getBallColor';
+import getClaimType from '../../helpers/getClaimType';
+import { useNavigate } from 'react-router-dom';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png'
-
 
 import './browsed-claim.scss';
 
 const BrowsedClaim = (props) => {
-    const {showClaim, setSearchInput} = props,
+    const {setSearchInput} = props,
           [title, setTitle] = useState(''),
           [type, setType] = useState(''),
-          [descr, setDescr] = useState('');
-
-    const {claimId} = useParams();
-    const {getClaim} = useProjectService();
-
+          [descr, setDescr] = useState(''),
+          {claimId} = useParams(),
+          {getClaim, updateClaim, error, clearError} = useProjectService(),
+          navigate = useNavigate();
 
     useEffect(() => {
         getClaim(claimId).then(claim => {
@@ -35,30 +35,21 @@ const BrowsedClaim = (props) => {
             setSearchInput(true);
         }
     })
-
-
-
+    // вынести в отдельную функцию(?)
+    const onUpdateClaim = (status) => {
+        clearError();
+        updateClaim({
+            "title": title, 
+            "description": descr, 
+            "type": getClaimType(type),
+            'status': status
+        }, claimId)
+        .then(navigate(-1))
+    }
 
     return (
         <div className="browse-claim">
             <Title title={'Incoming claim'}/>
-                {/* <Input
-                value={title} 
-                addClass={'input-block_mt40 input-block_gray'} 
-                label={'TITLE'} 
-                readOnly/>
-                <Input
-                icon={IconDown}
-                value={type} 
-                addClass={'input-block_mt40 input-block_gray'} 
-                label={'TYPE'} 
-                readOnly/>
-                <Input
-                value={descr} 
-                addClass={'input-block_mt40 input-block_gray'} 
-                label={'DESCRIPTION'} 
-                placeholder={'Type claim description'} 
-                readOnly/> */}
                 <div className="browse-claim__item">
                     <span className="browse-claim__label">Title</span>
                     <div className="browse-claim__text">{title}</div>
@@ -75,10 +66,11 @@ const BrowsedClaim = (props) => {
                     <span className="browse-claim__label">DESCRIPTION</span>
                     <div className="browse-claim__text">{descr}</div>
                 </div>
+                {error ? <div className='error'>{error.message}</div> : null}
             <div className="browse-claim__btns">
-                <Button onClick onToggle={() => showClaim(null)} addClass={'button_cancel'} label={'Cancel'}/>
-                <Button label={'Done'}/>
-                <Button addClass={'button_decline'} label={'Decline'}/>
+                <Button onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
+                <Button onClick={() => onUpdateClaim('done')}label={'Done'}/>
+                <Button onClick={() => onUpdateClaim('decl')}addClass={'button_decline'} label={'Decline'}/>
             </div>
     </div>
     )   

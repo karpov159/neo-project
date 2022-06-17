@@ -1,4 +1,4 @@
-import Title from '../title/title';
+import Title from '../generic/title/title';
 import { useNavigate } from 'react-router-dom';
 
 import './errorMessage.scss';

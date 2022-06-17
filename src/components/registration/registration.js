@@ -1,16 +1,14 @@
 import { Formik } from 'formik';
-import { useState } from 'react';
-import useProjectService from "../../services/ProjectService";
-import Input from "../input/input"
-import Button from "../button/button";
 import { useNavigate } from "react-router-dom";
-import Title from "../title/title";
+import useProjectService from "../../services/ProjectService";
+import Input from "../generic/input/input"
+import Button from "../generic/button/button";
+import Title from "../generic/title/title";
+
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 
-
 const Registration = () => {
-    // const [error, setError] = useState(null)
     const navigate = useNavigate();
     const {registration, error, clearError} = useProjectService();    
 
@@ -54,12 +52,7 @@ const Registration = () => {
                         "fullName": values.name + ' ' + values.surname,
                         "email": values.email,
                         "password": values.password
-                    }).then(result => {
-                        if (result) {
-                            console.log(result);
-                            navigate(-1);
-                        }
-                    })                    
+                    }).then(navigate(-1))                    
                 }}
             >
                 {({
@@ -129,13 +122,11 @@ const Registration = () => {
                         {errors.terms && touched.terms && !error ? <div className='error'>{errors.terms}</div> : null}
                         {error ? <div className='error'>{error.message}</div> : null}
                         <div className="form__btns">
-                            <Button type="button" onClick label={'Cancel'} addClass={'button_cancel button_w45'}/>
+                            <Button type="button" onClick={() => navigate(-1)} label={'Cancel'} addClass={'button_cancel button_w45'}/>
                             <Button type="submit" label={'Continue'} addClass={'button_w45'} />
                         </div>
                     </form>
-
                 )}
-
             </Formik>
         </>
 

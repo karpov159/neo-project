@@ -1,19 +1,10 @@
-
 import './input.scss';
 
-
-const Input = (props) => {
-
-    const {label, placeholder, icon, addClass, onChange, value, readOnly, name, type, error} = props,
-
-          span = label ? <span className='input-block__span'>{label}</span> : null,
-
+const Input = ({label, placeholder, icon, addClass, onChange, value, name, type, error}) => {
+    const span = label ? <span className='input-block__span'>{label}</span> : null,
           img = icon ? <img className='input-block__icon' src={icon} alt="icon"/> : null,
-
           classes = addClass ? 'input-block ' + addClass : 'input-block',
-          
           inputClasses = error ? 'input-block__input input-block__input_error' : 'input-block__input';
-
 
     return (
         <div  
@@ -25,7 +16,6 @@ const Input = (props) => {
             onChange={onChange} 
             value={value}
             type={type}
-            readOnly={readOnly}
             required
             placeholder={placeholder} />
             {img}

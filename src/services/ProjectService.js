@@ -2,35 +2,31 @@ import useHttp from "../components/hooks/http.hook";
 
 const useProjectService = () => {
     const {loading, request, error, clearError} = useHttp(),
-          _apiKey = 'http://localhost:3001/claim',
-          _registration = 'http://localhost:3001/auth/registration',
-          _authorization = 'http://localhost:3001/auth/login',
-          _createNewClaim = 'http://localhost:3001/claim',
-          _user = 'http://localhost:3001/user',
+          _apiBase = 'http://localhost:3001',
           _userToken = localStorage.getItem("Token");
 
 
     const getAllClaims = async (sort = 'title', order = 'desc') => {
-        const res = await request(`${_apiKey}?offset=0&column=${sort}&sort=${order}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
+        const res = await request(`${_apiBase}/claim?offset=0&column=${sort}&sort=${order}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'});
         return res.claims;
     }
     
     const getClaim = async (id) => {
-        const res = await request(`${_apiKey}/${id}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
+        const res = await request(`${_apiBase}/claim/${id}`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'});
         return res;
     }
 
     const registration = async (body) => {
-        const res = await request(_registration, 'POST', JSON.stringify(body), {'Content-Type': 'application/json;charset=utf-8'})
+        const res = await request(`${_apiBase}/auth/registration`, 'POST', JSON.stringify(body), {'Content-Type': 'application/json;charset=utf-8'})
         return res;
     }
 
     const authorization = async (body) => {
-        const res = await request(_authorization, 'POST', JSON.stringify(body), {'Content-Type': 'application/json;charset=utf-8'})
+        const res = await request(`${_apiBase}/auth/login`, 'POST', JSON.stringify(body), {'Content-Type': 'application/json;charset=utf-8'})
         
         localStorage.setItem("Token", res.token);
         localStorage.setItem('User', 
@@ -41,14 +37,21 @@ const useProjectService = () => {
     }
 
     const createUser = async (body) => {
-        const res = await request(_user, 'POST', JSON.stringify(body), {'Authorization': `Bearer ${_userToken}`,
+        const res = await request(`${_apiBase}/user`, 'POST', JSON.stringify(body), {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'})
         return res;
     }
 
     const getUsers = async () => {
-        const res = await request(_user, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
+        const res = await request(`${_apiBase}/user`, 'GET', null, {'Authorization': `Bearer ${_userToken}`,
+
+        'Content-Type': 'application/json'});
+        return res;
+    }
+
+    const updateClaim = async (body, id) => {
+        const res = await request(`${_apiBase}/claim/${id}`, 'PUT', JSON.stringify(body), {'Authorization': `Bearer ${_userToken}`,
 
         'Content-Type': 'application/json'});
         return res;
@@ -56,7 +59,7 @@ const useProjectService = () => {
 
     const createNewClaim = async (body) => {
         const res = await request(
-            _createNewClaim, 
+            `${_apiBase}/claim`, 
 
             'POST', 
 
@@ -69,9 +72,11 @@ const useProjectService = () => {
         return res;
     }
 
-    return {loading, request, error, clearError, getAllClaims, 
-        registration, authorization, createNewClaim, getClaim, 
-        createUser, getUsers};
+    return {
+        loading, request, error, clearError, 
+        getAllClaims, registration, authorization, 
+        createNewClaim, getClaim, createUser, 
+        getUsers, updateClaim};
 }
 
 export default useProjectService;

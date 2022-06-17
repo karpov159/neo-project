@@ -1,19 +1,16 @@
-import Input from '../input/input';
 import { useNavigate } from 'react-router-dom';
-import Hamburger from '../hamburger/hamburger';
+import Input from '../generic/input/input';
+import Hamburger from './hamburger/hamburger';
+
 import SearchImg from '../../assets/icons/search.svg';
 import Notification from '../../assets/icons/icon-notification.svg';
 import IconHome from '../../assets/icons/icon-log-out.svg';
-import Profile from '../../assets/icons/person-circle.svg';
-
-
+import Profile from '../../assets/icons/avatar.png';
 import './header.scss';
 
-
-const Header = (props) => {
-    const {toggleLogin, isSearchInput, setSearchWord} = props;
-    const navigate = useNavigate();
-    const {fullName} = JSON.parse(localStorage.getItem('User'));
+const Header = ({toggleLogin, isSearchInput, setSearchWord}) => {
+    const navigate = useNavigate(),
+          {fullName} = JSON.parse(localStorage.getItem('User'));
 
     const changeValue = (e) => {
         setSearchWord(e.target.value)
@@ -44,6 +41,5 @@ const Header = (props) => {
         </header>
     )
 }
-
 
 export default Header;

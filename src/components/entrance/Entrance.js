@@ -5,7 +5,7 @@ import MiniLogo from '../../assets/img/logo_mini.svg';
 
 import './entrance.scss';
 
-const Entrance = (props) => {
+const Entrance = () => {
     return (
             <div className='entrance'>
                 <div className='entrance__left'>

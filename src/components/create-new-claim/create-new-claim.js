@@ -1,26 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useProjectService from '../../services/ProjectService';
-import getClaimType from '../../libs/getClaimType';
+import getClaimType from '../../helpers/getClaimType';
+import claimTypes from '../../helpers/claimTypes';
 
-import Title from '../title/title';
-import Input from '../input/input';
-import Button from '../button/button';
-import DropDownInput from '../input/DropDownInput';
+import Title from '../generic/title/title';
+import Input from '../generic/input/input';
+import Button from '../generic/button/button';
+import DropDownInput from '../generic/input/DropDownInput';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png';
 import './create-new-claim.scss';
 
-const CreateNewClaim = (props) => {
+const changeValue = (e, func) => {
+    func(e.target.value)
+}
 
-    const {setSearchInput} = props;
+const CreateNewClaim = ({setSearchInput}) => {
 
-    const [title, setTitle] = useState('');
-    const [type, setType] = useState('');
-    const [descr, setDescr] = useState('');
-    const navigate = useNavigate();
-
-    const {error, clearError, createNewClaim} = useProjectService();
+    const [title, setTitle] = useState(''),
+          [type, setType] = useState(''),
+          [descr, setDescr] = useState(''),
+          navigate = useNavigate(),
+          {error, clearError, createNewClaim} = useProjectService();
 
     useEffect(() => {
         setSearchInput(false);
@@ -29,14 +31,10 @@ const CreateNewClaim = (props) => {
         }
     })
 
-    const changeValue = (e, func) => {
-        func(e.target.value)
-    }
-
     const changeDropDown = (option) => {
         setType(option)
     }
-
+    // вынести в отдельную функцию(?)
     const onSubmit = (e) => {
         clearError();
         e.preventDefault();
@@ -45,10 +43,10 @@ const CreateNewClaim = (props) => {
             "description": descr, 
             "type": getClaimType(type)
         })
-        // .then(results => results ? navigate(-1) : null);
+        .then(navigate(-1));
     }
 
-    const options = ['Hardware', 'Software', 'Troubleshooting', 'Networking'];
+    
     return (
         <div className="new-claim">
             <Title title={'Creating new claim'}/>
@@ -59,17 +57,15 @@ const CreateNewClaim = (props) => {
                 addClass={'input-block_mt40'} 
                 label={'TITLE'} 
                 placeholder={'Type claim title'}/>
-                
                 <DropDownInput 
                 icon={IconDown}
                 onChange={changeDropDown}
                 value={type}
-                options={options}
+                claimTypes={claimTypes}
                 addClass={'input-block_mt40'} 
                 label={'TYPE'} 
                 placeholder={'Select type'}                
                 />
-
                 <Input 
                 onChange={(e) => changeValue(e, setDescr)} 
                 value={descr} 
@@ -78,7 +74,7 @@ const CreateNewClaim = (props) => {
                 placeholder={'Type claim description'}/>
                 {error ? <div className='error'>Cant create new claim</div> : null}
                 <div className="new-claim__btns">
-                    <Button onClick addClass={'button_cancel'} label={'Cancel'}/>
+                    <Button onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
                     <Button label={'Create'}/>
                 </div>
             </form>

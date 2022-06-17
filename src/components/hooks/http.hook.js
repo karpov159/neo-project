@@ -16,11 +16,10 @@ const useHttp = () => {
 
                 } else {
                     const data = await response.json();
-        
+    
                     setLoading(false);
                     return data;
                 }
-    
                 
             } catch(e) {
                 setLoading(false);

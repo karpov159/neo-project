@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Title from '../title/title';
+import Title from '../generic/title/title';
 
 const Page404 = () => {
     const navigate = useNavigate();
