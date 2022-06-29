@@ -9,6 +9,7 @@ const Menu = () => {
     const mobile = false,
           activeLink = "Home",
           activeClass = mobile ? 'menu menu_active' : 'menu';
+
     return (
         <>
             <aside className={activeClass}>
@@ -23,12 +24,13 @@ const Menu = () => {
     )
 }
 
-const View = ({activeLink}) => {
+const View = ({activeLink, navigate}) => {
     return menuLinkInfo.map(({name, icon}) => {
         return <PageLink 
         icon={icon} 
-        active={activeLink === name ? true : false} 
+        active={activeLink === name ? true : false}
         mobileName={name}
+        key={name}
         />
     })
 }

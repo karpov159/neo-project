@@ -68,6 +68,11 @@
             }
         }
     }
+    &__title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 95%;
+    }
 
 
     &__filter {

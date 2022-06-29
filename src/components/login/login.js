@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import useProjectService from '../../services/ProjectService';
-import Input from '../generic/input/input';
-import Button from '../generic/button/button';
+import Input from '../generic/input/Input';
+import Button from '../generic/button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { auth, clearLoadingStatus } from './LoginSlice';
+import ErrorInput from '../generic/errors/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
@@ -18,23 +20,29 @@ const Login = ({toggleLogin}) => {
     const [email, setEmail] = useState(''),
           [password, setPassword] = useState(''),
           [keepLogIn, setKeepLogIn] = useState(false),
-          navigate = useNavigate(),
-          {authorization, error, clearError} = useProjectService();
-    // вынести в отдельную функцию(?)
+          dispatch = useDispatch(),
+          {authLoadingStatus} = useSelector(state => state.auth),
+          navigate = useNavigate();
+    
+    useEffect(() => {
+        dispatch(clearLoadingStatus())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+    const error = authLoadingStatus === 'error' ? true : false;
+
     const onSubmit = (e) => {
-        clearError();
         e.preventDefault();
-        authorization({
+        dispatch(auth({
             "email": email,
             "password": password
-        }).then(result => {
-            if (result) {
-                console.log(result.role.slug)
-                toggleLogin();
-                navigate('homepage'); 
-            }
-        })
-    }
+        }))
+        .unwrap()
+        .then(() => {
+            toggleLogin();
+            navigate('homepage'); 
+        });
+    };
 
     return (
         <>
@@ -56,7 +64,7 @@ const Login = ({toggleLogin}) => {
                 label={'password'} 
                 placeholder={'Type your password'} 
                 icon={Lock} />
-                {error ? <div className='error error_block'>Wrong password</div> : null}
+                {error ? <ErrorInput addClass="error-input_block" text="Wrong password"/> : null}
 
                 <div className="form__check">
                     <input 

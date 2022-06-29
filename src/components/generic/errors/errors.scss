@@ -1,0 +1,74 @@
+@import '../../../style/variables.scss';
+
+.error-server {
+    text-align: center;
+    margin-top: 50px;
+    &__block {
+        width: 550px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 40px auto 0 auto;
+    }
+    &__text {
+        font-size: 20px;
+    }
+}
+
+.error-input {
+    position: absolute;
+    margin-top: 6px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    color: #CC1F1F;
+    &_block {
+        position: relative;
+    }
+}
+
+.error-access {
+    z-index: 100;
+    position: fixed;
+    padding: 0 20px 0 60px;
+    border: 2px solid $active-color;
+    width: 400px;
+    height: 130px;
+    right: 56px;
+    bottom: 20px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__text {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32px;
+        color: rgb(177, 80, 80);
+    }
+    &__img {
+        position: absolute;
+        width: 45px;
+        height: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5px;
+        svg {
+            width: 100%;
+            height: 100%;
+            path {
+                fill: red;
+            }
+        }
+    }
+    &__close {
+        font-size: 30px;
+        color: $active-color;
+        font-weight: 500;
+        position: absolute;
+        line-height: 10px;
+        top: 15px;
+        right: 10px;
+        cursor: pointer;
+    }
+}

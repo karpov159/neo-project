@@ -1,16 +1,24 @@
 import { Formik } from 'formik';
 import { useNavigate } from "react-router-dom";
-import useProjectService from "../../services/ProjectService";
-import Input from "../generic/input/input"
-import Button from "../generic/button/button";
-import Title from "../generic/title/title";
+import { registration, clearLoadingStatus } from './RegistrationSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import Input from "../generic/input/Input"
+import Button from "../generic/button/Button";
+import Title from "../generic/title/Title";
+import ErrorInput from '../generic/errors/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 
 const Registration = () => {
-    const navigate = useNavigate();
-    const {registration, error, clearError} = useProjectService();    
+    const navigate = useNavigate(),
+          {registrationLoadingStatus} = useSelector(state => state.registration),
+          dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(clearLoadingStatus())
+    }, []);
 
     return (
         <>
@@ -26,9 +34,16 @@ const Registration = () => {
                 }}
 
                 validate = {values => {
-                    clearError();
 
                     const errors = {};
+
+                    if (!values.name) {
+                        errors.name = 'Please type your name'
+                    }
+
+                    if (!values.surname) {
+                        errors.surname = 'Please type your surname'
+                    }
 
                     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                         errors.email = 'Invalid email address';
@@ -47,12 +62,13 @@ const Registration = () => {
                 }}
 
                 onSubmit = {values => {
-                    clearError();
-                    registration({
+                    dispatch(registration({
                         "fullName": values.name + ' ' + values.surname,
                         "email": values.email,
                         "password": values.password
-                    }).then(navigate(-1))                    
+                    }))
+                    .unwrap()
+                    .then(() => navigate(-1))
                 }}
             >
                 {({
@@ -70,16 +86,20 @@ const Registration = () => {
                         value={values.name} 
                         onChange={handleChange} 
                         label={'Name'} 
-                        placeholder={'Type your name'} 
+                        placeholder={'Type your name'}
+                        onBlur={handleBlur}
                         icon={Mail} />
+                        {errors.name && touched.name ? <ErrorInput text={errors.name}/>  : null}
                         <Input
                         type="text"
                         name="surname"
                         value={values.surname} 
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        onBlur={handleBlur} 
                         label={'surname'} 
                         placeholder={'Type your surname'} 
                         icon={Mail} />
+                        {errors.surname && touched.surname ? <ErrorInput text={errors.surname}/> : null}
                         <Input
                         type="email"
                         name="email"
@@ -89,7 +109,7 @@ const Registration = () => {
                         label={'E-MAIL'} 
                         placeholder={'Type your e-mail'} 
                         icon={Mail} />
-                        {errors.email && touched.email ? <div className='error'>{errors.email}</div> : null}
+                        {errors.email && touched.email ? <ErrorInput text={errors.email}/> : null}
                         <Input
                         type="password"
                         name="password"
@@ -107,7 +127,7 @@ const Registration = () => {
                         label={'password'} 
                         placeholder={'Type your password again'} 
                         icon={Lock} />
-                        {errors.password && touched.secondPassword ? <div className='error'>{errors.password}</div> : null}
+                        {errors.password && touched.secondPassword ? <ErrorInput text={errors.password}/> : null}
                         <div className="form__check form__check_mt40">
                             <input 
                             name="terms"
@@ -119,17 +139,25 @@ const Registration = () => {
                             type="checkbox"/>
                             <label className="form__label" htmlFor="checkbox">I have read and accept the Privacy Statement </label>
                         </div>
-                        {errors.terms && touched.terms && !error ? <div className='error'>{errors.terms}</div> : null}
-                        {error ? <div className='error'>{error.message}</div> : null}
+                        {errors.terms && touched.terms ? <ErrorInput text={errors.terms}/> : null}
                         <div className="form__btns">
-                            <Button type="button" onClick={() => navigate(-1)} label={'Cancel'} addClass={'button_cancel button_w45'}/>
-                            <Button type="submit" label={'Continue'} addClass={'button_w45'} />
+                            <Button 
+                            type="button" 
+                            onClick={() =>{
+                                navigate(-1)
+                            }} 
+                            label={'Cancel'} 
+                            addClass={'button_cancel button_w45'}/>
+                            <Button 
+                            type="submit" 
+                            label={'Continue'} 
+                            addClass={'button_w45'} />
                         </div>
+                        {registrationLoadingStatus === 'error' ? <ErrorInput text="Registration failure!"/> : null}
                     </form>
                 )}
             </Formik>
         </>
-
     )
 }
 

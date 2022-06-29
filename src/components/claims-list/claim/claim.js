@@ -1,11 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setBrowseAccessError } from '../ClaimsSlice';
 import getStatusColor from '../../../helpers/getStatusColor';
 import getBallColor from '../../../helpers/getBallColor';
 
 import './claim.scss';
 
 const Claim = ({title, createdAt, type, status, id}) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(),
+          dispatch = useDispatch(),
+          {browseAccessError} = useSelector(state => state.claims),
+          {role} = JSON.parse(localStorage.getItem('User'));
+
+    const onClick = () => {
+        if (role === 'admin') {
+            navigate(`${id}`);
+        } else {
+            dispatch(setBrowseAccessError(true));
+        }
+    }
+
 
     return (
         <div className="claim">
@@ -27,10 +41,9 @@ const Claim = ({title, createdAt, type, status, id}) => {
                 <div style={{'background': `${getStatusColor(status)}`}} className="claim__status">{status}</div>
             </div>
             <button 
-            onClick={() => {
-                navigate(`${id}`);
-            }} 
-            className="claim__button">Browse</button>
+                onClick={onClick} 
+                className="claim__button">Browse
+            </button>
         </div>
     )
 }

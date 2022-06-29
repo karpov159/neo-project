@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useProjectService from '../../services/ProjectService';
 import getClaimType from '../../helpers/getClaimType';
 import claimTypes from '../../helpers/claimTypes';
+import { useDispatch } from 'react-redux';
+import { createNewClaim } from '../claims-list/ClaimsSlice';
+import validateStr from '../../helpers/validateStr';
+import ErrorInput from '../generic/errors/ErrorInput';
 
-import Title from '../generic/title/title';
-import Input from '../generic/input/input';
-import Button from '../generic/button/button';
+import Title from '../generic/title/Title';
+import Input from '../generic/input/Input';
+import Button from '../generic/button/Button';
 import DropDownInput from '../generic/input/DropDownInput';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png';
 import './create-new-claim.scss';
 
-const changeValue = (e, func) => {
-    func(e.target.value)
-}
-
 const CreateNewClaim = ({setSearchInput}) => {
 
     const [title, setTitle] = useState(''),
           [type, setType] = useState(''),
-          [descr, setDescr] = useState(''),
+          [description, setDescription] = useState(''),
+          [errors, setErrors] = useState({}),
           navigate = useNavigate(),
-          {error, clearError, createNewClaim} = useProjectService();
+          dispatch = useDispatch();
 
     useEffect(() => {
         setSearchInput(false);
@@ -31,22 +31,32 @@ const CreateNewClaim = ({setSearchInput}) => {
         }
     })
 
+    const changeValue = (e, func) => {
+        func(e.target.value)
+
+        setErrors(() => ({
+            title: validateStr(title) ? 'Please type claim title' : false,
+            description: validateStr(description) ? 'Please type claim description' : false
+        }))
+    }
+
     const changeDropDown = (option) => {
         setType(option)
     }
-    // вынести в отдельную функцию(?)
-    const onSubmit = (e) => {
-        clearError();
-        e.preventDefault();
-        createNewClaim({
-            "title": title, 
-            "description": descr, 
-            "type": getClaimType(type)
-        })
-        .then(navigate(-1));
-    }
 
-    
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        if (!errors.title && !errors.description) {
+            dispatch(createNewClaim({
+                title, 
+                description,
+                "type": getClaimType(type)
+            }))
+            .unwrap()
+            .then(() => navigate(-1));
+        }
+    }
     return (
         <div className="new-claim">
             <Title title={'Creating new claim'}/>
@@ -57,7 +67,8 @@ const CreateNewClaim = ({setSearchInput}) => {
                 addClass={'input-block_mt40'} 
                 label={'TITLE'} 
                 placeholder={'Type claim title'}/>
-                <DropDownInput 
+                {errors.title ? <ErrorInput text={errors.title}/> : null}
+                <DropDownInput
                 icon={IconDown}
                 onChange={changeDropDown}
                 value={type}
@@ -67,15 +78,15 @@ const CreateNewClaim = ({setSearchInput}) => {
                 placeholder={'Select type'}                
                 />
                 <Input 
-                onChange={(e) => changeValue(e, setDescr)} 
-                value={descr} 
-                addClass={'input-block_mt40'} 
+                onChange={(e) => changeValue(e, setDescription)} 
+                value={description} 
+                addClass={'input-block_mt40'}
                 label={'DESCRIPTION'} 
                 placeholder={'Type claim description'}/>
-                {error ? <div className='error'>Cant create new claim</div> : null}
+                {errors.description ? <ErrorInput text={errors.description}/> : null}
                 <div className="new-claim__btns">
-                    <Button onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
-                    <Button label={'Create'}/>
+                    <Button type="button" onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
+                    <Button type="submit" label={'Create'}/>
                 </div>
             </form>
         </div>

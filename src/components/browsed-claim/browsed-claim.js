@@ -1,8 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import Title from '../generic/title/title';
-import useProjectService from '../../services/ProjectService';
-import Button from '../generic/button/button';
+import Title from '../generic/title/Title';
+import Button from '../generic/button/Button';
+import { updateClaim, getClaim } from '../claims-list/ClaimsSlice';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import getBallColor from '../../helpers/getBallColor';
 import getClaimType from '../../helpers/getClaimType';
@@ -16,17 +16,25 @@ const BrowsedClaim = (props) => {
     const {setSearchInput} = props,
           [title, setTitle] = useState(''),
           [type, setType] = useState(''),
-          [descr, setDescr] = useState(''),
+          [description, setDescription] = useState(''),
           {claimId} = useParams(),
-          {getClaim, updateClaim, error, clearError} = useProjectService(),
+          dispatch = useDispatch(),
           navigate = useNavigate();
 
     useEffect(() => {
-        getClaim(claimId).then(claim => {
-                setTitle(claim.title);
-                setType(claim.type ? claim.type.name : 'Type was not selected');
-                setDescr(claim.description)
+        dispatch(getClaim(claimId))
+        .unwrap()
+        .then(claim => {
+            setTitle(claim.title);
+            setType(claim.type);
+            setDescription(claim.description)
         })
+        .catch(() => {
+            setTitle('no data');
+            setType('no data');
+            setDescription('no data')
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [claimId])
 
     useEffect(() => {
@@ -35,16 +43,20 @@ const BrowsedClaim = (props) => {
             setSearchInput(true);
         }
     })
-    // вынести в отдельную функцию(?)
+
     const onUpdateClaim = (status) => {
-        clearError();
-        updateClaim({
-            "title": title, 
-            "description": descr, 
-            "type": getClaimType(type),
-            'status': status
-        }, claimId)
-        .then(navigate(-1))
+        const updatedClaim = {
+            body: {
+                title, 
+                description, 
+                "type": getClaimType(type),
+                status
+            },
+            claimId
+        }
+        dispatch(updateClaim(updatedClaim))
+        .unwrap()
+        .then(() => navigate(-1));
     }
 
     return (
@@ -64,9 +76,9 @@ const BrowsedClaim = (props) => {
                 </div>
                 <div className="browse-claim__item">
                     <span className="browse-claim__label">DESCRIPTION</span>
-                    <div className="browse-claim__text">{descr}</div>
+                    <div className="browse-claim__text">{description}</div>
                 </div>
-                {error ? <div className='error'>{error.message}</div> : null}
+                {null ? <div className='error'>'fdfd</div> : null}
             <div className="browse-claim__btns">
                 <Button onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
                 <Button onClick={() => onUpdateClaim('done')}label={'Done'}/>

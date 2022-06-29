@@ -1,33 +1,42 @@
-import filtersList from '../../helpers/filtersList';
-import Claim from './claim/claim';
-import Spinner from '../generic/spinner/Spiner';
-import ErrorMessage from '../errorMessage/errorMessage';
+import { selectAll } from './ClaimsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchClaims } from './ClaimsSlice';
+import store from '../../store';
 
+import Claim from './claim/Claim';
+import Spinner from '../generic/spinner/Spiner';
+import ErrorServer from '../generic/errors/ErrorServer';
 
 import './claims-list.scss';
 
-const ClaimsList = ({data, onSetSort, showClaim, loading, error, setToggleOrder}) => {
+const ClaimsList = ({showClaim}) => {
 
-    const spinner = loading ? <Spinner/> : null,
-          errorMessage = error ? <ErrorMessage/> : null,
-          content = !error && !loading ? <Items showClaim={showClaim} data={data}/> : null;
+    const {claimsLoadingStatus, currentPage, searchInput, columnSort, orderSort} = useSelector(state => state.claims),
+          dispatch = useDispatch(),
+          numOfClaimsToSee = 10,
+          lastPageIndex = currentPage * numOfClaimsToSee,
+          firstPageIndex = lastPageIndex - numOfClaimsToSee,
+          allClaims = selectAll(store.getState());
 
-    return (
-        <div className="claims-list">
-            <div className="claims-list__filters">
-                <Filtres onSetSort={onSetSort} filtersList={filtersList} setToggleOrder={setToggleOrder}/>
-            </div>
-            {spinner}
-            {errorMessage}
-            {content}
-        </div>
-    )
-}
+    useEffect(() => {
+        const details = {
+            columnSort,
+            orderSort,
+            searchInput
+        }
+        dispatch(fetchClaims(details))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchInput, columnSort, orderSort]);
 
-// создание айтемов
-const Items = ({data, showClaim}) => {
-    return (
-        data.map(({title, createdAt, type, status, _id}) => {
+    if (claimsLoadingStatus === 'loading') {
+        return <Spinner/>
+    } else if (claimsLoadingStatus === 'error') {
+        return <ErrorServer/>
+    }
+
+    const renderClaims = (claims) => {
+        return claims.map(({title, createdAt, type, status, _id}) => {
             return <Claim 
             showClaim={showClaim}
             title={title} 
@@ -38,26 +47,16 @@ const Items = ({data, showClaim}) => {
             id={_id}
             />
         })
-    )
-}
+    }
 
-// создание фильтров
-const Filtres = ({filtersList, onSetSort, setToggleOrder}) => {
-    return filtersList.map(({label, icon, key, filter}) => {
-        return (
-            <div key={key} className="claims-list__item">
-                <div onClick={() => {
-                    onSetSort(filter);
-                    setToggleOrder(toggleOrder => !toggleOrder);
-                }} 
-                className='claims-list__filter'>
-                    <div>{label}</div>
-                    {icon ? <img src={icon} alt="filter" /> : null }  
-                </div>
-            </div>
-        )
-        
-    })
+    const claims = allClaims.slice(firstPageIndex, lastPageIndex);
+    const elements = renderClaims(claims);
+
+    return (
+        <>
+            {elements}
+        </>
+    )
 }
 
 export default ClaimsList;

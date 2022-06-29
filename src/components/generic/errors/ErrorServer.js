@@ -1,21 +1,20 @@
-import Title from '../generic/title/title';
+import Title from '../title/Title';
 import { useNavigate } from 'react-router-dom';
 
-import './errorMessage.scss';
+import './errors.scss';
 
-const ErrorMessage = () => {
+const ErrorServer = () => {
     const navigate = useNavigate();
     return (
-        <div className='error-message'>
+        <div className='error-server'>
             <Title title="Something went wrong with the server"/>
-            <div className="error-message__block">
-                <p className="error-message__text">Click here to comeback to the homepage</p>
+            <div className="error-server__block">
+                <p className="error-server__text">Click here to comeback to the homepage</p>
                 <button onClick={() => navigate('/')} className='button button_cancel button_error'>Click</button>
             </div>
-
         </div>
     )
 }
 
-export default ErrorMessage;
+export default ErrorServer;
 

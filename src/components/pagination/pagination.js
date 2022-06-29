@@ -1,16 +1,33 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import getTotalPages from '../../helpers/getTotalPages';
+import store from '../../store';
+import { selectAll, changePage } from '../claims-list/ClaimsSlice';
+import Page from './pageComponent/Page';
+
 import Left from '../../assets/icons/pagination/Left.png';
 import Right from '../../assets/icons/pagination/Right.png';
 
-
 import './pagination.scss';
 
-const Pagination = ({totalPages, changePageByArrows, activePage, changePageByNumbers}) => {
+const Pagination = () => {
+    const {currentPage} = useSelector(state => state.claims),
+          claims = selectAll(store.getState()),
+          dispatch = useDispatch(),
+          totalPages = getTotalPages(claims);
+
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            dispatch(changePage(1));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage, totalPages])
+
     // если пользователь на странице 1, то стрелочка скрыта
-    const leftArrow = activePage === 1 ? null : 
+    const leftArrow = currentPage === 1 || totalPages < 1 ? 
+        null : 
         <button 
-        onClick={() => {
-            changePageByArrows(-10);
-        }}
+        onClick={() => dispatch(changePage(currentPage - 1))}
         className="pagination__left"
         >
         <img src={Left} alt="left"/>    
@@ -19,10 +36,10 @@ const Pagination = ({totalPages, changePageByArrows, activePage, changePageByNum
     // если пользователь на последней странице, то стрелочка скрыта
     const rightArrow = 
         <button 
-        style={activePage === totalPages ? {'visibility': 'hidden'} : null} 
-        onClick={() => {
-        changePageByArrows(10);
-        }} 
+        style={currentPage === totalPages || totalPages < 1 
+            ? {'visibility': 'hidden'} 
+            : null} 
+        onClick={() => dispatch(changePage(currentPage + 1))}
         className="pagination__right">
         <img src={Right} alt="right" />    
         </button>;
@@ -31,8 +48,7 @@ const Pagination = ({totalPages, changePageByArrows, activePage, changePageByNum
         <div className="pagination">
             {leftArrow}
             <TotalPages 
-            changePageByNumbers={changePageByNumbers}
-            active={activePage} 
+            active={currentPage} 
             totalPages={totalPages}
             />
             {rightArrow}
@@ -40,18 +56,16 @@ const Pagination = ({totalPages, changePageByArrows, activePage, changePageByNum
     )
 }
 
-const TotalPages = ({totalPages, active, changePageByNumbers}) => {
+const TotalPages = ({totalPages, active}) => {
     // получаем массив с элементами страниц
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
         pages.push(
         <Page 
-        changePageByNumbers={changePageByNumbers}
         key={i}
         active={active === i ? 'pagination__page_active' : null} 
         num={i}/>
         )
-
     }
 
     if (totalPages > 8) {
@@ -78,16 +92,6 @@ const TotalPages = ({totalPages, active, changePageByNumbers}) => {
         )
     }
     return pages;
-}
-
-const Page = ({num, active, changePageByNumbers}) => {
-    const classes = active ? 'pagination__page ' + active : 'pagination__page';
-
-    return (
-        <div
-        onClick={() => changePageByNumbers(num)}
-        className={classes}>{num}</div>
-    )
 }
 
 export default Pagination;

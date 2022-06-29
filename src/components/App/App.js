@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Entrance from '../entrance/entrance';
-import Homepage from '../homepage/homepage';
+import Entrance from '../entrance/Entrance';
+import Homepage from '../homepage/Homepage';
 import Page404 from '../page404/404';
-import Registration from '../registration/registration';
-import Login from '../login/login';
+import Registration from '../registration/Registration';
+import Login from '../login/Login';
 
 
 import './app.scss';
