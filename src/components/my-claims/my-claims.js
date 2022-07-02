@@ -10,7 +10,7 @@ import { setNewClaimAccesError } from '../claims-list/ClaimsSlice';
 
 import './my-claims.scss';
 
-const MyClaims = ({showClaim}) => {
+const MyClaims = () => {
     const {browseAccessError, newClaimAccesError} = useSelector(state => state.claims),
           navigate = useNavigate(),
           dispatch = useDispatch(),
@@ -42,9 +42,7 @@ const MyClaims = ({showClaim}) => {
             </div>
             <div className="claims-list">
                 <Filters/>
-                <ClaimsList 
-                showClaim={showClaim}
-                />
+                <ClaimsList/>
             </div>
             <Pagination/>
             {browseError}
@@ -52,7 +50,5 @@ const MyClaims = ({showClaim}) => {
         </div>
     )
 }
-
-
 
 export default MyClaims;

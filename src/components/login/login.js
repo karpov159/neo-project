@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import Input from '../generic/input/Input';
 import Button from '../generic/button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, clearLoadingStatus } from './LoginSlice';
+import { auth, clearLoadingStatus, setLoggedIn } from './LoginSlice';
 import ErrorInput from '../generic/errors/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
@@ -16,7 +16,7 @@ const onChangeInput = (e, func) => {
     func(e.target.value);
 }
 
-const Login = ({toggleLogin}) => {
+const Login = () => {
     const [email, setEmail] = useState(''),
           [password, setPassword] = useState(''),
           [keepLogIn, setKeepLogIn] = useState(false),
@@ -39,7 +39,7 @@ const Login = ({toggleLogin}) => {
         }))
         .unwrap()
         .then(() => {
-            toggleLogin();
+            dispatch(setLoggedIn(true));
             navigate('homepage'); 
         });
     };

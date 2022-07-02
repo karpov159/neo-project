@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 
 const PageLink = ({icon, active, mobileName}) => {
-    const mobile = false,
+    const {openedHamburger} = useSelector(state => state.menu),
           classes = active ? 'menu__link menu__link_active' : 'menu__link',
-          name = mobile ? <div className='menu__name'>{mobileName}</div> : null;
+          name = openedHamburger ? <div className='menu__name'>{mobileName}</div> : null;
 
     return (
         <button className={classes}>

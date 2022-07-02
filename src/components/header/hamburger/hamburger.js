@@ -1,8 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
+import {setOpenedHamburger} from '../../menu/MenuSlice';
+
+
 import './hamburger.scss';
 
 const Hamburger = () => {
+    const dispatch = useDispatch();
+    const {openedHamburger} = useSelector(state => state.menu);
+
+    const onClick = () => {
+        if (openedHamburger) {
+            dispatch(setOpenedHamburger(false));
+            document.body.style.overflow = "";
+        } else {
+            dispatch(setOpenedHamburger(true));
+            document.body.style.overflow = "hidden";
+        }
+    }
+
     return (
-        <div className="hamburger">
+        <div onClick={onClick} className="hamburger">
             <span className="hamburger__line"></span>
             <span className="hamburger__line"></span>
             <span className="hamburger__line"></span>       

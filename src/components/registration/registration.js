@@ -79,7 +79,7 @@ const Registration = () => {
                     handleBlur,
                     handleSubmit
                 }) => (
-                    <form className="form form_mt20" onSubmit={handleSubmit}>
+                    <form className="form form_reg" onSubmit={handleSubmit}>
                         <Input
                         type="text"
                         name="name"

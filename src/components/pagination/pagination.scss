@@ -43,6 +43,7 @@
         letter-spacing: 2px;
         position: relative;
         margin-right: 8px;
+        cursor: pointer;
         &::after {
             content: '...';
             color: rgba(0, 0, 0, 0.5);

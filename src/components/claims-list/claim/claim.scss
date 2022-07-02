@@ -14,6 +14,8 @@
         font-size: 16px;
         line-height: 20px;
         color: #2D3436;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &__type {
         display: flex;
@@ -69,14 +71,11 @@
         }
     }
     &__title {
+        width: 95%;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 95%;
     }
-
-
     &__filter {
         display: none;
     }
-
 }

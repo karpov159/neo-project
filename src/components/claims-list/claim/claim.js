@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setBrowseAccessError } from '../ClaimsSlice';
 import getStatusColor from '../../../helpers/getStatusColor';
@@ -9,7 +9,6 @@ import './claim.scss';
 const Claim = ({title, createdAt, type, status, id}) => {
     const navigate = useNavigate(),
           dispatch = useDispatch(),
-          {browseAccessError} = useSelector(state => state.claims),
           {role} = JSON.parse(localStorage.getItem('User'));
 
     const onClick = () => {
@@ -23,7 +22,9 @@ const Claim = ({title, createdAt, type, status, id}) => {
 
     return (
         <div className="claim">
-            <div className="claim__title">{title}</div>
+            <div className="claim__title">
+                <div className="claim__text">{title}</div>
+            </div>
             <div className="claim__block">
             <div className="claim__filter">Created</div>
                 <div className="claim__text">{createdAt}</div>

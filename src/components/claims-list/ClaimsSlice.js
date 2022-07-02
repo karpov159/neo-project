@@ -32,7 +32,7 @@ export const fetchClaims = createAsyncThunk(
             null, 
             {'Authorization': `Bearer ${getUserToken()}`,
             'Content-Type': 'application/json'});
-        return await res.claims;
+        return res.claims;
     }
 )
 

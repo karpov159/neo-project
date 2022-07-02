@@ -1,7 +1,24 @@
 @import './variables.scss';
 
+@media (max-width: 1650px) {
+    .pagination {
+        bottom: 20px;
+    }
+    .entrance {
+        &__right {
+            padding-top: 30px;
+            padding-bottom: 50px;
+        }
+    }
+    .form {
+        margin-top: 10px;       
+
+    }
+}
+
 @media (max-width: 1200px) {
     .entrance {
+        height: auto;
         &__left {
             img {
                 width: 500px;
@@ -52,7 +69,7 @@
 @media (max-width: 992px) {
     .homepage {
         height: auto;
-        padding-bottom: 50px;
+        padding-bottom: 10px;
     }
     .entrance {
         grid-template-columns: 1fr;
@@ -68,7 +85,6 @@
             }
         }
     }
-
     .menu {
         display: none;
         position: fixed;
@@ -104,8 +120,9 @@
     }
     .claims-list {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, 420px);
         grid-template-rows: repeat(2, 240px);
+        justify-content: center;
         grid-auto-rows: 240px;
         row-gap: 24px;
         column-gap: 24px;
@@ -127,22 +144,26 @@
         justify-content: flex-start;
         align-items: flex-start;
         border: none;
-
         &__title {
+            padding: 6px 0 6px 16px;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 20px;
-            letter-spacing: 0.25px;
             border-top-left-radius: 16px;
             border-top-right-radius: 16px;
-            color: #FFFFFF;
             height: 32px;
             background: $main-color;
             margin-bottom: 8px;
+            .claim__text {
+                color: #FFFFFF;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0.25px;
+                height: 20px;
+                width: 400px;
+            }
         }
         &__button {
             margin: 16px 0 0 25px;
@@ -226,22 +247,43 @@
         }
         &__options {
             margin-left: 0;
-            width: 176px;
+            width: 160px;
         }
         &__btn {
             &_bigger {
                 width: 48px;
                 height: 48px;
+                svg {
+                    fill: #fff;
+                }
             }
+            svg {
+                path {
+                    stroke: #fff;
+                }
+            }
+
         }
     }
     .pagination {
-        display: none;
+        justify-content: flex-end;
+        position: relative;
+        margin-top: 50px;
+    }
+    
+    .error-access {
+        width: 270px;
+        height: 100px;
+        padding: 0 30px 0 50px;
+        right: 30px;
+        bottom: 10px;
+        &__text {
+            font-size: 14px;
+            line-height: 25px;
+        }
+
     }
 }
-
-
-
 
 @media (max-width: 768px) {
     .claims-list {
@@ -262,25 +304,30 @@
     .button {
         height: 52px;
     }
-
 }
-
-
-
 
 @media (max-width: 576px) {
     .entrance {
         grid-template-rows: calc(100vh - 64px) 64px;
         &__right {
-            padding: 48px 0 148px 0;
+            padding: 48px 0 84px 0;
+            .title {
+                display: none;
+            }
         }
         &__logo {
             width: 96px;
             height: 93px;
+            margin-top: 0;
         }
     }
-    .login {
-        margin-top: 70px;
+    .error-input {
+        font-size: 14px;
+        margin-top: 3px;
+        line-height: 22px;
+    }
+    .form {
+        margin-top: 72px;
         &__text {
             font-size: 12px;
             line-height: 15px;
@@ -295,6 +342,7 @@
         .input-block {
             margin-top: 24px;
             width: 343px;
+            color: red;
             input {
                 font-size: 16px;
                 line-height: 19px;
@@ -304,6 +352,18 @@
                 height: 25px;
                 bottom: 6px;
                 right: 11px;
+            }
+        }
+        &__btns {
+            margin-top: 20px;
+            .button {
+                height: 40px;
+            }
+        }
+        &_reg {
+            margin-top: 0;
+            .input-block {
+                margin-top: 20px;
             }
         }
     }
@@ -339,6 +399,17 @@
             margin-top: 24px;
         }
     }
+    .pagination {
+        justify-content: center;
+        position: relative;
+        margin-top: 50px;
+        right: 0;
+        &__page, &__dots, &__right, &__left {
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+        }
 
+    }
 }
 

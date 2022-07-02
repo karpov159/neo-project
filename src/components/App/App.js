@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Entrance from '../entrance/Entrance';
 import Homepage from '../homepage/Homepage';
@@ -10,21 +10,16 @@ import Login from '../login/Login';
 import './app.scss';
 
 const App = () => {
-  // заглушка на логин
-  const [isLoggedIn, setLogin] = useState(false);
-
-  const toggleLogin = () => {
-    setLogin(isLoggedIn => !isLoggedIn);
-  }
+  const {isLoggedIn} = useSelector(state => state.auth)
 
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path='/homepage/*' element={isLoggedIn ? <Homepage toggleLogin={toggleLogin}/> : <Navigate to="/"/>}/>
-          <Route path='/' element={isLoggedIn ? <Navigate to="/homepage" /> : <Entrance toggleLogin={toggleLogin}/>}> 
+          <Route path='/homepage/*' element={isLoggedIn ? <Homepage /> : <Navigate to="/"/>}/>
+          <Route path='/' element={isLoggedIn ? <Navigate to="/homepage" /> : <Entrance />}> 
             <Route path="/registration" element={<Registration/>}/>
-            <Route path="/" element={<Login toggleLogin={toggleLogin}/>}/>
+            <Route path="/" element={<Login />}/>
           </Route>
           <Route path="*" element={<Page404/>}/>
         </Routes>

@@ -1,11 +1,5 @@
 .browse-claim {
     padding: 56px 0 0 64px;
-    // .input {
-    //     &:first-child {
-    //         margin-top: 48px;
-    //     }
-    // }
-
     &__item {
         margin-top: 63px;
         width: 589px;
@@ -14,7 +8,6 @@
         background: rgba(194, 194, 194, 0.24);
         border-radius: 16px;
         position: relative;
-
     }
     &__text {
         font-weight: 400;
@@ -24,6 +17,12 @@
         display: flex;
         align-items: center;
         cursor: default;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 95%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
     }
     &__ball {
         margin-right: 10px;

@@ -1,14 +1,15 @@
 import PageLink from './pageLink/PageLink';
 import menuLinkInfo from '../../helpers/menuLinkInfo';
+import { useSelector } from 'react-redux';
 
 import MiniLogo from '../../assets/img/logo_mini.svg';
 
 import './menu.scss';
 
 const Menu = () => {
-    const mobile = false,
+    const {openedHamburger} = useSelector(state => state.menu),
           activeLink = "Home",
-          activeClass = mobile ? 'menu menu_active' : 'menu';
+          activeClass = openedHamburger ? 'menu menu_active' : 'menu';
 
     return (
         <>
@@ -18,13 +19,13 @@ const Menu = () => {
                     <View activeLink={activeLink}/>
                 </div>
             </aside>
-            {mobile ? <div className='overlay'/> : null}
+            {openedHamburger ? <div className='overlay'/> : null}
         </>
     
     )
 }
 
-const View = ({activeLink, navigate}) => {
+const View = ({activeLink}) => {
     return menuLinkInfo.map(({name, icon}) => {
         return <PageLink 
         icon={icon} 

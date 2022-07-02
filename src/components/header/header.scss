@@ -1,3 +1,4 @@
+@import '../../style/variables.scss';
 .header {
     grid-column: 2/3;
     grid-row: 1/2;
@@ -36,6 +37,10 @@
         svg {
             width: 40px;
             height: 40px;
+            border-radius: 100%;
+            path {
+                stroke: $icon-color;
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ import ErrorServer from '../generic/errors/ErrorServer';
 
 import './claims-list.scss';
 
-const ClaimsList = ({showClaim}) => {
+const ClaimsList = () => {
 
     const {claimsLoadingStatus, currentPage, searchInput, columnSort, orderSort} = useSelector(state => state.claims),
           dispatch = useDispatch(),
@@ -38,7 +38,6 @@ const ClaimsList = ({showClaim}) => {
     const renderClaims = (claims) => {
         return claims.map(({title, createdAt, type, status, _id}) => {
             return <Claim 
-            showClaim={showClaim}
             title={title} 
             createdAt={createdAt.slice(0, 10)} 
             type={type ? type.name : null} 

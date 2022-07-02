@@ -6,7 +6,7 @@ const loginAdapter = createEntityAdapter();
 
 const initialState = loginAdapter.getInitialState({
     authLoadingStatus: 'idle',
-    isLoggedIn: false
+    isLoggedIn: true
 });
 
 export const auth = createAsyncThunk(
@@ -32,12 +32,12 @@ export const auth = createAsyncThunk(
 )
 
 const loginSlice = createSlice({
-    name: 'login',
+    name: 'auth',
     initialState,
     reducers: {
         clearLoadingStatus: state => {state.authLoadingStatus = 'idle'},
         setLoggedIn: (state, action) => {
-            state.loggedIn = action.payload;
+            state.isLoggedIn = action.payload;
         }
     },
     extraReducers: (builder) => {
