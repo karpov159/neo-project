@@ -49,6 +49,8 @@ const Header = ({ isSearchInput}) => {
                     </div>          
                     <button onClick={() => {
                         dispatch(setLoggedIn(false));
+                        localStorage.removeItem('User');
+                        localStorage.removeItem('Token');
                         navigate('/');
                     }} 
                     className="header__btn">

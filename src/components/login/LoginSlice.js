@@ -6,7 +6,7 @@ const loginAdapter = createEntityAdapter();
 
 const initialState = loginAdapter.getInitialState({
     authLoadingStatus: 'idle',
-    isLoggedIn: true
+    isLoggedIn: false
 });
 
 export const auth = createAsyncThunk(
@@ -19,13 +19,6 @@ export const auth = createAsyncThunk(
             JSON.stringify(body), 
             {'Content-Type': 'application/json;charset=utf-8'}
         )
-    
-        localStorage.setItem("Token", res.token);
-        localStorage.setItem('User', 
-            JSON.stringify({
-                'fullName': res.fullName,
-                'role': res.role.slug
-            }));
             
         return await res;
     }

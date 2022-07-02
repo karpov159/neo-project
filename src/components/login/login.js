@@ -38,7 +38,14 @@ const Login = () => {
             "password": password
         }))
         .unwrap()
-        .then(() => {
+        .then((res) => {
+            localStorage.setItem("Token", res.token);
+            localStorage.setItem('User', 
+                JSON.stringify({
+                    'fullName': res.fullName,
+                    'role': res.role.slug,
+                    keepLogIn
+                }));
             dispatch(setLoggedIn(true));
             navigate('homepage'); 
         });
@@ -67,7 +74,8 @@ const Login = () => {
                 {error ? <ErrorInput addClass="error-input_block" text="Wrong password"/> : null}
 
                 <div className="form__check">
-                    <input 
+                    <input
+                    onClick={() => setKeepLogIn(keepLogIn => !keepLogIn)} 
                     value={keepLogIn} 
                     id="checkbox" 
                     className='form__box' 
