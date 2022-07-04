@@ -9,7 +9,6 @@ import Page404 from '../page404/404';
 import Registration from '../registration/Registration';
 import Login from '../login/Login';
 
-
 import './app.scss';
 
 const App = () => {
@@ -35,7 +34,6 @@ const App = () => {
           </Route>
           <Route path="*" element={<Page404/>}/>
         </Routes>
-
       </div>
     </Router>
   );

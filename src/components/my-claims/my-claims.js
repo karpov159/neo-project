@@ -16,7 +16,7 @@ const MyClaims = () => {
           dispatch = useDispatch(),
           {role} = JSON.parse(localStorage.getItem('User'));
  
-    const onClick = () => {
+    const handleClick = () => {
         if (role === 'work') {
             navigate('create-new-claim');
         } else {
@@ -32,7 +32,7 @@ const MyClaims = () => {
             <div className="my-claims__headline">
                 <Title title='Your claims'/>
                 <button
-                onClick={onClick} 
+                onClick={handleClick} 
                 className="my-claims__btn">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M20 13V27" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

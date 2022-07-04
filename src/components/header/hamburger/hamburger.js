@@ -8,7 +8,7 @@ const Hamburger = () => {
     const dispatch = useDispatch();
     const {openedHamburger} = useSelector(state => state.menu);
 
-    const onClick = () => {
+    const handleClick = () => {
         if (openedHamburger) {
             dispatch(setOpenedHamburger(false));
             document.body.style.overflow = "";
@@ -19,7 +19,7 @@ const Hamburger = () => {
     }
 
     return (
-        <div onClick={onClick} className="hamburger">
+        <div onClick={handleClick} className="hamburger">
             <span className="hamburger__line"></span>
             <span className="hamburger__line"></span>
             <span className="hamburger__line"></span>       

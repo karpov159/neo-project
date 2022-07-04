@@ -12,9 +12,8 @@ import IconDown from '../../assets/icons/icon-chevron-down.png'
 
 import './browsed-claim.scss';
 
-const BrowsedClaim = (props) => {
-    const {setSearchInput} = props,
-          [title, setTitle] = useState(''),
+const BrowsedClaim = ({setSearchInput}) => {
+    const [title, setTitle] = useState(''),
           [type, setType] = useState(''),
           [description, setDescription] = useState(''),
           {claimId} = useParams(),

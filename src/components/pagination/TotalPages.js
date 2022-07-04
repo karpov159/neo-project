@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { changePage } from '../claims-list/ClaimsSlice';
-import Page from './pageComponent/Page';
+import Page from './pageComponent/PageComponent';
 
 const TotalPages = ({totalPages, active}) => {
     const {currentPage} = useSelector(state => state.claims),
