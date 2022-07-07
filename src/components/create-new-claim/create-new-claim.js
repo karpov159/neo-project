@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getClaimType from '../../helpers/getClaimType';
-import claimTypes from '../../helpers/claimTypes';
 import { useDispatch } from 'react-redux';
 import { createNewClaim } from '../../store/ClaimsSlice';
 import validateStr from '../../helpers/validateStr';
-import ErrorInput from '../../Shared/Errors/ErrorInput';
-import Title from '../../Shared/Title/Title';
-import Input from '../../Shared/Input/Input';
-import Button from '../../Shared/Button/Button';
-import DropDownInput from '../../Shared/Input/DropDownInput';
+import ErrorInput from '../../shared/Errors/ErrorInput';
+import Title from '../../shared/Title/Title';
+import Input from '../../shared/Input/Input';
+import Button from '../../shared/Button/Button';
+import DropDownInput from '../../shared/Input/DropDownInput';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png';
 import './Create-new-claim.scss';
@@ -22,6 +21,7 @@ const CreateNewClaim = ({setSearchInput}) => {
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const claimTypes = ['Hardware', 'Software', 'Troubleshooting', 'Networking'];
 
     useEffect(() => {
         setSearchInput(false);

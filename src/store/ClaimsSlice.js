@@ -2,9 +2,8 @@ import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/too
 import useHttp from "../helpers/http.hook";
 import modifyData from "../helpers/modifyData";
 
-import { _apiBase } from "../helpers/constants";
+import { BASE_URL } from "../helpers/constants";
 import getUserToken from '../helpers/getUserToken';
-
 
 const claimsAdapter = createEntityAdapter({
     selectId: (claim) => {
@@ -27,7 +26,7 @@ export const fetchClaims = createAsyncThunk(
     async ({columnSort = 'title', orderSort = 'desc', searchInput = ''}) => {
         const {request} = useHttp();
         const res = await request(
-            `${_apiBase}/claim?offset=0&search=${searchInput}&column=${columnSort}&sort=${orderSort}`, 
+            `${BASE_URL}/claim?offset=0&search=${searchInput}&column=${columnSort}&sort=${orderSort}`, 
             'GET', 
             null, 
             {'Authorization': `Bearer ${getUserToken()}`,
@@ -41,7 +40,7 @@ export const getClaim = createAsyncThunk(
     async (id) => {
         const {request} = useHttp();
         const res = await request(
-            `${_apiBase}/claim/${id}`, 
+            `${BASE_URL}/claim/${id}`, 
             'GET', 
             null,
             {'Authorization': `Bearer ${getUserToken()}`,
@@ -55,7 +54,7 @@ export const createNewClaim = createAsyncThunk(
     async (body) => {
         const {request} = useHttp();
         const res = await request(
-            `${_apiBase}/claim`, 
+            `${BASE_URL}/claim`, 
             'POST', 
             JSON.stringify(body), 
             {'Authorization': `Bearer ${getUserToken()}`,
@@ -69,7 +68,7 @@ export const updateClaim = createAsyncThunk(
     async ({claimId, body}) => {
         const {request} = useHttp();
         const res = await request(
-            `${_apiBase}/claim/${claimId}`,
+            `${BASE_URL}/claim/${claimId}`,
             'PUT',
             JSON.stringify(body),
             {'Authorization':

@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changePage } from '../../store/ClaimsSlice';
+import getPagesToShow from '../../helpers/getPagesToShow';
 import Page from './Page/Page';
 
 const TotalPages = ({totalPages, active}) => {
-    const {currentPage} = useSelector(state => state.claims);
     const dispatch = useDispatch();
-          
     const pages = [];
+
     for (let i = 1; i <= totalPages; i++) {
         pages.push(
         <Page 
@@ -16,28 +16,31 @@ const TotalPages = ({totalPages, active}) => {
         )
     }
 
+    const content = getPagesToShow(active, pages, totalPages);
+    const firstPage = pages[0];
+    const lastPage = pages[totalPages-1];
+    const leftDot = 
+        active > 4 ? 
+        <div onClick={() => dispatch(changePage(active - 3))} className="pagination__dots"></div> : 
+        null;
+
+    const rightDot = 
+        active + 3 >= totalPages ? 
+        null : 
+        <div onClick={() => dispatch(changePage(active + 3))} className="pagination__dots"></div>;
+
     if (totalPages > 8) {
         return (
             <>
-                {pages.slice(0,1)}
+                {firstPage}
 
-                {active > 4 ? 
-                <div onClick={() => dispatch(changePage(currentPage - 3))} className="pagination__dots"></div> 
-                : null}
+                {leftDot}
 
-                {active <= 3 ? pages.slice(1, 6) : null}
+                {content}
 
-                {active > 3 && active + 3 <= totalPages ? pages.slice(active - 3, active + 2) : null}
+                {rightDot}
 
-                {active + 3 > totalPages && active !== totalPages? pages.slice(active - 4, totalPages - 1) : null}
-
-                {active === totalPages ? pages.slice(active - 5, active - 1) : null}
-
-                {active + 3 >= totalPages ? 
-                null : 
-                <div onClick={() => dispatch(changePage(currentPage + 3))} className="pagination__dots"></div>}
-
-                {pages.pop()}
+                {lastPage}
             </>
         )
     }

@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth, clearLoadingStatus, setLoggedIn } from '../../store/LoginSlice';
-import { REGISTRATION, HOMEPAGE } from '../../core/Routes/RoutesConfig';
+import { REGISTRATION, HOMEPAGE } from '../../core/config/RoutesConfig';
 import localStorage from '../../helpers/localStorage';
-import ErrorInput from '../../Shared/Errors/ErrorInput';
-import Input from '../../Shared/Input/Input';
-import Button from '../../Shared/Button/Button';
-
+import ErrorInput from '../../shared/Errors/ErrorInput';
+import Input from '../../shared/Input/Input';
+import Button from '../../shared/Button/Button';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
@@ -43,13 +42,6 @@ const Login = () => {
         }))
         .unwrap()
         .then(res => {
-            // localStorage.setItem("Token", res.token);
-            // localStorage.setItem('User', 
-            //     JSON.stringify({
-            //         'fullName': res.fullName,
-            //         'role': res.role.slug,
-            //         keepLogIn
-            //     }));
             User.putUser(res, keepLogIn);
             dispatch(setLoggedIn(true));
             navigate(HOMEPAGE); 

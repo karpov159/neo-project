@@ -18,4 +18,3 @@ const ErrorServer = () => {
 }
 
 export default ErrorServer;
-

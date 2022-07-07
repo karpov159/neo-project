@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { registration, clearLoadingStatus } from '../../store/RegistrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import Input from "../../Shared/Input/Input"
-import Button from "../../Shared/Button/Button";
-import Title from "../../Shared/Title/Title";
-import ErrorInput from '../../Shared/Errors/ErrorInput';
+import { setLoggedIn } from '../../store/LoginSlice';
+import { HOMEPAGE } from '../../core/config/RoutesConfig';
+import localStorage from '../../helpers/localStorage';
+import Input from "../../shared/Input/Input"
+import Button from "../../shared/Button/Button";
+import Title from "../../shared/Title/Title";
+import ErrorInput from '../../shared/Errors/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
@@ -15,6 +18,8 @@ const Registration = () => {
     const navigate = useNavigate();
     const {registrationLoadingStatus} = useSelector(state => state.registration);
     const dispatch = useDispatch();
+    const User = new localStorage();
+    const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
     useEffect(() => {
         dispatch(clearLoadingStatus())
@@ -46,7 +51,7 @@ const Registration = () => {
                         errors.surname = 'Please type your surname'
                     }
 
-                    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                    if (!regEmail.test(values.email)) {
                         errors.email = 'Invalid email address';
                     }
 
@@ -69,7 +74,11 @@ const Registration = () => {
                         "password": values.password
                     }))
                     .unwrap()
-                    .then(() => navigate(-1))
+                    .then((res) => {
+                        User.putUser(res, false);
+                        dispatch(setLoggedIn(true));
+                        navigate(HOMEPAGE); 
+                    })
                 }}
             >
                 {({

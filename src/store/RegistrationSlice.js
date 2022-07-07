@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 import useHttp from "../helpers/http.hook";
-import { _apiBase } from "../helpers/constants";
+import { BASE_URL } from "../helpers/constants";
 
 const registrationAdapter = createEntityAdapter();
 
@@ -13,7 +13,7 @@ export const registration = createAsyncThunk(
     async (body) => {
         const {request} = useHttp();
         const res = await request(
-            `${_apiBase}/auth/registration`, 
+            `${BASE_URL}/auth/registration`, 
             'POST', 
             JSON.stringify(body), 
             {'Content-Type': 'application/json;charset=utf-8'})

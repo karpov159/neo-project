@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Title from '../../../Shared/Title/Title';
+import Title from '../../../shared/Title/Title';
 
 const PageNotFound = () => {
     const navigate = useNavigate();

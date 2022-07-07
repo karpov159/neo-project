@@ -21,6 +21,10 @@ class localStorage {
             keepLogIn
         }));
     }
+
+    deleteuser() {
+        window.localStorage.removeItem(this.keyName);
+    }
 }
 
 export default localStorage;

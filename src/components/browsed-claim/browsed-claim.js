@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import Title from '../../Shared/Title/Title';
-import Button from '../../Shared/Button/Button';
+import Title from '../../shared/Title/Title';
+import Button from '../../shared/Button/Button';
 import { updateClaim, getClaim } from '../../store/ClaimsSlice';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';

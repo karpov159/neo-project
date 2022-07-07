@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Input from '../../Shared/Input/Input';
+import Input from '../../shared/Input/Input';
 import Hamburger from './Hamburger/Hamburger';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeSearchInput } from '../../store/ClaimsSlice';

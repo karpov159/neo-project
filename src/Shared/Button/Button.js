@@ -13,5 +13,3 @@ const Button = ({label, addClass, onClick, type}) => {
 }
 
 export default Button;
-
-

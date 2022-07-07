@@ -4,8 +4,8 @@ import { fetchClaims , selectAll} from '../../store/ClaimsSlice';
 import store from '../../store';
 
 import Claim from './Claim/Claim';
-import Spinner from '../../Shared/Spinner/Spinner';
-import ErrorServer from '../../Shared/Errors/ErrorServer';
+import Spinner from '../../shared/Spinner/Spinner';
+import ErrorServer from '../../shared/Errors/ErrorServer';
 
 import './Claims-list.scss';
 

@@ -2,10 +2,10 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ClaimsList from '../Claims-list/Claims-list';
 import Pagination from '../Pagination/Pagination';
-import { CREATE_CLAIM } from '../../core/Routes/RoutesConfig';
-import Title from '../../Shared/Title/Title';
+import { CREATE_CLAIM } from '../../core/config/RoutesConfig';
+import Title from '../../shared/Title/Title';
 import Filters from './Filters/Filters';
-import ErrorAccess from '../../Shared/Errors/ErrorAccess';
+import ErrorAccess from '../../shared/Errors/ErrorAccess';
 import { setNewClaimAccesError } from '../../store/ClaimsSlice';
 
 
