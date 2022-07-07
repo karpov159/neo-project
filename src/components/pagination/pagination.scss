@@ -3,6 +3,7 @@
     position: fixed;
     bottom: 90px;
     right: 56px;
+
     &__left, &__right, &__page {
         margin-right: 8px;
         cursor: pointer;
@@ -19,18 +20,22 @@
         font-size: 14px;
         line-height: 22px;
         color: rgba(0, 0, 0, 0.85);
+
         img {
             width: 12px;
             height: 12px;
         }   
+
         &_active {
             color: #7DB59A;
             border: 1px solid #7DB59A;
         }
     }
+
     &__right {
         margin-right: 0;
     }
+
     &__dots {
         display: flex;
         justify-content: center;
@@ -44,6 +49,7 @@
         position: relative;
         margin-right: 8px;
         cursor: pointer;
+        
         &::after {
             content: '...';
             color: rgba(0, 0, 0, 0.5);

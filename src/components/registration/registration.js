@@ -1,20 +1,20 @@
 import { Formik } from 'formik';
 import { useNavigate } from "react-router-dom";
-import { registration, clearLoadingStatus } from './RegistrationSlice';
+import { registration, clearLoadingStatus } from '../../store/RegistrationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import Input from "../generic/input/Input"
-import Button from "../generic/button/Button";
-import Title from "../generic/title/Title";
-import ErrorInput from '../generic/errors/ErrorInput';
+import Input from "../../Shared/Input/Input"
+import Button from "../../Shared/Button/Button";
+import Title from "../../Shared/Title/Title";
+import ErrorInput from '../../Shared/Errors/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 
 const Registration = () => {
-    const navigate = useNavigate(),
-          {registrationLoadingStatus} = useSelector(state => state.registration),
-          dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {registrationLoadingStatus} = useSelector(state => state.registration);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(clearLoadingStatus())

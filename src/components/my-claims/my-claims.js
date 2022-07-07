@@ -1,24 +1,25 @@
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ClaimsList from '../claims-list/Claims-list';
-import Pagination from '../pagination/Pagination';
-import Title from '../generic/title/Title';
-import Filters from './filters/Filters';
-import ErrorAccess from '../generic/errors/ErrorAccess';
-import { setNewClaimAccesError } from '../claims-list/ClaimsSlice';
+import ClaimsList from '../Claims-list/Claims-list';
+import Pagination from '../Pagination/Pagination';
+import { CREATE_CLAIM } from '../../core/Routes/RoutesConfig';
+import Title from '../../Shared/Title/Title';
+import Filters from './Filters/Filters';
+import ErrorAccess from '../../Shared/Errors/ErrorAccess';
+import { setNewClaimAccesError } from '../../store/ClaimsSlice';
 
 
-import './my-claims.scss';
+import './My-claims.scss';
 
 const MyClaims = () => {
-    const {browseAccessError, newClaimAccesError} = useSelector(state => state.claims),
-          navigate = useNavigate(),
-          dispatch = useDispatch(),
-          {role} = JSON.parse(localStorage.getItem('User'));
+    const {browseAccessError, newClaimAccesError} = useSelector(state => state.claims);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {role} = JSON.parse(localStorage.getItem('User'));
  
     const handleClick = () => {
         if (role === 'work') {
-            navigate('create-new-claim');
+            navigate(CREATE_CLAIM);
         } else {
             dispatch(setNewClaimAccesError(true));
         }

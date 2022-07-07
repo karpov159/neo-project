@@ -3,6 +3,7 @@
     display: grid;
     grid-template-rows: 56px;
     grid-auto-rows: 48px;
+
     &__filters {
         padding-left: 24px;
         background: #F1F1F1;
@@ -10,6 +11,7 @@
         grid-template-columns: 1.5fr repeat(4, 1fr);
         border-bottom: 1px solid #C2C2C2;
     }
+
     &__item {
         display: flex;
         align-items: center;
@@ -19,6 +21,7 @@
             margin-left: 16px;
         }
     }
+    
     &__filter {
         font-size: 18px;
         min-width: 50px;

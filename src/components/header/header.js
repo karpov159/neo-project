@@ -1,19 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import Input from '../generic/input/Input';
-import Hamburger from './hamburger/Hamburger';
+import Input from '../../Shared/Input/Input';
+import Hamburger from './Hamburger/Hamburger';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSearchInput } from '../claims-list/ClaimsSlice';
-import { setLoggedIn } from '../login/LoginSlice';
+import { changeSearchInput } from '../../store/ClaimsSlice';
+import { setLoggedIn } from '../../store/LoginSlice';
 
 import SearchImg from '../../assets/icons/search.svg';
 import adminAvatar from '../../assets/icons/avatar.png';
-import './header.scss';
+import './Header.scss';
 
 const Header = ({ isSearchInput}) => {
-    const navigate = useNavigate(),
-          dispatch = useDispatch(),
-          {searchInput} = useSelector(state => state.claims),
-          {fullName, role} = JSON.parse(localStorage.getItem('User'));
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {searchInput} = useSelector(state => state.claims);
+    const {fullName, role} = JSON.parse(localStorage.getItem('User'));
 
     const changeValue = (e) => {
         dispatch(changeSearchInput(e.target.value));

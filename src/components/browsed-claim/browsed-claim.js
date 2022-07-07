@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Title from '../generic/title/Title';
-import Button from '../generic/button/Button';
-import { updateClaim, getClaim } from '../claims-list/ClaimsSlice';
+import Title from '../../Shared/Title/Title';
+import Button from '../../Shared/Button/Button';
+import { updateClaim, getClaim } from '../../store/ClaimsSlice';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import getBallColor from '../../helpers/getBallColor';
@@ -10,15 +10,15 @@ import { useNavigate } from 'react-router-dom';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png'
 
-import './browsed-claim.scss';
+import './Browsed-claim.scss';
 
 const BrowsedClaim = ({setSearchInput}) => {
-    const [title, setTitle] = useState(''),
-          [type, setType] = useState(''),
-          [description, setDescription] = useState(''),
-          {claimId} = useParams(),
-          dispatch = useDispatch(),
-          navigate = useNavigate();
+    const [title, setTitle] = useState('');
+    const [type, setType] = useState('');
+    const [description, setDescription] = useState('');
+    const {claimId} = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getClaim(claimId))
@@ -78,6 +78,7 @@ const BrowsedClaim = ({setSearchInput}) => {
                     <div className="browse-claim__text">{description}</div>
                 </div>
                 {null ? <div className='error'>'fdfd</div> : null}
+                
             <div className="browse-claim__btns">
                 <Button onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
                 <Button onClick={() => onUpdateClaim('done')}label={'Done'}/>

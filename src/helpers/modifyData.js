@@ -1,5 +1,4 @@
 const modifyData = ({title, createdAt, type, status, _id, description}) => {
-
     return {
         _id,
         createdAt: createdAt.slice(0, 10),

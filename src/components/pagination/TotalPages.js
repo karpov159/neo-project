@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changePage } from '../claims-list/ClaimsSlice';
-import Page from './pageComponent/PageComponent';
+import { changePage } from '../../store/ClaimsSlice';
+import Page from './Page/Page';
 
 const TotalPages = ({totalPages, active}) => {
-    const {currentPage} = useSelector(state => state.claims),
-          dispatch = useDispatch();
-    // получаем массив с элементами страниц
+    const {currentPage} = useSelector(state => state.claims);
+    const dispatch = useDispatch();
+          
     const pages = [];
     for (let i = 1; i <= totalPages; i++) {
         pages.push(

@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setBrowseAccessError } from '../ClaimsSlice';
+import { setBrowseAccessError } from '../../../store/ClaimsSlice';
 import getStatusColor from '../../../helpers/getStatusColor';
 import getBallColor from '../../../helpers/getBallColor';
 
-import './claim.scss';
+import './Claim.scss';
 
 const Claim = ({title, createdAt, type, status, id}) => {
-    const navigate = useNavigate(),
-          dispatch = useDispatch(),
-          {role} = JSON.parse(localStorage.getItem('User'));
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {role} = JSON.parse(localStorage.getItem('User'));
 
     const onClick = () => {
         if (role === 'admin') {

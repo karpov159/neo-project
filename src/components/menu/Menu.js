@@ -1,15 +1,15 @@
-import PageLink from './pageLink/PageLink';
+import PageLink from './PageLink/PageLink';
 import menuLinkInfo from '../../helpers/menuLinkInfo';
 import { useSelector } from 'react-redux';
 
 import MiniLogo from '../../assets/img/logo_mini.svg';
 
-import './menu.scss';
+import './Menu.scss';
 
 const Menu = () => {
-    const {openedHamburger} = useSelector(state => state.menu),
-          activeLink = "Home",
-          activeClass = openedHamburger ? 'menu menu_active' : 'menu';
+    const {openedHamburger} = useSelector(state => state.menu);
+    const activeLink = "Home";
+    const activeClass = openedHamburger ? 'menu menu_active' : 'menu';
 
     return (
         <>

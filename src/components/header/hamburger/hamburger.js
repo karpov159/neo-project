@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {setOpenedHamburger} from '../../menu/MenuSlice';
+import {setOpenedHamburger} from '../../../store/MenuSlice';
 
 
-import './hamburger.scss';
+import './Hamburger.scss';
 
 const Hamburger = () => {
     const dispatch = useDispatch();

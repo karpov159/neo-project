@@ -1,23 +1,22 @@
-import { selectAll } from './ClaimsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchClaims } from './ClaimsSlice';
+import { fetchClaims , selectAll} from '../../store/ClaimsSlice';
 import store from '../../store';
 
-import Claim from './claim/Claim';
-import Spinner from '../generic/spinner/Spiner';
-import ErrorServer from '../generic/errors/ErrorServer';
+import Claim from './Claim/Claim';
+import Spinner from '../../Shared/Spinner/Spinner';
+import ErrorServer from '../../Shared/Errors/ErrorServer';
 
-import './claims-list.scss';
+import './Claims-list.scss';
 
 const ClaimsList = () => {
 
-    const {claimsLoadingStatus, currentPage, searchInput, columnSort, orderSort} = useSelector(state => state.claims),
-          dispatch = useDispatch(),
-          numOfClaimsToSee = 10,
-          lastPageIndex = currentPage * numOfClaimsToSee,
-          firstPageIndex = lastPageIndex - numOfClaimsToSee,
-          allClaims = selectAll(store.getState());
+    const {claimsLoadingStatus, currentPage, searchInput, columnSort, orderSort} = useSelector(state => state.claims);
+    const dispatch = useDispatch();
+    const numOfClaimsToSee = 10;
+    const lastPageIndex = currentPage * numOfClaimsToSee;
+    const firstPageIndex = lastPageIndex - numOfClaimsToSee;
+    const allClaims = selectAll(store.getState());
 
     useEffect(() => {
         const details = {

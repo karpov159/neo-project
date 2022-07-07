@@ -1,4 +1,3 @@
-
 const getBallColor = (type) => {
     switch (type) {
         case 'Software':

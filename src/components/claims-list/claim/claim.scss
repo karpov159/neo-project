@@ -6,9 +6,11 @@
     justify-content: flex-start;
     align-items: center;
     cursor: default;
+
     &:hover {
         background: #E1F3EA;
     }
+
     &__text, &__title {
         font-weight: 400;
         font-size: 16px;
@@ -17,10 +19,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     &__type {
         display: flex;
         align-items: center;
     }
+
     &__ball {
         margin-right: 16px;
         display: inline-block;
@@ -28,6 +32,7 @@
         height: 16px;
         border-radius: 100%;
     }
+
     &__status {
         width: 124px;
         height: 32px;
@@ -42,6 +47,7 @@
         justify-content: center;
         align-items: center;
     }
+
     &__button {
         position: relative;
         font-weight: 400;
@@ -53,6 +59,7 @@
         background: none;
         cursor: pointer;
         transition: 0.3s all;
+
         &::after {
             content: '';
             bottom: 0;
@@ -63,18 +70,22 @@
             background-color: #148BFF;
             transition: 0.3s all;
         }
+
         &:hover {
             color: #1460ad;
+
             &::after {
                 background-color: #1460ad;
             }
         }
     }
+
     &__title {
         width: 95%;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    
     &__filter {
         display: none;
     }

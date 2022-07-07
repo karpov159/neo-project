@@ -1,10 +1,10 @@
 import filtersList from "../../../helpers/filtersList";
 import { useDispatch, useSelector } from "react-redux";
-import { changeColumnSort, changeOrderSort } from '../../claims-list/ClaimsSlice';
+import { changeColumnSort, changeOrderSort } from '../../../store/ClaimsSlice';
 
 const Filters = () => {
-    const dispatch = useDispatch(),
-          {orderSort} = useSelector(state => state.claims);
+    const dispatch = useDispatch();
+    const {orderSort} = useSelector(state => state.claims);
 
     const renderFilters = (filtersList) => {
         return filtersList.map(({label, icon, key, filter}) => {

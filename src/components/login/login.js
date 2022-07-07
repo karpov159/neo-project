@@ -1,28 +1,32 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import Input from '../generic/input/Input';
-import Button from '../generic/button/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, clearLoadingStatus, setLoggedIn } from './LoginSlice';
-import ErrorInput from '../generic/errors/ErrorInput';
+import { auth, clearLoadingStatus, setLoggedIn } from '../../store/LoginSlice';
+import { REGISTRATION, HOMEPAGE } from '../../core/Routes/RoutesConfig';
+import localStorage from '../../helpers/localStorage';
+import ErrorInput from '../../Shared/Errors/ErrorInput';
+import Input from '../../Shared/Input/Input';
+import Button from '../../Shared/Button/Button';
+
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
 import BigLogo from '../../assets/img/logo_big.svg';
 
-import './login.scss';
+import './Login.scss';
 
 const onChangeInput = (e, func) => {
     func(e.target.value);
 }
 
 const Login = () => {
-    const [email, setEmail] = useState(''),
-          [password, setPassword] = useState(''),
-          [keepLogIn, setKeepLogIn] = useState(false),
-          dispatch = useDispatch(),
-          {authLoadingStatus} = useSelector(state => state.auth),
-          navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [keepLogIn, setKeepLogIn] = useState(false);
+    const dispatch = useDispatch();
+    const {authLoadingStatus} = useSelector(state => state.auth);
+    const navigate = useNavigate();
+    const User = new localStorage();
     
     useEffect(() => {
         dispatch(clearLoadingStatus())
@@ -38,16 +42,17 @@ const Login = () => {
             "password": password
         }))
         .unwrap()
-        .then((res) => {
-            localStorage.setItem("Token", res.token);
-            localStorage.setItem('User', 
-                JSON.stringify({
-                    'fullName': res.fullName,
-                    'role': res.role.slug,
-                    keepLogIn
-                }));
+        .then(res => {
+            // localStorage.setItem("Token", res.token);
+            // localStorage.setItem('User', 
+            //     JSON.stringify({
+            //         'fullName': res.fullName,
+            //         'role': res.role.slug,
+            //         keepLogIn
+            //     }));
+            User.putUser(res, keepLogIn);
             dispatch(setLoggedIn(true));
-            navigate('homepage'); 
+            navigate(HOMEPAGE); 
         });
     };
 
@@ -86,7 +91,7 @@ const Login = () => {
                 <Button label={'Login'} addClass={'button_main'}/>
                 <div className="form__link">
                     Not a member? &nbsp;
-                <NavLink end to="/registration">
+                <NavLink end to={REGISTRATION}>
                     Request registration.
                 </NavLink>
                 </div>

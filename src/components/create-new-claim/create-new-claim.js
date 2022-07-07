@@ -3,26 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import getClaimType from '../../helpers/getClaimType';
 import claimTypes from '../../helpers/claimTypes';
 import { useDispatch } from 'react-redux';
-import { createNewClaim } from '../claims-list/ClaimsSlice';
+import { createNewClaim } from '../../store/ClaimsSlice';
 import validateStr from '../../helpers/validateStr';
-import ErrorInput from '../generic/errors/ErrorInput';
-
-import Title from '../generic/title/Title';
-import Input from '../generic/input/Input';
-import Button from '../generic/button/Button';
-import DropDownInput from '../generic/input/DropDownInput';
+import ErrorInput from '../../Shared/Errors/ErrorInput';
+import Title from '../../Shared/Title/Title';
+import Input from '../../Shared/Input/Input';
+import Button from '../../Shared/Button/Button';
+import DropDownInput from '../../Shared/Input/DropDownInput';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png';
-import './create-new-claim.scss';
+import './Create-new-claim.scss';
 
 const CreateNewClaim = ({setSearchInput}) => {
 
-    const [title, setTitle] = useState(''),
-          [type, setType] = useState(''),
-          [description, setDescription] = useState(''),
-          [errors, setErrors] = useState({}),
-          navigate = useNavigate(),
-          dispatch = useDispatch();
+    const [title, setTitle] = useState('');
+    const [type, setType] = useState('');
+    const [description, setDescription] = useState('');
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setSearchInput(false);
@@ -61,6 +60,7 @@ const CreateNewClaim = ({setSearchInput}) => {
         <div className="new-claim">
             <Title title={'Creating new claim'}/>
             <form onSubmit={(e) => onSubmit(e) } className="new-claim__form">
+
                 <Input 
                 onChange={(e) => changeValue(e, setTitle)} 
                 value={title} 
@@ -68,6 +68,7 @@ const CreateNewClaim = ({setSearchInput}) => {
                 label={'TITLE'} 
                 placeholder={'Type claim title'}/>
                 {errors.title ? <ErrorInput text={errors.title}/> : null}
+
                 <DropDownInput
                 icon={IconDown}
                 onChange={changeDropDown}
@@ -77,6 +78,7 @@ const CreateNewClaim = ({setSearchInput}) => {
                 label={'TYPE'} 
                 placeholder={'Select type'}                
                 />
+
                 <Input 
                 onChange={(e) => changeValue(e, setDescription)} 
                 value={description} 
@@ -84,6 +86,7 @@ const CreateNewClaim = ({setSearchInput}) => {
                 label={'DESCRIPTION'} 
                 placeholder={'Type claim description'}/>
                 {errors.description ? <ErrorInput text={errors.description}/> : null}
+                
                 <div className="new-claim__btns">
                     <Button type="button" onClick={() => navigate(-1)} addClass={'button_cancel'} label={'Cancel'}/>
                     <Button type="submit" label={'Create'}/>

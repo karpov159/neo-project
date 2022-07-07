@@ -1,42 +1,31 @@
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { setLoggedIn } from '../login/LoginSlice';
+import { BrowserRouter as Router  } from 'react-router-dom';
+import { setLoggedIn } from '../../store/LoginSlice';
 import { useDispatch } from 'react-redux';
-import Entrance from '../entrance/Entrance';
-import Homepage from '../homepage/Homepage';
-import Page404 from '../page404/404';
-import Registration from '../registration/Registration';
-import Login from '../login/Login';
+import localStorageTest from '../../helpers/localStorage';
+import Routes from '../../core/Routes/Routes';
 
-import './app.scss';
+import './App.scss';
 
 const App = () => {
-  const {isLoggedIn} = useSelector(state => state.auth);
-  const {keepLogIn} = localStorage.getItem('User') ? JSON.parse(localStorage.getItem('User')) : false;
-  const dispatch = useDispatch();
+    const User = new localStorageTest();
+    const {keepLogIn} = User.getUser() ? User.getUser() : false;
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (keepLogIn) {
-      dispatch(setLoggedIn(true));
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    useEffect(() => {
+        if (keepLogIn) {
+            dispatch(setLoggedIn(true));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path='/homepage/*' element={isLoggedIn ? <Homepage /> : <Navigate to="/"/>}/>
-          <Route path='/' element={isLoggedIn ? <Navigate to="/homepage" /> : <Entrance />}> 
-            <Route path="/registration" element={<Registration/>}/>
-            <Route path="/" element={<Login />}/>
-          </Route>
-          <Route path="*" element={<Page404/>}/>
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Routes/>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

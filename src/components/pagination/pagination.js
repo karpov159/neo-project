@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import getTotalPages from '../../helpers/getTotalPages';
 import store from '../../store';
-import { selectAll, changePage } from '../claims-list/ClaimsSlice';
+import { selectAll, changePage } from '../../store/ClaimsSlice';
 import TotalPages from './TotalPages';
 import Left from '../../assets/icons/pagination/Left.png';
 import Right from '../../assets/icons/pagination/Right.png';
 
-import './pagination.scss';
+import './Pagination.scss';
 
 const Pagination = () => {
-    const {currentPage} = useSelector(state => state.claims),
-          claims = selectAll(store.getState()),
-          dispatch = useDispatch(),
-          totalPages = getTotalPages(claims);
+    const {currentPage} = useSelector(state => state.claims);
+    const claims = selectAll(store.getState());
+    const dispatch = useDispatch();
+    const totalPages = getTotalPages(claims);
 
     useEffect(() => {
         if (currentPage > totalPages) {
@@ -22,7 +22,6 @@ const Pagination = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPage, totalPages])
 
-    // если пользователь на странице 1, то стрелочка скрыта
     const leftArrow = currentPage === 1 || totalPages < 1 ? 
         null : 
         <button 
@@ -32,7 +31,6 @@ const Pagination = () => {
         <img src={Left} alt="left"/>    
         </button>;
 
-    // если пользователь на последней странице, то стрелочка скрыта
     const rightArrow = 
         <button 
         style={currentPage === totalPages || totalPages < 1 
@@ -42,7 +40,7 @@ const Pagination = () => {
         className="pagination__right">
         <img src={Right} alt="right" />    
         </button>;
-    // получаем страницы и стрелочки
+        
     return (
         <div className="pagination">
             {leftArrow}
