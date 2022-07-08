@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
-import { setOpenedHamburger } from '../../../store/MenuSlice';
+import { setOpenedHamburger } from '../../../core/store/menu/menu.reducer';
 import { useDispatch } from 'react-redux';
 import Menu from '../../Menu/Menu';
 import Header from '../../Header/Header';
@@ -15,7 +15,7 @@ const HomePage = ({isSearchInput}) => {
         const handleCLick = (e) => {
             const target = e.target;
 
-            if (target.classList.contains('overlay')) {
+            if (target.classList.contains('menu__overlay')) {
                 dispatch(setOpenedHamburger());
                 document.body.style.overflow = "";
             }   

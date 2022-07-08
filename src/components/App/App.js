@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router  } from 'react-router-dom';
-import { setLoggedIn } from '../../store/LoginSlice';
+import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { useDispatch } from 'react-redux';
 import localStorageTest from '../../helpers/localStorage';
 import Routes from '../../core/Routes/Routes';

@@ -1,15 +1,16 @@
 import { Formik } from 'formik';
 import { useNavigate } from "react-router-dom";
-import { registration, clearLoadingStatus } from '../../store/RegistrationSlice';
+import { registration } from '../../core/store/registration/reg.action';
+import { clearLoadingStatus } from '../../core/store/registration/reg.reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { setLoggedIn } from '../../store/LoginSlice';
+import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { HOMEPAGE } from '../../core/config/RoutesConfig';
 import localStorage from '../../helpers/localStorage';
 import Input from "../../shared/Input/Input"
 import Button from "../../shared/Button/Button";
 import Title from "../../shared/Title/Title";
-import ErrorInput from '../../shared/Errors/ErrorInput';
+import ErrorInput from '../../shared/Errors/ErrorInput/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
 import Lock from '../../assets/icons/icon-lock.svg';
@@ -28,7 +29,7 @@ const Registration = () => {
 
     return (
         <>
-            <Title title="Create your personal account"/>
+            <Title addClass="title_hidden" title="Create your personal account"/>
             <Formik
                 initialValues = {{
                     name: '',
@@ -91,6 +92,7 @@ const Registration = () => {
                 }) => (
                     <form className="form form_reg" onSubmit={handleSubmit}>
                         <Input
+                        addClass="input-block_reg"
                         type="text"
                         name="name"
                         value={values.name} 
@@ -101,6 +103,7 @@ const Registration = () => {
                         icon={Mail} />
                         {errors.name && touched.name ? <ErrorInput text={errors.name}/>  : null}
                         <Input
+                        addClass="input-block_reg"
                         type="text"
                         name="surname"
                         value={values.surname} 
@@ -111,6 +114,7 @@ const Registration = () => {
                         icon={Mail} />
                         {errors.surname && touched.surname ? <ErrorInput text={errors.surname}/> : null}
                         <Input
+                        addClass="input-block_reg"
                         type="email"
                         name="email"
                         value={values.email} 
@@ -118,17 +122,21 @@ const Registration = () => {
                         onBlur={handleBlur}
                         label={'E-MAIL'} 
                         placeholder={'Type your e-mail'} 
+                        autoComplete="username"
                         icon={Mail} />
                         {errors.email && touched.email ? <ErrorInput text={errors.email}/> : null}
                         <Input
+                        addClass="input-block_reg"
                         type="password"
                         name="password"
                         value={values.password} 
                         onChange={handleChange} 
                         label={'password'} 
                         placeholder={'Type your password'} 
+                        autoComplete="new-password"
                         icon={Lock} />
                         <Input
+                        addClass="input-block_reg"
                         type="password"
                         name="secondPassword"
                         value={values.secondPassword} 
@@ -136,6 +144,7 @@ const Registration = () => {
                         onBlur={handleBlur}
                         label={'password'} 
                         placeholder={'Type your password again'} 
+                        autoComplete="new-password"
                         icon={Lock} />
                         {errors.password && touched.secondPassword ? <ErrorInput text={errors.password}/> : null}
                         <div className="form__check form__check_mt40">

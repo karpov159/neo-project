@@ -1,15 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setBrowseAccessError } from '../../../store/ClaimsSlice';
+import { setBrowseAccessError } from '../../../core/store/claim/claim.reducer';
 import getStatusColor from '../../../helpers/getStatusColor';
 import getBallColor from '../../../helpers/getBallColor';
+import localStorage from '../../../helpers/localStorage';
 
 import './Claim.scss';
 
 const Claim = ({title, createdAt, type, status, id}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {role} = JSON.parse(localStorage.getItem('User'));
+    const User = new localStorage();
+    const {role} = User.getUser();
 
     const onClick = () => {
         if (role === 'admin') {
@@ -23,7 +25,7 @@ const Claim = ({title, createdAt, type, status, id}) => {
     return (
         <div className="claim">
             <div className="claim__title">
-                <div className="claim__text">{title}</div>
+                <div className="claim__text claim__text_white">{title}</div>
             </div>
             <div className="claim__block">
             <div className="claim__filter">Created</div>

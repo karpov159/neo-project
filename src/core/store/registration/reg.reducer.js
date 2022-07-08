@@ -1,26 +1,11 @@
-import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
-import useHttp from "../helpers/http.hook";
-import { BASE_URL } from "../helpers/constants";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import {registration} from './reg.action';
 
 const registrationAdapter = createEntityAdapter();
 
 const initialState = registrationAdapter.getInitialState({
     registrationLoadingStatus: 'idle',
 });
-
-export const registration = createAsyncThunk(
-    'registration/userRegistration',
-    async (body) => {
-        const {request} = useHttp();
-        const res = await request(
-            `${BASE_URL}/auth/registration`, 
-            'POST', 
-            JSON.stringify(body), 
-            {'Content-Type': 'application/json;charset=utf-8'})
-            
-        return await res;
-    }
-)
 
 const registrationSlice = createSlice({
     name: 'registration',

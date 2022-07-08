@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchClaims , selectAll} from '../../store/ClaimsSlice';
-import store from '../../store';
-
+import { fetchClaims} from '../../core/store/claim/claim.action';
+import { selectAll } from '../../core/store/claim/claim.reducer';
+import store from '../../core/store';
 import Claim from './Claim/Claim';
 import Spinner from '../../shared/Spinner/Spinner';
-import ErrorServer from '../../shared/Errors/ErrorServer';
+import ErrorServer from '../../shared/Errors/ErrorServer/ErrorServer';
 
 import './Claims-list.scss';
 

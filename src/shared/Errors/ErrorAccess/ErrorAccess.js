@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setBrowseAccessError, setNewClaimAccesError } from "../../store/ClaimsSlice";
+import { setBrowseAccessError, setNewClaimAccesError } from "../../../core/store/claim/claim.reducer";
+import './ErrorAccess.scss';
 
 const ErrorAccess = ({text}) => {
     const dispatch = useDispatch();

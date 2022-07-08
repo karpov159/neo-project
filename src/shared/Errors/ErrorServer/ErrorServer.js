@@ -1,7 +1,7 @@
-import Title from '../Title/Title';
+import Title from '../../Title/Title';
 import { useNavigate } from 'react-router-dom';
 
-import './Errors.scss';
+import './ErrorServer.scss';
 
 const ErrorServer = () => {
     const navigate = useNavigate();

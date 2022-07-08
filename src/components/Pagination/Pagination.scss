@@ -1,8 +1,11 @@
 .pagination {
     display: flex;
-    position: fixed;
-    bottom: 90px;
-    right: 56px;
+    position: relative;
+    // bottom: 90px;
+    // right: 56px;
+    margin-top: 56px;
+    justify-content: flex-end;
+
 
     &__left, &__right, &__page {
         margin-right: 8px;
@@ -59,3 +62,39 @@
 
     }
 }
+
+@media (max-width: 1650px) {
+    .pagination {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .pagination {
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .pagination {
+        justify-content: flex-end;
+        position: relative;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .pagination {
+        justify-content: center;
+        position: relative;
+        margin-top: 50px;
+        right: 0;
+        
+        &__page, &__dots, &__right, &__left {
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+        }
+    }
+}
+

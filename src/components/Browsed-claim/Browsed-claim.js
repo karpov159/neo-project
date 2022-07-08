@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Title from '../../shared/Title/Title';
 import Button from '../../shared/Button/Button';
-import { updateClaim, getClaim } from '../../store/ClaimsSlice';
+import { updateClaim, getClaim } from '../../core/store/claim/claim.action';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import getBallColor from '../../helpers/getBallColor';
@@ -9,7 +9,6 @@ import getClaimType from '../../helpers/getClaimType';
 import { useNavigate } from 'react-router-dom';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png'
-
 import './Browsed-claim.scss';
 
 const BrowsedClaim = ({setSearchInput}) => {

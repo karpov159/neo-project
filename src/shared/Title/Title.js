@@ -1,14 +1,10 @@
 import './Title.scss';
 
-const Title = ({title, custom}) => {
-    if (custom) {
-        return (
-            <h4 className="title" >{title}</h4>
-        )
-    }
+const Title = ({title, addClass}) => {
+    const classes = addClass ? "title " + addClass : "title";
 
     return (
-        <h2 className="title" >{title}</h2>
+        <h2 className={classes} >{title}</h2>
     )
 }
 

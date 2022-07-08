@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { changePage } from '../../store/ClaimsSlice';
+import { changePage } from '../../core/store/claim/claim.reducer';
 import getPagesToShow from '../../helpers/getPagesToShow';
 import Page from './Page/Page';
 
@@ -16,9 +16,10 @@ const TotalPages = ({totalPages, active}) => {
         )
     }
 
-    const content = getPagesToShow(active, pages, totalPages);
+    const allPages = getPagesToShow(active, pages, totalPages);
     const firstPage = pages[0];
     const lastPage = pages[totalPages-1];
+    
     const leftDot = 
         active > 4 ? 
         <div onClick={() => dispatch(changePage(active - 3))} className="pagination__dots"></div> : 
@@ -36,7 +37,7 @@ const TotalPages = ({totalPages, active}) => {
 
                 {leftDot}
 
-                {content}
+                {allPages}
 
                 {rightDot}
 

@@ -13,3 +13,9 @@
         background: #FFFFFF;
     }
 }
+
+@media (max-width: 992px) {
+    .hamburger {
+        display: flex;
+    }
+}

@@ -1,7 +1,7 @@
 @import '../../../style/variables.scss';
 
 .pre-screen {
-    height: 100vh;
+    height: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: minmax(calc(100vh - 91px), auto) 91px;
@@ -20,7 +20,6 @@
     }
 
     &__right {
-        padding-bottom: 140px;
         padding-top: 100px;
         display: flex;
         flex-direction: column;
@@ -50,3 +49,67 @@
     }
 }
 
+@media (max-width: 1650px) {
+    .pre-screen {
+        &__right {
+            padding-top: 30px;
+            padding-bottom: 50px;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .pre-screen {
+        
+        &__left {
+            img {
+                width: 500px;
+                height: 480px;
+            }
+        }
+
+        &__right {
+            padding: 70px 0;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .pre-screen {
+        grid-template-columns: 1fr;
+
+        &__left {
+            display: none;
+        }
+
+        &__right {
+            padding: 70px 0;
+        }
+        
+        &__footer {
+            img {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .pre-screen {
+        grid-template-rows: none;
+        
+        &__right {
+            padding: 0;
+        }
+        
+        &__logo {
+            width: 96px;
+            height: 93px;
+            margin-top: 48px;
+        }
+
+        &__footer {
+            height: 64px;
+        }
+    }    
+}

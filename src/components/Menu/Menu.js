@@ -3,7 +3,6 @@ import menuLinkInfo from '../../helpers/menuLinkInfo';
 import { useSelector } from 'react-redux';
 
 import MiniLogo from '../../assets/img/logo_mini.svg';
-
 import './Menu.scss';
 
 const Menu = () => {
@@ -19,7 +18,7 @@ const Menu = () => {
                     <View activeLink={activeLink}/>
                 </div>
             </aside>
-            {openedHamburger ? <div className='overlay'/> : null}
+            {openedHamburger ? <div className='menu__overlay'/> : null}
         </>
     
     )

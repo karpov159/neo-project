@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import claims from './ClaimsSlice';
-import registration  from "./RegistrationSlice";
-import auth from './LoginSlice';
-import menu from "./MenuSlice";
+import claims from './claim/claim.reducer';
+import registration  from "./registration/reg.reducer";
+import auth from './login/login.reducer';
+import menu from "./menu/menu.reducer";
 
 const store = configureStore({
     reducer: {claims, registration, auth, menu},

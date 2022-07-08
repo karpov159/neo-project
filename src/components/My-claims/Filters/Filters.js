@@ -1,6 +1,6 @@
 import filtersList from "../../../helpers/filtersList";
 import { useDispatch, useSelector } from "react-redux";
-import { changeColumnSort, changeOrderSort } from '../../../store/ClaimsSlice';
+import { changeColumnSort, changeOrderSort } from '../../../core/store/claim/claim.reducer';
 
 const Filters = () => {
     const dispatch = useDispatch();

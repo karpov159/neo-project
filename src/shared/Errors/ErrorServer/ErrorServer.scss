@@ -1,0 +1,16 @@
+.error-server {
+    text-align: center;
+    margin-top: 50px;
+    
+    &__block {
+        width: 550px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 40px auto 0 auto;
+    }
+
+    &__text {
+        font-size: 20px;
+    }
+}

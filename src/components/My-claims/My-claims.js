@@ -5,9 +5,9 @@ import Pagination from '../Pagination/Pagination';
 import { CREATE_CLAIM } from '../../core/config/RoutesConfig';
 import Title from '../../shared/Title/Title';
 import Filters from './Filters/Filters';
-import ErrorAccess from '../../shared/Errors/ErrorAccess';
-import { setNewClaimAccesError } from '../../store/ClaimsSlice';
-
+import ErrorAccess from '../../shared/Errors/ErrorAccess/ErrorAccess';
+import { setNewClaimAccesError } from '../../core/store/claim/claim.reducer';
+import localStorage from '../../helpers/localStorage';
 
 import './My-claims.scss';
 
@@ -15,7 +15,8 @@ const MyClaims = () => {
     const {browseAccessError, newClaimAccesError} = useSelector(state => state.claims);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {role} = JSON.parse(localStorage.getItem('User'));
+    const User = new localStorage();
+    const {role} = User.getUser();
  
     const handleClick = () => {
         if (role === 'work') {

@@ -1,6 +1,20 @@
 .homepage {
-    height: 100vh;
+    height: auto;
     display: grid;
     grid-template-columns: 96px calc(100vw - 96px);
     grid-template-rows: 96px minmax(calc(100vh - 96px), auto);
+}
+
+@media (max-width: 992px) {
+    .homepage {
+        height: auto;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    .homepage {
+        display: flex;
+        flex-direction: column;
+    }
 }

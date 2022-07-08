@@ -1,6 +1,6 @@
 import './Input.scss';
 
-const Input = ({label, placeholder, icon, addClass, onChange, value, name, type, error}) => {
+const Input = ({label, placeholder, icon, addClass, onChange, value, name, type, error, autoComplete}) => {
     const span = label ? <span className='input-block__span'>{label}</span> : null;
     const img = icon ? <img className='input-block__icon' src={icon} alt="icon"/> : null;
     const classes = addClass ? 'input-block ' + addClass : 'input-block';
@@ -17,7 +17,9 @@ const Input = ({label, placeholder, icon, addClass, onChange, value, name, type,
             value={value}
             type={type}
             required
-            placeholder={placeholder} />
+            placeholder={placeholder} 
+            autoComplete={autoComplete}            
+            />
             {img}
         </div>
     )

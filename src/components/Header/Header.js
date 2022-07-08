@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../shared/Input/Input';
 import Hamburger from './Hamburger/Hamburger';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSearchInput } from '../../store/ClaimsSlice';
-import { setLoggedIn } from '../../store/LoginSlice';
+import { changeSearchInput, setBrowseAccessError, setNewClaimAccesError, changePage } from '../../core/store/claim/claim.reducer';
+import { setLoggedIn } from '../../core/store/login/login.reducer';
+import localStorage from '../../helpers/localStorage';
 
 import SearchImg from '../../assets/icons/search.svg';
 import adminAvatar from '../../assets/icons/avatar.png';
@@ -13,11 +14,22 @@ const Header = ({ isSearchInput}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {searchInput} = useSelector(state => state.claims);
-    const {fullName, role} = JSON.parse(localStorage.getItem('User'));
+    const User = new localStorage();
+    const {fullName, role} = User.getUser();
 
     const changeValue = (e) => {
         dispatch(changeSearchInput(e.target.value));
     };
+
+    const handleClick = () => {
+        dispatch(setLoggedIn(false));
+        dispatch(changeSearchInput(''));
+        dispatch(setNewClaimAccesError(false));
+        dispatch(setBrowseAccessError(false));
+        dispatch(changePage(1));
+        User.deleteUser();
+        navigate('/');
+    }
 
     const profileImg = role === 'admin' ?
     <img src={adminAvatar} alt="notification" /> :
@@ -47,12 +59,7 @@ const Header = ({ isSearchInput}) => {
                     <div className="header__name">
                         {fullName}   
                     </div>          
-                    <button onClick={() => {
-                        dispatch(setLoggedIn(false));
-                        localStorage.removeItem('User');
-                        localStorage.removeItem('Token');
-                        navigate('/');
-                    }} 
+                    <button onClick={handleClick} 
                     className="header__btn">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17 29H13C12.4696 29 11.9609 28.7893 11.5858 28.4142C11.2107 28.0391 11 27.5304 11 27V13C11 12.4696 11.2107 11.9609 11.5858 11.5858C11.9609 11.2107 12.4696 11 13 11H17" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -66,3 +66,18 @@
         transform: translateY(-50%);
     }
 }
+
+@media (max-width: 768px) {
+    .browse-claim {
+        padding: 24px 16px 0 16px;
+
+        &__item {
+            margin-top: 47px;
+            width: 343px;
+        }
+        
+        &__btns {
+            margin-top: 24px;
+        }
+    }
+}

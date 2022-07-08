@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .menu {
     padding: 32px 12px 0 12px;
     width: 100%;
@@ -73,14 +75,56 @@
         color: #FFFFFF;
         margin-left: 24px;
     }
+
+    &__overlay {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        background: rgba(0, 0, 0, 0.6);
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
 }
 
-.overlay {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    background: rgba(0, 0, 0, 0.6);
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+
+@media (max-width: 992px) {
+    .menu {
+        display: none;
+        position: fixed;
+        top: 64px;
+        z-index: 10;
+        width: 350px;
+        height: 100vh;
+        padding: 16px 0 0 16px;
+        background: $main-color;
+
+        &_active {
+            display: block;
+        }
+
+        &__links {
+            margin-top: 0;
+            align-items: flex-start
+        }
+
+        &__link {
+            &::after {
+                left: -16px;
+            }
+
+            &:hover {
+
+                &::after {
+                    left: -16px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .menu {
+        width: 256px;
+    }
 }

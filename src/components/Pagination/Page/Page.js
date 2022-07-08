@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { changePage } from "../../../store/ClaimsSlice";
+import { changePage } from "../../../core/store/claim/claim.reducer";
 
 const Page = ({num, active}) => {
     const classes = active ? 'pagination__page ' + active : 'pagination__page';

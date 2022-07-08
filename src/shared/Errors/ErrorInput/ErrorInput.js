@@ -1,3 +1,5 @@
+import './ErrorInput.scss';
+
 const ErrorInput = ({text, addClass}) => {
     const classes = addClass ? 'error-input ' + addClass : 'error-input';
 

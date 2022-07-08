@@ -3,6 +3,7 @@
     width: 466px;
     height: 71px;
     position: relative;
+    
     &__span {
         font-weight: 700;
         font-size: 12px;
@@ -11,6 +12,7 @@
         text-transform: uppercase;
         letter-spacing: 2.5px;
     }
+
     &__input {
         margin-top: 8px;
         padding: 8px 44px 8px 16px;
@@ -22,17 +24,21 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 22px;
+
         &::placeholder {
             color: #2D3436;
         }
+
         &:focus {
             outline: 4px solid rgba(253, 203, 110, 0.4);
             background: rgba(236, 210, 175, 0.609);
         }
+
         &_error {
             border: 2px solid rgba(204, 30, 30, 0.24);
         }
     }
+
     &__icon {
         position: absolute;
         bottom: 0;
@@ -40,6 +46,7 @@
         width: 40px;
         height: 40px;
     }
+
     &_search {
         margin-top: 0;
         width: 585px;
@@ -48,14 +55,17 @@
         input {
             margin-top: 0;
             padding: 8px 44px 8px 26px;
+
             &::placeholder {
                 color: #ADADAD;
             }
+
             &:focus {
                 outline: none;
                 background: rgba(194, 194, 194, 0.24);
             }
         }
+
         img {
             top: 50%;
             transform: translateY(-50%);
@@ -63,6 +73,7 @@
     }
     &_mt40 {
         margin-top: 40px;
+
         &::first-child {
             margin-top: 48px;
         }
@@ -82,25 +93,30 @@
 
     &_gray {
         cursor: default;
+
         input {
             color: #ADADAD;
             cursor: default;
+
             &:focus {
                 outline: none;
                 background: rgba(194, 194, 194, 0.24);
             }
         }
     }
+
     &__option {
         display: flex;
         padding: 10px;
         align-items: center;
         cursor: pointer;
         transition: all 0.2s;
+
         &:hover {
             background: rgba(194, 194, 194, 0.24);
         }
     }
+
     &__ball {
         margin-right: 16px;
         display: inline-block;
@@ -108,45 +124,45 @@
         height: 16px;
         border-radius: 100%;
     }
+    
     &__pointer {
         cursor: pointer;
     }
 }
 
-.select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    cursor: pointer;
-    background: url("../../assets/icons/icon-chevron-down.png") no-repeat right center;
-    background-color: rgba(194, 194, 194, 0.24);
-    margin-top: 8px;
-    padding: 8px 44px 8px 16px;
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 16px;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    &::placeholder {
-        color: #2D3436;
-    }
-    &:focus {
-        outline: 4px solid rgba(253, 203, 110, 0.4);
-        background: url("../../assets/icons/icon-chevron-down.png") no-repeat right center;
-        background-color: rgba(236, 210, 175, 0.609);
+@media (max-width: 992px) {
+    .input-block {
+        &_search {
+            display: none;
+        }
     }
 }
 
-.option {
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    height: 30px;
-    width: 500px;
-    &:hover {
-        background: rgba(194, 194, 194, 0.24);
+@media (max-width: 576px) {
+    .input-block {
+        width: 343px;
+
+        &_mt40 {
+            margin-top: 24px;
+        }
+        &_log {
+            margin-top: 24px;
+
+            input {
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+
+        &_reg {
+            margin-top: 20px;
+        }
+
+        &__icon {
+            width: 25px;
+            height: 25px;
+            bottom: 6px;
+            right: 11px;
+        }
     }
 }

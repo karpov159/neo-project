@@ -22,7 +22,7 @@ class localStorage {
         }));
     }
 
-    deleteuser() {
+    deleteUser() {
         window.localStorage.removeItem(this.keyName);
     }
 }

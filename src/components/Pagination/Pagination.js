@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import getTotalPages from '../../helpers/getTotalPages';
-import store from '../../store';
-import { selectAll, changePage } from '../../store/ClaimsSlice';
+import store from '../../core/store';
+import { selectAll, changePage } from '../../core/store/claim/claim.reducer';
 import TotalPages from './TotalPages';
 import Left from '../../assets/icons/pagination/Left.png';
 import Right from '../../assets/icons/pagination/Right.png';

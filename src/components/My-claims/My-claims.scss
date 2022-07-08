@@ -1,5 +1,5 @@
 .my-claims {
-    padding: 56px 58px 105px 56px;
+    padding: 56px 58px 0 56px;
     position: relative;
 
     &__headline {
@@ -50,6 +50,40 @@
     .claim {
         &:last-child {
             border-bottom: none;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .my-claims {
+        padding: 20px;
+        width: calc(100vw - 96px);
+    }
+}
+
+@media (max-width: 992px) {
+    .my-claims {
+        padding: 24px 15px 0 15px;
+        width: 100%;
+
+        &__btn {
+            width: 48px;
+            height: 48px;
+            padding-left: 0;
+            justify-content: center;
+            
+            &::after {
+                content: '';
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .my-claims {
+        
+        &__headline {
+            align-items: center;
         }
     }
 }

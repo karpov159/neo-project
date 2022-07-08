@@ -2,6 +2,7 @@
 
 .form {
     margin-top: 96px;
+    margin-bottom: 50px;
 
     &_reg {
         margin-top: 20px;
@@ -71,6 +72,7 @@
         line-height: 17px;
         color: #2D3436;
         text-align: center;
+        
         a {
             color: #2F80ED;
             text-decoration: none;
@@ -81,5 +83,41 @@
         margin-top: 35px;
         display: flex;
         justify-content: space-between;
+    }
+}
+
+@media (max-width: 1650px) {
+    .form {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .form {
+        margin-top: 72px;
+        margin-bottom: 83px;
+
+        &__text {
+            font-size: 12px;
+            line-height: 15px;
+        }
+        
+        &__link {
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        &__check {
+            margin-top: 21px;
+        }
+
+        &__btns {
+            margin-top: 20px;
+        }
+
+        &_reg {
+            margin: 24px 0 46px 0;
+
+        }
     }
 }
