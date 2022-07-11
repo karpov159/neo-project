@@ -1,92 +1,90 @@
 @import '../../style/variables.scss';
 
 .button {
-    border: none;
-    background: $main-color;
-    border-radius: 16px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 36px;
-    text-align: center;
-    height: 48px;
-    width: 82px;
-    cursor: pointer;
-    transition: 0.3s all;
-    letter-spacing: 0.25px;
+	border: none;
+	background: $main-color;
+	border-radius: 16px;
+	color: #fff;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 36px;
+	text-align: center;
+	height: 48px;
+	width: 82px;
+	cursor: pointer;
+	transition: 0.3s all;
+	letter-spacing: 0.25px;
 
-    &_main {
-        height: 52px;
-        width: 100%;
-        margin-top: 35px;
-    }
+	&_main {
+		height: 52px;
+		width: 100%;
+		margin-top: 35px;
+	}
 
-    &:hover {
-        background: $hover-color;
-    }
+	&:hover {
+		background: $hover-color;
+	}
 
-    &:active {
-        background: $active-color;
-    }
+	&:active {
+		background: $active-color;
+	}
 
-    &_cancel {
-        border: 1px solid #ADADAD;
-        background: none;
-        color: $cancel-main-color;
-        
-        &:hover {
-            border: 1px solid $main-color;
-            color: $main-color;
-            background: none;
-        }
+	&_cancel {
+		border: 1px solid #adadad;
+		background: none;
+		color: $cancel-main-color;
 
-        &:active {
-            border: 1px solid $active-color;
-            color: $active-color;
-            background: none;
-        }
-    }
+		&:hover {
+			border: 1px solid $main-color;
+			color: $main-color;
+			background: none;
+		}
 
-    &_decline {
-        background: $decline-main-color;
+		&:active {
+			border: 1px solid $active-color;
+			color: $active-color;
+			background: none;
+		}
+	}
 
-        &:hover {
-            background: $decline-hover-color;
-        }
+	&_decline {
+		background: $decline-main-color;
 
-        &:active {
-            background: $decline-active-color;
-        }
-    }
-    
-    &_w45 {
-        width: 45%;
-    }
-    
-    &_error {
-        min-width: 50px;
-    }
+		&:hover {
+			background: $decline-hover-color;
+		}
 
+		&:active {
+			background: $decline-active-color;
+		}
+	}
+
+	&_w45 {
+		width: 45%;
+	}
+
+	&_error {
+		min-width: 50px;
+	}
 }
 
 @media (max-width: 768px) {
-    .button {
-        height: 52px;
-    }
+	.button {
+		height: 52px;
+	}
 }
 
 @media (max-width: 576px) {
-    .button {
+	.button {
+		&_main {
+			font-size: 16px;
+			line-height: 20px;
+			margin-top: 24px;
+			height: 48px;
+		}
 
-        &_main {
-            font-size: 16px;
-            line-height: 20px;
-            margin-top: 24px;
-            height: 48px;
-        }
-
-        &_w45 {
-            height: 40px;
-        }
-    }
+		&_w45 {
+			height: 40px;
+		}
+	}
 }

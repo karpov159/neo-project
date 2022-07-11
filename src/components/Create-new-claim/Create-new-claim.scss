@@ -1,26 +1,25 @@
 .new-claim {
-    padding: 56px 0 0 64px;
-    .input {
+	padding: 56px 0 0 64px;
+	.input {
+		&:first-child {
+			margin-top: 48px;
+		}
+	}
 
-        &:first-child {
-            margin-top: 48px;
-        }
-    }
-    
-    &__btns {
-        width: 188px;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 48px;
-    }
+	&__btns {
+		width: 188px;
+		display: flex;
+		justify-content: space-between;
+		margin-top: 48px;
+	}
 }
 
 @media (max-width: 576px) {
-    .new-claim {
-        padding: 24px 16px 0 16px;
+	.new-claim {
+		padding: 24px 16px 0 16px;
 
-        &__btns {
-            margin-top: 24px;
-        }
-    }
+		&__btns {
+			margin-top: 24px;
+		}
+	}
 }

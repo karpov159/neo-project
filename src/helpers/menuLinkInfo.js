@@ -7,34 +7,34 @@ import IconDatabase from '../assets/icons/icon-database.svg';
 import IconNavigation from '../assets/icons/icon-navigation.svg';
 
 const menuLinkInfo = [
-    {
-        name: 'Home',
-        icon: IconHome
-    },
-    {
-        name: 'Services',
-        icon: IconGlobe
-    },
-    {
-        name: 'Storage',
-        icon: IconArchive
-    },
-    {
-        name: 'Charts',
-        icon: IconPieChart
-    },
-    {
-        name: 'Currency',
-        icon: IconDollar
-    },
-    {
-        name: 'Base',
-        icon: IconDatabase
-    },
-    {
-        name: 'Locations',
-        icon: IconNavigation
-    }
-]
+	{
+		name: 'Home',
+		icon: IconHome,
+	},
+	{
+		name: 'Services',
+		icon: IconGlobe,
+	},
+	{
+		name: 'Storage',
+		icon: IconArchive,
+	},
+	{
+		name: 'Charts',
+		icon: IconPieChart,
+	},
+	{
+		name: 'Currency',
+		icon: IconDollar,
+	},
+	{
+		name: 'Base',
+		icon: IconDatabase,
+	},
+	{
+		name: 'Locations',
+		icon: IconNavigation,
+	},
+];
 
 export default menuLinkInfo;

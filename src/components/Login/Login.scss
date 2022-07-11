@@ -1,123 +1,121 @@
 @import '../../style/variables.scss';
 
 .form {
-    margin-top: 96px;
-    margin-bottom: 50px;
+	margin-top: 96px;
+	margin-bottom: 50px;
 
-    &_reg {
-        margin-top: 20px;
-    }
+	&_reg {
+		margin-top: 20px;
+	}
 
-    .input-block {
-        &:first-child {
-            margin-top: 0;
-        }
-    }
+	.input-block {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
 
-    &__check {
-        margin-top: 27px;
-        display: flex;
-        align-items: center;
+	&__check {
+		margin-top: 27px;
+		display: flex;
+		align-items: center;
 
-        &_mt40 {
-            margin-top: 40px;
-        }
-    }
+		&_mt40 {
+			margin-top: 40px;
+		}
+	}
 
-    &__box {
-        opacity: 0;
-        width: 18px;
-        height: 18px;
-        position: absolute;
+	&__box {
+		opacity: 0;
+		width: 18px;
+		height: 18px;
+		position: absolute;
 
-        &:checked + label::after {
-            content: '✓';
-            font-weight: 700;
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            left: -23px;
-            bottom: 0px;
-            color: $active-color
-        }
-    }
+		&:checked + label::after {
+			content: '✓';
+			font-weight: 700;
+			position: absolute;
+			width: 18px;
+			height: 18px;
+			left: -23px;
+			bottom: 0px;
+			color: $active-color;
+		}
+	}
 
-    &__label {
-        position: relative;
-        margin-left: 40px;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        color: #2D3436;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
+	&__label {
+		position: relative;
+		margin-left: 40px;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 17px;
+		color: #2d3436;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
 
-        &::before {
-            position: absolute;
-            content: '';
-            width: 18px;
-            height: 18px;
-            border: 2px solid #5C5C5C;
-            left: -29px;
+		&::before {
+			position: absolute;
+			content: '';
+			width: 18px;
+			height: 18px;
+			border: 2px solid #5c5c5c;
+			left: -29px;
+		}
+	}
 
-        }
-    }
-    
-    &__link {
-        margin-top: 16px;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
-        color: #2D3436;
-        text-align: center;
-        
-        a {
-            color: #2F80ED;
-            text-decoration: none;
-        }
-    }
+	&__link {
+		margin-top: 16px;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 17px;
+		color: #2d3436;
+		text-align: center;
 
-    &__btns {
-        margin-top: 35px;
-        display: flex;
-        justify-content: space-between;
-    }
+		a {
+			color: #2f80ed;
+			text-decoration: none;
+		}
+	}
+
+	&__btns {
+		margin-top: 35px;
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 @media (max-width: 1650px) {
-    .form {
-        margin-top: 10px;
-    }
+	.form {
+		margin-top: 10px;
+	}
 }
 
 @media (max-width: 576px) {
-    .form {
-        margin-top: 72px;
-        margin-bottom: 83px;
+	.form {
+		margin-top: 72px;
+		margin-bottom: 83px;
 
-        &__text {
-            font-size: 12px;
-            line-height: 15px;
-        }
-        
-        &__link {
-            font-size: 12px;
-            line-height: 15px;
-        }
+		&__text {
+			font-size: 12px;
+			line-height: 15px;
+		}
 
-        &__check {
-            margin-top: 21px;
-        }
+		&__link {
+			font-size: 12px;
+			line-height: 15px;
+		}
 
-        &__btns {
-            margin-top: 20px;
-        }
+		&__check {
+			margin-top: 21px;
+		}
 
-        &_reg {
-            margin: 24px 0 46px 0;
+		&__btns {
+			margin-top: 20px;
+		}
 
-        }
-    }
+		&_reg {
+			margin: 24px 0 46px 0;
+		}
+	}
 }

@@ -1,20 +1,20 @@
 .error-input {
-    position: absolute;
-    margin-top: 6px;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 32px;
-    color: #CC1F1F;
+	position: absolute;
+	margin-top: 6px;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 32px;
+	color: #cc1f1f;
 
-    &_block {
-        position: relative;
-    }
+	&_block {
+		position: relative;
+	}
 }
 
 @media (max-width: 576px) {
-    .error-input {
-        font-size: 14px;
-        margin-top: 3px;
-        line-height: 22px;
-    }
+	.error-input {
+		font-size: 14px;
+		margin-top: 3px;
+		line-height: 22px;
+	}
 }

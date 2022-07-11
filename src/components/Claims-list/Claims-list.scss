@@ -1,69 +1,69 @@
 .claims-list {
-    margin-top: 48px;
-    display: grid;
-    grid-template-rows: 56px;
-    grid-auto-rows: 48px;
+	margin-top: 48px;
+	display: grid;
+	grid-template-rows: 56px;
+	grid-auto-rows: 48px;
 
-    &__filters {
-        padding-left: 24px;
-        background: #F1F1F1;
-        display: grid;
-        grid-template-columns: 1.5fr repeat(4, 1fr);
-        border-bottom: 1px solid #C2C2C2;
-    }
+	&__filters {
+		padding-left: 24px;
+		background: #f1f1f1;
+		display: grid;
+		grid-template-columns: 1.5fr repeat(4, 1fr);
+		border-bottom: 1px solid #c2c2c2;
+	}
 
-    &__item {
-        display: flex;
-        align-items: center;
-        img {
-            width: 7px;
-            height: 10px;   
-            margin-left: 16px;
-        }
-    }
-    
-    &__filter {
-        font-size: 18px;
-        min-width: 50px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
+	&__item {
+		display: flex;
+		align-items: center;
+		img {
+			width: 7px;
+			height: 10px;
+			margin-left: 16px;
+		}
+	}
+
+	&__filter {
+		font-size: 18px;
+		min-width: 50px;
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+	}
 }
 
 @media (max-width: 1200px) {
-    .claims-list {
-        width: 100%;
-        margin-top: 20px;
-        
-        &__filters {
-            grid-template-columns: 1.5fr repeat(4, 1fr);
-            column-gap: 20px;
-        }
-    }
+	.claims-list {
+		width: 100%;
+		margin-top: 20px;
+
+		&__filters {
+			grid-template-columns: 1.5fr repeat(4, 1fr);
+			column-gap: 20px;
+		}
+	}
 }
 
 @media (max-width: 992px) {
-    .claims-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, 420px);
-        grid-template-rows: repeat(2, 240px);
-        justify-content: center;
-        grid-auto-rows: 240px;
-        row-gap: 24px;
-        column-gap: 24px;
-        margin-top: 34px;
-        
-        &__filters {
-            display: none;
-        }
-    }
+	.claims-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 420px);
+		grid-template-rows: repeat(2, 240px);
+		justify-content: center;
+		grid-auto-rows: 240px;
+		row-gap: 24px;
+		column-gap: 24px;
+		margin-top: 34px;
+
+		&__filters {
+			display: none;
+		}
+	}
 }
 
 @media (max-width: 768px) {
-    .claims-list {
-        justify-content: center;
-        align-items: center;
-        grid-template-columns: 343px;
-    }
+	.claims-list {
+		justify-content: center;
+		align-items: center;
+		grid-template-columns: 343px;
+	}
 }

@@ -1,89 +1,88 @@
 .my-claims {
-    padding: 56px 58px 0 56px;
-    position: relative;
+	padding: 56px 58px 0 56px;
+	position: relative;
 
-    &__headline {
-        padding-left: 8px;
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
+	&__headline {
+		padding-left: 8px;
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+	}
 
-    &__btn {
-        padding-left: 6px;
-        width: 174px;
-        height: 48px;
-        background: #7DB59A;
-        border-radius: 16px;
-        border: none;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        cursor: pointer;
-        transition: 0.3s all;
-        position: relative;
+	&__btn {
+		padding-left: 6px;
+		width: 174px;
+		height: 48px;
+		background: #7db59a;
+		border-radius: 16px;
+		border: none;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		cursor: pointer;
+		transition: 0.3s all;
+		position: relative;
 
-        &:hover {
-            background: #5B9479;
-        }
+		&:hover {
+			background: #5b9479;
+		}
 
-        &:active {
-            background: #4F896C;
-        }
+		&:active {
+			background: #4f896c;
+		}
 
-        &::after {
-            position: absolute;
-            content: 'Create claim';
-            font-weight: 700;
-            font-size: 17px;
-            line-height: 32px;
-            color: #FFFFFF;
-            letter-spacing: 0.2px;
-            left: 44px;
-        }
-        
-        img {
-            width: 40px;
-            height: 40px;
-        }
-    }
-    .claim {
-        &:last-child {
-            border-bottom: none;
-        }
-    }
+		&::after {
+			position: absolute;
+			content: 'Create claim';
+			font-weight: 700;
+			font-size: 17px;
+			line-height: 32px;
+			color: #ffffff;
+			letter-spacing: 0.2px;
+			left: 44px;
+		}
+
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
+	.claim {
+		&:last-child {
+			border-bottom: none;
+		}
+	}
 }
 
 @media (max-width: 1200px) {
-    .my-claims {
-        padding: 20px;
-        width: calc(100vw - 96px);
-    }
+	.my-claims {
+		padding: 20px;
+		width: calc(100vw - 96px);
+	}
 }
 
 @media (max-width: 992px) {
-    .my-claims {
-        padding: 24px 15px 0 15px;
-        width: 100%;
+	.my-claims {
+		padding: 24px 15px 0 15px;
+		width: 100%;
 
-        &__btn {
-            width: 48px;
-            height: 48px;
-            padding-left: 0;
-            justify-content: center;
-            
-            &::after {
-                content: '';
-            }
-        }
-    }
+		&__btn {
+			width: 48px;
+			height: 48px;
+			padding-left: 0;
+			justify-content: center;
+
+			&::after {
+				content: '';
+			}
+		}
+	}
 }
 
 @media (max-width: 576px) {
-    .my-claims {
-        
-        &__headline {
-            align-items: center;
-        }
-    }
+	.my-claims {
+		&__headline {
+			align-items: center;
+		}
+	}
 }

@@ -1,21 +1,21 @@
 .hamburger {
-    position: absolute;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 24px;
-    top: 20px;
-    left: 16px;
-    
-    &__line {
-        width: 24px;
-        height: 2px;
-        background: #FFFFFF;
-    }
+	position: absolute;
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 24px;
+	top: 20px;
+	left: 16px;
+
+	&__line {
+		width: 24px;
+		height: 2px;
+		background: #ffffff;
+	}
 }
 
 @media (max-width: 992px) {
-    .hamburger {
-        display: flex;
-    }
+	.hamburger {
+		display: flex;
+	}
 }

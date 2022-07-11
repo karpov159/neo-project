@@ -1,29 +1,29 @@
 .title {
-    font-weight: 700;
-    font-size: 36px;
-    line-height: 44px;
-    color: #000000;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 44px;
+	color: #000000;
 }
 
 @media (max-width: 1250px) {
-    .title {
-        font-size: 30px;
-    }
+	.title {
+		font-size: 30px;
+	}
 }
 
 @media (max-width: 992px) {
-    .title {
-        font-size: 28px;
-    }
+	.title {
+		font-size: 28px;
+	}
 }
 
 @media (max-width: 576px) {
-    .title {
-        font-size: 24px;
-        line-height: 29px;
+	.title {
+		font-size: 24px;
+		line-height: 29px;
 
-        &_hidden {
-            display: none;
-        }
-    }
+		&_hidden {
+			display: none;
+		}
+	}
 }

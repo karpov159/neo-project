@@ -3,49 +3,54 @@ import { changePage } from '../../core/store/claim/claim.reducer';
 import getPagesToShow from '../../helpers/getPagesToShow';
 import Page from './Page/Page';
 
-const TotalPages = ({totalPages, active}) => {
-    const dispatch = useDispatch();
-    const pages = [];
+const TotalPages = ({ totalPages, active }) => {
+	const dispatch = useDispatch();
+	const pages = [];
 
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push(
-        <Page 
-        key={i}
-        active={active === i ? 'pagination__page_active' : null} 
-        num={i}/>
-        )
-    }
+	for (let i = 1; i <= totalPages; i++) {
+		pages.push(
+			<Page
+				key={i}
+				active={active === i ? 'pagination__page_active' : null}
+				num={i}
+			/>
+		);
+	}
 
-    const allPages = getPagesToShow(active, pages, totalPages);
-    const firstPage = pages[0];
-    const lastPage = pages[totalPages-1];
-    
-    const leftDot = 
-        active > 4 ? 
-        <div onClick={() => dispatch(changePage(active - 3))} className="pagination__dots"></div> : 
-        null;
+	const allPages = getPagesToShow(active, pages, totalPages);
+	const firstPage = pages[0];
+	const lastPage = pages[totalPages - 1];
 
-    const rightDot = 
-        active + 3 >= totalPages ? 
-        null : 
-        <div onClick={() => dispatch(changePage(active + 3))} className="pagination__dots"></div>;
+	const leftDot =
+		active > 4 ? (
+			<div
+				onClick={() => dispatch(changePage(active - 3))}
+				className='pagination__dots'></div>
+		) : null;
 
-    if (totalPages > 8) {
-        return (
-            <>
-                {firstPage}
+	const rightDot =
+		active + 3 >= totalPages ? null : (
+			<div
+				onClick={() => dispatch(changePage(active + 3))}
+				className='pagination__dots'></div>
+		);
 
-                {leftDot}
+	if (totalPages > 8) {
+		return (
+			<>
+				{firstPage}
 
-                {allPages}
+				{leftDot}
 
-                {rightDot}
+				{allPages}
 
-                {lastPage}
-            </>
-        )
-    }
-    return pages;
-}
+				{rightDot}
+
+				{lastPage}
+			</>
+		);
+	}
+	return pages;
+};
 
 export default TotalPages;
