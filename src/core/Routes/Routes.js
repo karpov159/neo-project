@@ -9,7 +9,7 @@ import {
 	BROWSE_CLAIM,
 	NOT_FOUND,
 } from '../config/RoutesConfig';
-import { HomePage, PageNotFound, PreScreenPage } from '../../components/Pages';
+import { HomePage, PageNotFound, PreScreenPage } from '../../Pages';
 import MyClaims from '../../components/My-claims/My-claims';
 import CreateNewClaim from '../../components/Create-new-claim/Create-new-claim';
 import BrowsedClaim from '../../components/Browsed-claim/Browsed-claim';

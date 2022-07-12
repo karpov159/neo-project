@@ -1,0 +1,12 @@
+@import '../../style/variables.scss';
+
+.not-found {
+	display: flex;
+	padding: 20px;
+	justify-content: space-between;
+	align-items: center;
+	width: 400px;
+	height: 200px;
+	border: 2px solid $decline-main-color;
+	margin: 100px auto 0 auto;
+}

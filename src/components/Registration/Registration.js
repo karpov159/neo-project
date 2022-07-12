@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { HOMEPAGE } from '../../core/config/RoutesConfig';
-import localStorage from '../../helpers/localStorage';
+import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
 import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
-import Title from '../../shared/Title/Title';
+import Typography from '../../shared/Typography/Typography';
 import ErrorInput from '../../shared/Errors/ErrorInput/ErrorInput';
 
 import Mail from '../../assets/icons/icon-mail.svg';
@@ -21,7 +21,6 @@ const Registration = () => {
 		(state) => state.registration
 	);
 	const dispatch = useDispatch();
-	const User = new localStorage();
 	const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 	useEffect(() => {
@@ -31,10 +30,10 @@ const Registration = () => {
 
 	return (
 		<>
-			<Title
-				addClass='title_hidden'
-				title='Create your personal account'
-			/>
+			<Typography component='h2' addClass='title_hidden'>
+				Create your personal account
+			</Typography>
+
 			<Formik
 				initialValues={{
 					name: '',
@@ -79,7 +78,7 @@ const Registration = () => {
 					)
 						.unwrap()
 						.then((res) => {
-							User.putUser(res, false);
+							userLocalStorage.setItem(res, true);
 							dispatch(setLoggedIn(true));
 							navigate(HOMEPAGE);
 						});

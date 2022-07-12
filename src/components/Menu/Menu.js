@@ -1,6 +1,6 @@
+import { useSelector } from 'react-redux';
 import PageLink from './PageLink/PageLink';
 import menuLinkInfo from '../../helpers/menuLinkInfo';
-import { useSelector } from 'react-redux';
 
 import MiniLogo from '../../assets/img/logo_mini.svg';
 import './Menu.scss';

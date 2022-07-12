@@ -7,7 +7,7 @@ import {
 	setLoggedIn,
 } from '../../core/store/login/login.reducer';
 import { REGISTRATION, HOMEPAGE } from '../../core/config/RoutesConfig';
-import localStorage from '../../helpers/localStorage';
+import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
 import ErrorInput from '../../shared/Errors/ErrorInput/ErrorInput';
 import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
@@ -28,7 +28,6 @@ const Login = () => {
 	const dispatch = useDispatch();
 	const { authLoadingStatus } = useSelector((state) => state.auth);
 	const navigate = useNavigate();
-	const User = new localStorage();
 	const error = authLoadingStatus === 'error' ? true : false;
 
 	useEffect(() => {
@@ -46,7 +45,7 @@ const Login = () => {
 		)
 			.unwrap()
 			.then((res) => {
-				User.putUser(res, keepLogIn);
+				userLocalStorage.setItem(res, keepLogIn);
 				dispatch(setLoggedIn(true));
 				navigate(HOMEPAGE);
 			});

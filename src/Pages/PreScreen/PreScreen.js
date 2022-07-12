@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import EntranceImg from '../../../assets/img/entrance_img.png';
-import MiniLogo from '../../../assets/img/logo_mini.svg';
+import EntranceImg from '../../assets/img/entrance_img.png';
+import MiniLogo from '../../assets/img/logo_mini.svg';
 import './PreScreen.scss';
 
 const Entrance = () => {

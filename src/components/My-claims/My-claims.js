@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ClaimsList from '../Claims-list/Claims-list';
-import Pagination from '../Pagination/Pagination';
+import { setNewClaimAccesError } from '../../core/store/claim/claim.reducer';
 import { CREATE_CLAIM } from '../../core/config/RoutesConfig';
-import Title from '../../shared/Title/Title';
+import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
+import ClaimsList from '../Claims-list/Claims-list';
+import PlusIcon from '../Icons/PlusIcon';
+import Pagination from '../Pagination/Pagination';
+import Typography from '../../shared/Typography/Typography';
 import Filters from './Filters/Filters';
 import ErrorAccess from '../../shared/Errors/ErrorAccess/ErrorAccess';
-import { setNewClaimAccesError } from '../../core/store/claim/claim.reducer';
-import localStorage from '../../helpers/localStorage';
 
 import './My-claims.scss';
 
@@ -17,8 +18,7 @@ const MyClaims = () => {
 	);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const User = new localStorage();
-	const { role } = User.getUser();
+	const { role } = userLocalStorage.getItem();
 
 	const handleClick = () => {
 		if (role === 'work') {
@@ -38,30 +38,10 @@ const MyClaims = () => {
 	return (
 		<div className='my-claims'>
 			<div className='my-claims__headline'>
-				<Title title='Your claims' />
+				<Typography component='h2'>Your claims</Typography>
 
 				<button onClick={handleClick} className='my-claims__btn'>
-					<svg
-						width='40'
-						height='40'
-						viewBox='0 0 40 40'
-						fill='none'
-						xmlns='http://www.w3.org/2000/svg'>
-						<path
-							d='M20 13V27'
-							stroke='white'
-							strokeWidth='2'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						/>
-						<path
-							d='M13 20H27'
-							stroke='white'
-							strokeWidth='2'
-							strokeLinecap='round'
-							strokeLinejoin='round'
-						/>
-					</svg>
+					<PlusIcon />
 				</button>
 			</div>
 

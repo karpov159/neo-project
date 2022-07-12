@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import getClaimType from '../../helpers/getClaimType';
 import { useDispatch } from 'react-redux';
 import { createNewClaim } from '../../core/store/claim/claim.action';
+import getClaimType from '../../helpers/getClaimType';
 import validateStr from '../../helpers/validateStr';
 import ErrorInput from '../../shared/Errors/ErrorInput/ErrorInput';
-import Title from '../../shared/Title/Title';
+import Typography from '../../shared/Typography/Typography';
 import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
 import DropDownInput from '../../shared/Input/DropDownInput';
@@ -66,7 +66,8 @@ const CreateNewClaim = ({ setSearchInput }) => {
 	};
 	return (
 		<div className='new-claim'>
-			<Title title={'Creating new claim'} />
+			<Typography component='h2'>Creating new claim </Typography>
+
 			<form onSubmit={(e) => onSubmit(e)} className='new-claim__form'>
 				<Input
 					onChange={(e) => changeValue(e, setTitle)}

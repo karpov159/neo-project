@@ -51,7 +51,7 @@ const ClaimsList = () => {
 	const error = claimsLoadingStatus === 'error' ? <ErrorServer /> : null;
 	const loading = claimsLoadingStatus === 'loading' ? <Spinner /> : null;
 	const claims = allClaims.slice(firstPageIndex, lastPageIndex);
-	const elements = renderClaims(claims);
+	const elements = !error && !loading ? renderClaims(claims) : null;
 
 	return (
 		<>

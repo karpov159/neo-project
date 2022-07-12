@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
-import { setOpenedHamburger } from '../../../core/store/menu/menu.reducer';
+import { setOpenedHamburger } from '../../core/store/menu/menu.reducer';
 import { useDispatch } from 'react-redux';
-import Menu from '../../Menu/Menu';
-import Header from '../../Header/Header';
+import Menu from '../../components/Menu/Menu';
+import Header from '../../components/Header/Header';
 
 import './HomePage.scss';
 

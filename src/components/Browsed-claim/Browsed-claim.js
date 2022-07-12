@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import Title from '../../shared/Title/Title';
-import Button from '../../shared/Button/Button';
+import { useNavigate } from 'react-router-dom';
 import { updateClaim, getClaim } from '../../core/store/claim/claim.action';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import getBallColor from '../../helpers/getBallColor';
 import getClaimType from '../../helpers/getClaimType';
-import { useNavigate } from 'react-router-dom';
+import Typography from '../../shared/Typography/Typography';
+import Button from '../../shared/Button/Button';
 
 import IconDown from '../../assets/icons/icon-chevron-down.png';
 import './Browsed-claim.scss';
@@ -59,7 +59,8 @@ const BrowsedClaim = ({ setSearchInput }) => {
 
 	return (
 		<div className='browse-claim'>
-			<Title title={'Incoming claim'} />
+			<Typography component='h2'>Incoming claim</Typography>
+
 			<div className='browse-claim__item'>
 				<span className='browse-claim__label'>Title</span>
 				<div className='browse-claim__text'>{title}</div>

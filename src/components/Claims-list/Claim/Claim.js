@@ -1,17 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setBrowseAccessError } from '../../../core/store/claim/claim.reducer';
+import { userLocalStorage } from '../../../core/LocalStorage/UserLocalStorage';
 import getStatusColor from '../../../helpers/getStatusColor';
 import getBallColor from '../../../helpers/getBallColor';
-import localStorage from '../../../helpers/localStorage';
 
 import './Claim.scss';
 
 const Claim = ({ title, createdAt, type, status, id }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const User = new localStorage();
-	const { role } = User.getUser();
+	const { role } = userLocalStorage.getItem();
 
 	const onClick = () => {
 		if (role === 'admin') {

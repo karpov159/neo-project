@@ -2,14 +2,15 @@ import { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { useDispatch } from 'react-redux';
-import localStorageTest from '../../helpers/localStorage';
+import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
 import Routes from '../../core/Routes/Routes';
 
 import './App.scss';
 
 const App = () => {
-	const User = new localStorageTest();
-	const { keepLogIn } = User.getUser() ? User.getUser() : false;
+	const { keepLogIn } = userLocalStorage.getItem()
+		? userLocalStorage.getItem()
+		: false;
 	const dispatch = useDispatch();
 
 	useEffect(() => {
