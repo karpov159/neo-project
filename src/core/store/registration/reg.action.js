@@ -9,7 +9,8 @@ export const registration = createAsyncThunk(
 		const res = await httpRequest(
 			`${BASE_URL}/auth/registration`,
 			'POST',
-			JSON.stringify(body)
+			JSON.stringify(body),
+			false
 		);
 
 		return await res;

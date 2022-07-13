@@ -11,19 +11,14 @@ export const fetchClaims = createAsyncThunk(
 			`${BASE_URL}/claim?offset=0&search=${searchInput}&column=${columnSort}&sort=${orderSort}`,
 			'GET',
 			null,
-			'claim'
+			true
 		);
 		return res.claims;
 	}
 );
 
 export const getClaim = createAsyncThunk('claims/getClaim', async (id) => {
-	const res = await httpRequest(
-		`${BASE_URL}/claim/${id}`,
-		'GET',
-		null,
-		'claim'
-	);
+	const res = await httpRequest(`${BASE_URL}/claim/${id}`, 'GET', null, true);
 	return modifyData(res);
 });
 
@@ -34,7 +29,7 @@ export const createNewClaim = createAsyncThunk(
 			`${BASE_URL}/claim`,
 			'POST',
 			JSON.stringify(body),
-			'claim'
+			true
 		);
 		return modifyData(res);
 	}
@@ -47,7 +42,7 @@ export const updateClaim = createAsyncThunk(
 			`${BASE_URL}/claim/${claimId}`,
 			'PUT',
 			JSON.stringify(body),
-			'claim'
+			true
 		);
 
 		return res;

@@ -1,22 +1,25 @@
 import { userLocalStorage } from '../core/LocalStorage/UserLocalStorage';
 
-const getClaimHeaders = (typeHeaders) => {
-	if (typeHeaders === 'claim') {
+const getClaimHeaders = (authStatus, headers = {}) => {
+	if (authStatus) {
+		const { token } = userLocalStorage.getItem();
+
 		return {
-			Authorization: `Bearer ${userLocalStorage.getItem().token}`,
-			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+			...headers,
 		};
-	} else {
-		return { 'Content-Type': 'application/json;charset=utf-8' };
 	}
 };
 
-const httpRequest = async (url, method = 'GET', body = null, typeHeaders) => {
+const httpRequest = async (url, method = 'GET', body = null, authStatus) => {
 	try {
 		const response = await fetch(url, {
 			method,
 			body,
-			headers: getClaimHeaders(typeHeaders),
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+				...getClaimHeaders(authStatus),
+			},
 		});
 		if (!response.ok) {
 			throw new Error('error');

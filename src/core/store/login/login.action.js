@@ -7,7 +7,8 @@ export const auth = createAsyncThunk('auth/userAuthorization', async (body) => {
 	const res = await httpRequest(
 		`${BASE_URL}/auth/login`,
 		'POST',
-		JSON.stringify(body)
+		JSON.stringify(body),
+		false
 	);
 
 	return await res;
