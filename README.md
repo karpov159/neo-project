@@ -4,8 +4,12 @@
 
 # User
 
--user@user.ru -password
+Email: user@user.ru
+
+Password: password
 
 # Admin
 
--admin@admin.ru -password
+Email: admin@admin.ru
+
+Password: password
