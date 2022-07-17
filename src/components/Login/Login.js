@@ -95,7 +95,7 @@ const Login = () => {
 						type='checkbox'
 					/>
 					<label className='form__label' htmlFor='checkbox'>
-						Keep me logged in{' '}
+						Keep me logged in
 					</label>
 				</div>
 
