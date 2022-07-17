@@ -19,8 +19,7 @@ const Pagination = () => {
 		if (currentPage > totalPages) {
 			dispatch(changePage(1));
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentPage, totalPages]);
+	}, [currentPage, totalPages, dispatch]);
 
 	const leftArrow =
 		currentPage === 1 || totalPages < 1 ? null : (

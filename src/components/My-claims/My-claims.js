@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setNewClaimAccesError } from '../../core/store/claim/claim.reducer';
+import { setNewClaimAccessError } from '../../core/store/claim/claim.reducer';
 import { CREATE_CLAIM } from '../../core/config/RoutesConfig';
 import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
 import ClaimsList from '../Claims-list/Claims-list';
@@ -13,7 +13,7 @@ import ErrorAccess from '../../shared/Errors/ErrorAccess/ErrorAccess';
 import './My-claims.scss';
 
 const MyClaims = () => {
-	const { browseAccessError, newClaimAccesError } = useSelector(
+	const { browseAccessError, newClaimAccessError } = useSelector(
 		(state) => state.claims
 	);
 	const navigate = useNavigate();
@@ -24,11 +24,11 @@ const MyClaims = () => {
 		if (role === 'work') {
 			navigate(CREATE_CLAIM);
 		} else {
-			dispatch(setNewClaimAccesError(true));
+			dispatch(setNewClaimAccessError(true));
 		}
 	};
 
-	const createError = newClaimAccesError ? (
+	const createError = newClaimAccessError ? (
 		<ErrorAccess text='Only a user with an work role can create new claims' />
 	) : null;
 	const browseError = browseAccessError ? (

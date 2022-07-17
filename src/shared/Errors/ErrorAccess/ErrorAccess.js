@@ -2,35 +2,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {
 	setBrowseAccessError,
-	setNewClaimAccesError,
+	setNewClaimAccessError,
 } from '../../../core/store/claim/claim.reducer';
 import ExclamIcon from '../../../components/Icons/ExclamIcon';
 import './ErrorAccess.scss';
 
 const ErrorAccess = ({ text }) => {
 	const dispatch = useDispatch();
-	const { browseAccessError, newClaimAccesError } = useSelector(
+	const { browseAccessError, newClaimAccessError } = useSelector(
 		(state) => state.claims
 	);
 
 	useEffect(() => {
 		const errorTimeout = setTimeout(() => {
 			dispatch(setBrowseAccessError(false));
-			dispatch(setNewClaimAccesError(false));
+			dispatch(setNewClaimAccessError(false));
 		}, 3000);
 
 		return () => {
 			clearTimeout(errorTimeout);
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [dispatch]);
 
 	const handleClick = () => {
 		if (browseAccessError) {
 			dispatch(setBrowseAccessError(false));
 		}
-		if (newClaimAccesError) {
-			dispatch(setNewClaimAccesError(false));
+		if (newClaimAccessError) {
+			dispatch(setNewClaimAccessError(false));
 		}
 	};
 

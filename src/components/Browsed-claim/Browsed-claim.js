@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateClaim, getClaim } from '../../core/store/claim/claim.action';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import getBallColor from '../../helpers/getBallColor';
 import getClaimType from '../../helpers/getClaimType';
 import Typography from '../../shared/Typography/Typography';
@@ -32,8 +31,7 @@ const BrowsedClaim = ({ setSearchInput }) => {
 				setType('no data');
 				setDescription('no data');
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [claimId]);
+	}, [claimId, dispatch]);
 
 	useEffect(() => {
 		setSearchInput(false);

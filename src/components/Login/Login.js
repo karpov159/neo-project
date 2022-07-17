@@ -8,6 +8,7 @@ import {
 } from '../../core/store/login/login.reducer';
 import { REGISTRATION, HOMEPAGE } from '../../core/config/RoutesConfig';
 import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
+import { userSessionStorage } from '../../core/SessionStorage/UserSessionStorage';
 import ErrorInput from '../../shared/Errors/ErrorInput/ErrorInput';
 import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
@@ -17,35 +18,35 @@ import Lock from '../../assets/icons/icon-lock.svg';
 import BigLogo from '../../assets/img/logo_big.svg';
 import './Login.scss';
 
-const onChangeInput = (e, func) => {
-	func(e.target.value);
-};
-
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [keepLogIn, setKeepLogIn] = useState(false);
-	const dispatch = useDispatch();
 	const { authLoadingStatus } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const error = authLoadingStatus === 'error' ? true : false;
 
 	useEffect(() => {
 		dispatch(clearLoadingStatus());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [dispatch]);
+
+	const onChangeInput = (e, func) => {
+		func(e.target.value);
+	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(
 			auth({
-				email: email,
-				password: password,
+				email,
+				password,
 			})
 		)
 			.unwrap()
 			.then((res) => {
 				userLocalStorage.setItem(res, keepLogIn);
+				userSessionStorage.setItem(res);
 				dispatch(setLoggedIn(true));
 				navigate(HOMEPAGE);
 			});

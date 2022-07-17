@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { setOpenedHamburger } from '../../core/store/menu/menu.reducer';
@@ -26,7 +25,7 @@ const HomePage = ({ isSearchInput }) => {
 		return () => {
 			document.removeEventListener('click', handleCLick);
 		};
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<section className='homepage'>

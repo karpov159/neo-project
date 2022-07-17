@@ -32,7 +32,7 @@ const CreateNewClaim = ({ setSearchInput }) => {
 		return () => {
 			setSearchInput(true);
 		};
-	});
+	}, [setSearchInput]);
 
 	const changeValue = (e, func) => {
 		func(e.target.value);

@@ -1,8 +1,5 @@
 const validateStr = (str) => {
-	if (str.trim() === '') {
-		return true;
-	}
-	return false;
+	return str.trim() === '';
 };
 
 export default validateStr;

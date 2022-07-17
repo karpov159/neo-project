@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	changeSearchInput,
 	setBrowseAccessError,
-	setNewClaimAccesError,
+	setNewClaimAccessError,
 	changePage,
 } from '../../core/store/claim/claim.reducer';
 import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
+import { userSessionStorage } from '../../core/SessionStorage/UserSessionStorage';
 import Input from '../../shared/Input/Input';
 import Hamburger from './Hamburger/Hamburger';
 import NotifyIcon from '../Icons/NotifyIcon';
@@ -31,9 +32,10 @@ const Header = ({ isSearchInput }) => {
 	const handleClick = () => {
 		dispatch(setLoggedIn(false));
 		dispatch(changeSearchInput(''));
-		dispatch(setNewClaimAccesError(false));
+		dispatch(setNewClaimAccessError(false));
 		dispatch(setBrowseAccessError(false));
 		dispatch(changePage(1));
+		userSessionStorage.removeItem();
 		userLocalStorage.removeItem();
 		navigate('/');
 	};

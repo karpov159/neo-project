@@ -11,14 +11,11 @@ const DropDownInput = ({
 	value,
 }) => {
 	const [active, setActive] = useState(false);
-	const DropDownInput = useRef(null);
+	const input = useRef(null);
 
 	useEffect(() => {
 		const handleCLick = (e) => {
-			if (
-				DropDownInput.current &&
-				!DropDownInput.current.contains(e.target)
-			) {
+			if (input.current && !input.current.contains(e.target)) {
 				setActive(false);
 			}
 		};
@@ -27,7 +24,7 @@ const DropDownInput = ({
 		return () => {
 			document.removeEventListener('click', handleCLick);
 		};
-	}, [active, DropDownInput]);
+	}, [active, input]);
 
 	const toggleActive = () => {
 		setActive((active) => !active);
@@ -40,7 +37,7 @@ const DropDownInput = ({
 	const classes = addClass ? 'input-block ' + addClass : 'input-block';
 
 	return (
-		<div ref={DropDownInput} className={classes}>
+		<div ref={input} className={classes}>
 			<span className='input-block__span'>{label}</span>
 			<input
 				className='input-block__input'

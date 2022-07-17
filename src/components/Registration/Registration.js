@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { setLoggedIn } from '../../core/store/login/login.reducer';
 import { HOMEPAGE } from '../../core/config/RoutesConfig';
 import { userLocalStorage } from '../../core/LocalStorage/UserLocalStorage';
+import { userSessionStorage } from '../../core/SessionStorage/UserSessionStorage';
 import Input from '../../shared/Input/Input';
 import Button from '../../shared/Button/Button';
 import Typography from '../../shared/Typography/Typography';
@@ -25,8 +26,7 @@ const Registration = () => {
 
 	useEffect(() => {
 		dispatch(clearLoadingStatus());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
@@ -78,7 +78,8 @@ const Registration = () => {
 					)
 						.unwrap()
 						.then((res) => {
-							userLocalStorage.setItem(res, true);
+							userLocalStorage.setItem(res, false);
+							userSessionStorage.setItem(res);
 							dispatch(setLoggedIn(true));
 							navigate(HOMEPAGE);
 						});

@@ -1,8 +1,9 @@
 import LocalStorage from './LocalStorage';
 
 class UserLocalStorage extends LocalStorage {
-	costructor() {
-		this.key = 'User';
+	constructor() {
+		super();
+		this.keyName = 'User';
 	}
 }
 

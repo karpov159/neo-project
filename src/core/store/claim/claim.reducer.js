@@ -14,7 +14,7 @@ const initialState = claimsAdapter.getInitialState({
 	columnSort: 'title',
 	orderSort: 'desc',
 	browseAccessError: false,
-	newClaimAccesError: false,
+	newClaimAccessError: false,
 });
 
 const claimsSlice = createSlice({
@@ -36,8 +36,8 @@ const claimsSlice = createSlice({
 		setBrowseAccessError: (state, action) => {
 			state.browseAccessError = action.payload;
 		},
-		setNewClaimAccesError: (state, action) => {
-			state.newClaimAccesError = action.payload;
+		setNewClaimAccessError: (state, action) => {
+			state.newClaimAccessError = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -70,5 +70,5 @@ export const {
 	changeColumnSort,
 	changeOrderSort,
 	setBrowseAccessError,
-	setNewClaimAccesError,
+	setNewClaimAccessError,
 } = actions;

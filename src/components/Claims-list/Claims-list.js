@@ -30,8 +30,7 @@ const ClaimsList = () => {
 			searchInput,
 		};
 		dispatch(fetchClaims(details));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchInput, columnSort, orderSort]);
+	}, [searchInput, columnSort, orderSort, dispatch]);
 
 	const renderClaims = (claims) => {
 		return claims.map(({ title, createdAt, type, status, _id }) => {

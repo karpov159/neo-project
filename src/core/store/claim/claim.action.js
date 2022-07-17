@@ -38,13 +38,11 @@ export const createNewClaim = createAsyncThunk(
 export const updateClaim = createAsyncThunk(
 	'claims/updateClaim',
 	async ({ claimId, body }) => {
-		const res = await httpRequest(
+		return httpRequest(
 			`${BASE_URL}/claim/${claimId}`,
 			'PUT',
 			JSON.stringify(body),
 			true
 		);
-
-		return res;
 	}
 );

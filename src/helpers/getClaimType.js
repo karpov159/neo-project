@@ -6,7 +6,7 @@ const getClaimType = (type) => {
 		case 'Troubleshooting': {
 			return 'troublesh';
 		}
-		case 'Hardwere': {
+		case 'Hardware': {
 			return 'hard';
 		}
 		default: {
